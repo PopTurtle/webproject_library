@@ -1,6 +1,6 @@
 <?php
 
-const app = "./App";
+const app = "/App";
 const ns_cut_preg = "/^App/";
 
 function autoload($class) {
