@@ -20,4 +20,8 @@ class Consumer extends DBObject {
         "Birthdate",
         "Mail"
     ];
+
+    protected function ensureCorrectData(): bool {
+        return false;
+    }
 }

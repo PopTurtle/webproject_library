@@ -26,9 +26,6 @@ class Book extends DBObject {
     ];
 
     protected function ensureCorrectData(): bool {
-
-        
-
         return false;
     }
 }

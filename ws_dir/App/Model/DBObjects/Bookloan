@@ -18,4 +18,8 @@ class Consumer extends DBObject {
         "DateStart",
         "DateEnd",
     ];
+    
+    protected function ensureCorrectData(): bool {
+        return false;
+    }
 }

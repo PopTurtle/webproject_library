@@ -1,26 +1,6 @@
 <?php
 
 require_once "../autoloader.php";
-use App\Model\Database;
-use App\Model\DBObjects\Book;
-
-$db = Database::getDatabase();
-
-$b = new Book();
-
-//var_dump($b);
-
-$b->Author = "Auteur";
-$b->Title = "Titre";
-$b->Editor = "Editeur";
-$b->PublicationYear = 1945;
-$b->Category = "Roman";
-$b->Stock = 3;
-
-var_dump($b->Author);
-
-$res = $b->tryAddToDB($db);
-var_dump($res);
 
 ?>
 
@@ -31,8 +11,25 @@ var_dump($res);
     <title>bilbiloték</title>
 </head>
 <body>
-    <h1>bibloték</h1>
+    <nav>
+        <!-- Php partial ? -->
+    </nav>
 
+    <main>
+        <section class="main-search">
+            <h2>Bienvenue sur votre espace d'emprunt !</h2>
+            <div class="search-bar">
+                <form method="get" action="">
+                    <input type="text" name="search-data" placeholder="Rechercher un livre">
+                    <!-- Liste : par titre ; par auteur ; par année... -->
+                    <input type="submit" value="Rechercher">
+                </form>
+            </div>
+        </section>
+        <section class="main-news">
+            <h2>Les nouveautés</h2>
+        </section>
+    </main>
 
 </body>
 </html>
