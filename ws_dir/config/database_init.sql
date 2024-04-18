@@ -24,6 +24,7 @@ CREATE TABLE consumer (
     lastname varchar(255) NOT NULL,
     birthdate date,
     mail varchar(255),
+    password varchar(255) NOT NULL,
     
     CONSTRAINT PK_consumer PRIMARY KEY (consumer_id)
 );
@@ -54,9 +55,9 @@ VALUES
 
 -- Utilisateurs
 INSERT INTO consumer
-(consumer_id, firstname, lastname, birthdate, mail)
+(consumer_id, firstname, lastname, birthdate, mail, password)
 VALUES
-(NULL, "Michel", "Samba", "1946-01-31", "michel.samba@gmiel.com");
+(NULL, "Michel", "Samba", "1946-01-31", "michel.samba@gmiel.com", "$2y$10$pSNKCsO.PpTjJhot.f7Yd.Gpl0ZDNpvfcnoVAt0RcEBcwU9CbJ4dq");
 
 -- Emprunts
 INSERT INTO bookloan

@@ -1,4 +1,7 @@
 <?php
 
+require_once "./autoloader.php";
+use App\Constants;
+
 // Redirect to the homepage
-header("Location: /view/index.php");
+header("Location: " . Constants::PAGE_HOME);

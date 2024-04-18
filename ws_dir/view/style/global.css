@@ -1,0 +1,25 @@
+:root {
+    --color-palette-1: #4F4972;
+    --color-palette-2: #6D9AA0;
+    --color-palette-3: #7D759B;
+    --color-palette-4: #F1A74E;
+
+    --primary-font: none;
+}
+
+@font-face {
+    font-family: "Helvetica Neue";
+    src: url("../../App/Assets/Fonts/HelveticaNeue/HelveticaNeueLight.otf");
+}
+
+body {
+    font-family: sans-serif;
+    margin: 0;
+}
+
+.category-title {
+    color: var(--color-palette-1);
+    text-align: center;
+    font-size: 1.7rem;
+    margin: 2rem auto;
+}

@@ -2,17 +2,18 @@
 
 namespace App\Model;
 
+use App\Constants;
+use App\Utils\Utils;
 use PDOException;
 
-const DB_HOST = "localhost";
-const DB_NAME = "webproject_library";
-const DB_USER = "root";
-const DB_PASS = "";
+class Database { // SINGLETON?
+    private const DB_HOST = "localhost";
+    private const DB_NAME = "webproject_library";
+    private const DB_USER = "root";
+    private const DB_PASS = "";
 
-class Database {
-
-    const ConnectionErrorCode = 500;
-    const ConnectionErrorMsg = "Une erreur de connexion est survenue";
+    public const ConnectionErrorCode = 500;
+    private const ConnectionErrorMsg = "Une erreur de connexion est survenue";
 
     private static $instance;
     private $connection;
@@ -21,15 +22,11 @@ class Database {
     private function __construct($redirectError) {
         $this->connectionError = false;
         try {
-            $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME;
-            $this->connection = new \PDO($dsn, DB_USER, DB_PASS);
+            $dsn = "mysql:host=" . self::DB_HOST . ";dbname=" . self::DB_NAME;
+            $this->connection = new \PDO($dsn, self::DB_USER, self::DB_PASS);
         } catch (PDOException $e) {
             if ($redirectError) {
-                header(
-                    "Location: /view/error.php?" .
-                    "code=" . Database::ConnectionErrorCode . "&" .
-                    "msg=" . Database::ConnectionErrorMsg
-                );
+                Utils::showErrorCode(Database::ConnectionErrorCode, Database::ConnectionErrorMsg);
             }
             $this->connectionError = true;
         }
@@ -37,14 +34,14 @@ class Database {
 
     // Si redirect error à false, alors il faut check connectionError
     public static function getDatabase($redirectError = true) : Database {
-        if (Database::$instance == null) {
+        if (Database::$instance == null || true) {
             Database::$instance = new Database($redirectError);
         }
         return Database::$instance;
     }
 
-    public static function getConnection(): \PDO {
-        return Database::getDatabase()->connection;
+    public static function getConnection($redirectError = true): \PDO {
+        return Database::getDatabase($redirectError)->connection;
     }
 
     public function connection(): \PDO {
