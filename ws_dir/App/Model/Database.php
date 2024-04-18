@@ -2,53 +2,50 @@
 
 namespace App\Model;
 
-use App\Constants;
+use App\Utils\Singleton;
 use App\Utils\Utils;
 use PDOException;
 
-class Database { // SINGLETON?
+
+/**
+ *  Gère la connection à la base de données, si elle est utilisée, sa méthode
+ *    statique ensureInstance doit être appelée avant tout code HTML, afin de
+ *    pouvoir rediriger sur une page d'erreur en cas de problème de connection.
+ */
+class Database extends Singleton {
+    /**  Constantes de connection */
     private const DB_HOST = "localhost";
     private const DB_NAME = "webproject_library";
     private const DB_USER = "root";
     private const DB_PASS = "";
 
+    /**  Constantes d'erreur */
     public const ConnectionErrorCode = 500;
     private const ConnectionErrorMsg = "Une erreur de connexion est survenue";
 
-    private static $instance;
-    private $connection;
-    private $connectionError;
+    /**  Connection courante à la BDD */
+    private \PDO $connection;
 
-    private function __construct($redirectError) {
-        $this->connectionError = false;
+    /**  Permet d'assurer la connection (Instanciation) */
+    public function ensureConnection() {
+        static::Instance();
+    }
+
+    /**  Se connecte à la BDD ou redirige sur une page d'erreur */
+    protected function __construct() {
         try {
             $dsn = "mysql:host=" . self::DB_HOST . ";dbname=" . self::DB_NAME;
             $this->connection = new \PDO($dsn, self::DB_USER, self::DB_PASS);
         } catch (PDOException $e) {
-            if ($redirectError) {
-                Utils::showErrorCode(Database::ConnectionErrorCode, Database::ConnectionErrorMsg);
-            }
-            $this->connectionError = true;
+            Utils::showErrorCode(Database::ConnectionErrorCode, Database::ConnectionErrorMsg);
         }
     }
 
-    // Si redirect error à false, alors il faut check connectionError
-    public static function getDatabase($redirectError = true) : Database {
-        if (Database::$instance == null || true) {
-            Database::$instance = new Database($redirectError);
-        }
-        return Database::$instance;
-    }
-
-    public static function getConnection($redirectError = true): \PDO {
-        return Database::getDatabase($redirectError)->connection;
+    public static function getConnection(): \PDO {
+        return static::Instance()->connection;
     }
 
     public function connection(): \PDO {
         return $this->connection;
-    }
-
-    public function hadConnectionError() {
-        return $this->connectionError;
     }
 }
