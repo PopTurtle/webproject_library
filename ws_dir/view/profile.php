@@ -20,6 +20,10 @@ if (isset($_POST["mail"]) && isset($_POST["password"])) {
         }
     }
 }
+
+if (!$sm->isUserConnected()) {
+    echo "Utilisateur non connecté" . PHP_EOL;
+}
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +35,7 @@ if (isset($_POST["mail"]) && isset($_POST["password"])) {
     <?php NavBar::putStyle(); ?>
 </head>
 <body>
-    <?php //NavBar::put(); ?>
+    <?php NavBar::put(); ?>
     <main>
     </main>
 </body>

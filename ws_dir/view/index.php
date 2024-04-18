@@ -7,7 +7,7 @@ use App\Partials\SearchBar;
 
 require_once "../autoloader.php";
 
-SessionManager::EnsureConnectionAttempt();
+SessionManager::ensureConnectionAttempt();
 ?>
 
 <!DOCTYPE html>

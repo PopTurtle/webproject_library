@@ -17,6 +17,24 @@ body {
     margin: 0;
 }
 
+body::after {
+    content: "";
+    position:fixed;
+    height: 1200px;
+    width: 1200px;
+
+    top:0;
+    right: 0;
+    transform: translate(15%, -14%) rotate(-4deg);
+
+    background-image: url("/App/Assets/Images/logo.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    opacity: .25;
+    z-index: -1000;
+}
+
 .category-title {
     color: var(--color-palette-1);
     text-align: center;

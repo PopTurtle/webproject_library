@@ -21,7 +21,7 @@ class Database extends Singleton {
 
     /**  Constantes d'erreur */
     public const ConnectionErrorCode = 500;
-    private const ConnectionErrorMsg = "Une erreur de connexion est survenue";
+    private const ConnectionErrorMsg = "Une erreur de connexion s'est produite";
 
     /**  Connection courante à la BDD */
     private \PDO $connection;
