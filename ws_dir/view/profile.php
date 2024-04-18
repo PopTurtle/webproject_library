@@ -4,9 +4,7 @@ require_once "../autoloader.php";
 
 use App\Constants;
 use App\Controller\SessionManager;
-use App\Model\DBObjects\Book;
 use App\Partials\NavBar;
-use App\Utils\Utils;
 
 $sm = SessionManager::Instance();
 if (isset($_POST["mail"]) && isset($_POST["password"])) {

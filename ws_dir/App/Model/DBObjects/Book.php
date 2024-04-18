@@ -4,6 +4,9 @@ namespace App\Model\DBObjects;
 
 use App\Model\DBObject;
 
+/**
+ *  Représente un livre, de la table 'book'
+ */
 class Book extends DBObject {
     protected const TableName = "book";
 
@@ -18,6 +21,6 @@ class Book extends DBObject {
     ];
 
     protected function ensureCorrectData(): bool {
-        return true;
+        return false;
     }
 }

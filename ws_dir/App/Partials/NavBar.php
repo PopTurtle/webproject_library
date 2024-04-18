@@ -36,16 +36,21 @@ class NavBar extends Partial {
         ?>
         <div class="nav-buttons">
         <?php
-        if ($btn_mode == self::BTN_HOME) {
-            self::putButton("Accueil", "nav-button btn-home", Constants::PAGE_HOME);
-        } else if ($btn_mode == self::BTN_USER) {
-            $sm = SessionManager::Instance();
-            if ($sm->isUserConnected()) {
-                self::putButton("Mon profil", "nav-button btn-profil", Constants::PAGE_PROFILE);
-            } else {
-                self::putButton("Administrateur", "nav-button btn-admin-connect", "");
-                self::putButton("Se connecter", "nav-button btn-connect", Constants::PAGE_LOGIN);
-            }
+        switch ($btn_mode) {
+            case self::BTN_HOME:
+                self::putButton("Accueil", "nav-button btn-home", Constants::PAGE_HOME);
+                break;
+            case self::BTN_USER:
+                $sm = SessionManager::Instance();
+                if ($sm->isUserConnected()) {
+                    self::putButton("Mon profil", "nav-button btn-profil", Constants::PAGE_PROFILE);
+                } else {
+                    self::putButton("Administrateur", "nav-button btn-admin-connect", "");
+                    self::putButton("Se connecter", "nav-button btn-connect", Constants::PAGE_LOGIN);
+                }
+                break;
+            default:
+                break;
         }
         ?>
         </div>

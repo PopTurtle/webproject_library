@@ -2,9 +2,11 @@
 
 namespace App\Model\DBObjects;
 
-use App\Model\Database;
 use App\Model\DBObject;
 
+/**
+ *  Représente un utilisateur, de la table 'consumer'
+ */
 class Consumer extends DBObject {
     protected const TableName = "consumer";
 
@@ -17,10 +19,12 @@ class Consumer extends DBObject {
         "Password" => "password"
     ];
 
+    /**  Renvoie l'utilisateur dont le mail est $mail s'il existe */
     public static function getConsumerByMail(string $mail) {
         return static::getFirstOBJ([static::$all_properties["Mail"] . " LIKE \"$mail\""]);
     }
 
+    /**  Renvoie l'utilisateur dont l'ID est $id s'il existe */
     public static function getConsumerByID(int $id) {
         return static::getFirstOBJ([static::$all_properties["Id"] . " = $id"]);
     }
