@@ -1,6 +1,6 @@
 <?php
 
-require_once "../autoloader.php";
+require_once "../../autoloader.php";
 
 use App\Constants;
 use App\Controller\SessionManager;

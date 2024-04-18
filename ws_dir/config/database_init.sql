@@ -10,7 +10,7 @@ CREATE TABLE book (
     title varchar(255) NOT NULL,
     author varchar(255) NOT NULL,
     editor varchar(255) NOT NULL,
-    publication_year year NOT NULL,
+    publication_year int NOT NULL,
     category varchar(255) NOT NULL,
     stock int NOT NULL,
 
@@ -47,11 +47,45 @@ CREATE TABLE bookloan (
 
 -- Remplissage avec des valeurs de tests
 
--- Livres
+-- Livres  ; valeures générées via ChatGPT
 INSERT INTO book
 (book_id, title, author, editor, publication_year, category, stock)
 VALUES
-(NULL, "Super titre", "Moi", "Padéditeur", 1975, "Roman", 2);
+(NULL, "Super titre", "Moi", "Padéditeur", "1975", "Roman", 2),
+(NULL, "Les Misérables", "Victor Hugo", "Gallimard", "1862", "Roman classique", 3),
+(NULL, "1984", "George Orwell", "Secker & Warburg", "1949", "Science-fiction", 5),
+(NULL, "Le Seigneur des Anneaux", "J.R.R. Tolkien", "Allen & Unwin", "1954", "Fantasy", 3),
+(NULL, "Le Petit Prince", "Antoine de Saint-Exupéry", "Reynal & Hitchcock", "1943", "Conte philosophique", 4),
+(NULL, "Harry Potter à l'école des sorciers", "J.K. Rowling", "Bloomsbury", "1997", "Jeunesse", 5),
+(NULL, "Crime et Châtiment", "Fiodor Dostoïevski", "The Russian Messenger", "1866", "Roman psychologique", 3),
+(NULL, "Orgueil et Préjugés", "Jane Austen", "T. Egerton, Whitehall", "1813", "Roman romantique", 4),
+(NULL, "L'Étranger", "Albert Camus", "Gallimard", "1942", "Roman philosophique", 5),
+(NULL, "Guerre et Paix", "Léon Tolstoï", "The Russian Messenger", "1869", "Roman historique", 2),
+(NULL, "Le Parfum", "Patrick Süskind", "Diogenes Verlag", "1985", "Roman noir", 3),
+(NULL, "Les Trois Mousquetaires", "Alexandre Dumas", "Baudry", "1844", "Roman d'aventure", 3),
+(NULL, "Anna Karénine", "Léon Tolstoï", "The Russian Messenger", "1877", "Roman réaliste", 2),
+(NULL, "Le Comte de Monte-Cristo", "Alexandre Dumas", "Pétion", "1844", "Roman d'aventure", 3),
+(NULL, "Fahrenheit 451", "Ray Bradbury", "Ballantine Books", "1953", "Science-fiction", 5),
+(NULL, "Don Quichotte", "Miguel de Cervantes", "Francisco de Robles", "1605", "Roman de chevalerie", 2),
+(NULL, "Les Hauts de Hurlevent", "Emily Brontë", "Thomas Cautley Newby", "1847", "Roman gothique", 4),
+(NULL, "Le Portrait de Dorian Gray", "Oscar Wilde", "Ward, Lock and Company", "1890", "Roman fantastique", 5),
+(NULL, "Le Vieil Homme et la Mer", "Ernest Hemingway", "Charles Scribner's Sons", "1952", "Roman philosophique", 5),
+(NULL, "Les Raisins de la colère", "John Steinbeck", "The Viking Press", "1939", "Roman réaliste", 1),
+(NULL, "Voyage au bout de la nuit", "Louis-Ferdinand Céline", "Éditions Denoël", "1932", "Roman noir", 3),
+(NULL, "Les Frères Karamazov", "Fiodor Dostoïevski", "The Russian Messenger", "1880", "Roman philosophique", 4),
+(NULL, "Vingt mille lieues sous les mers", "Jules Verne", "Pierre-Jules Hetzel", "1870", "Roman d'aventure", 5),
+(NULL, "Le Tour du monde en quatre-vingts jours", "Jules Verne", "Pierre-Jules Hetzel", "1873", "Roman d'aventure", 5),
+(NULL, "Les Quatre Filles du docteur March", "Louisa May Alcott", "Roberts Brothers", "1868", "Roman jeunesse", 3),
+(NULL, "Le Nom de la rose", "Umberto Eco", "Bompiani", "1980", "Roman historique", 4),
+(NULL, "Moby Dick", "Herman Melville", "Richard Bentley", "1851", "Roman d'aventure", 4),
+(NULL, "Autant en emporte le vent", "Margaret Mitchell", "Macmillan Publishers", "1936", "Roman historique", 3),
+(NULL, "Les Piliers de la Terre", "Ken Follett", "William Morrow and Company", "1989", "Roman historique", 4),
+(NULL, "Le Journal d'Anne Frank", "Anne Frank", "Contact Publishing", "1947", "Journal intime", 2),
+(NULL, "Matilda", "Roald Dahl", "Jonathan Cape", "1988", "Jeunesse", 5),
+(NULL, "Les Aventures de Tom Sawyer", "Mark Twain", "Charles L. Webster And Company", "1876", "Roman jeunesse", 4),
+(NULL, "Les Aventures d'Alice au pays des merveilles", "Lewis Carroll", "Macmillan", "1865", "Roman jeunesse", 4),
+(NULL, "Les Enfants du capitaine Grant", "Jules Verne", "Pierre-Jules Hetzel", "1868", "Roman d'aventure", 4),
+(NULL, "La Guerre et la Paix", "Léon Tolstoï", "The Russian Messenger", "1869", "Roman historique", 2);
 
 -- Utilisateurs
 INSERT INTO consumer

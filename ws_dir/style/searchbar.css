@@ -1,7 +1,7 @@
 :root {
     --search-bar-height-tot: 10vh;
     --search-bar-height-field: 7vh;
-    --search-bar-width-field: 60%;
+    --search-bar-width-field: 45%;
     --search-bar-height-content: 60%;
     --search-bar-sbutton-size: 50px;
     --search-bar-sbutton-color: orange;

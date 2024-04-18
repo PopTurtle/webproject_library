@@ -85,6 +85,20 @@ abstract class DBObject {
     }
 
     /**
+     *  Renvoie un tableau comportant tous les objets renvoyés par la requête
+     *    request. Il est supposé que cette requete renvoie bien des données
+     *    valides pour l'objet donné.
+     */
+    protected static function trySelectOBJFromDB(string $request) {
+        $res = Database::getConnection()->query($request);
+        $rs = [];
+        while ($val = $res->fetch()) {
+            array_push($rs, static::createFromDBArr($val));
+        }
+        return $rs;
+    }
+
+    /**
      *  Renvoie le premier objet qui respecte toutes les conditions SQL de
      *    $cond_arr, exemple de $cond_arr: ["title LIKE %fromage%"]
      * 
