@@ -17,16 +17,16 @@ SessionManager::EnsureConnectionAttempt();
     <title>bilbiloték</title>
     <link rel="stylesheet" href=<?= Constants::STYLE_GLOBAL ?>>
     <link rel="stylesheet" href=<?= Constants::STYLE_INDEX ?>>
-    <?php Navbar::putNavbarStyle(); ?>
-    <?php SearchBar::putSearchBarStyle(); ?>
+    <?php Navbar::putStyle(); ?>
+    <?php SearchBar::putStyle(); ?>
 </head>
 <body>
-    <?php Navbar::putNavbar(Navbar::BTN_USER); ?>
+    <?php Navbar::put(["btn_mode" => Navbar::BTN_USER]); ?>
 
     <main>
         <section class="main-search">
             <h2 class="category-title">Bienvenue sur votre espace d'emprunt !</h2>
-            <?php SearchBar::putSearchBar(""); ?>
+            <?php SearchBar::put(""); ?>
         </section>
         
         <section class="main-news">

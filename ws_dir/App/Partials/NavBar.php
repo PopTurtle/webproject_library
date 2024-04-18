@@ -4,30 +4,34 @@ namespace App\Partials;
 
 use App\Constants;
 use App\Controller\SessionManager;
+use App\Partials\Partial;
 
-class NavBar {
+class NavBar extends Partial {
     public const BTN_HOME = 1;
     public const BTN_USER = 2;
 
-    public static function putNavBar(int $btn_mode) {
+    public const ASSOCIATED_STYLE = Constants::STYLE_NAVBAR;
+
+    /**
+     *  @param $args :
+     *    - btn_mode : défini quels boutons afficher, BTN_HOME par défaut
+     */
+    public static function put($args = []) {
         ?>
-        <nav class="nav-main">
-            <div class="nav-content">
-                <div class="nav-logo">
-                    <img src="/App/Assets/Images/logo-full.png" alt="Logo accueil">
+        <header>
+            <nav class="nav-main">
+                <div class="nav-content">
+                    <div class="nav-logo">
+                        <img src="/App/Assets/Images/logo-full.png" alt="Logo accueil">
+                    </div>
+                    <?php self::putNavBarButtons($args['btn_mode'] ?? self::BTN_HOME); ?>
                 </div>
-                <?php self::putNavBarButtons($btn_mode); ?>
-            </div>
-        </nav>
-        <?php
-    }
-    
-    public static function putNavbarStyle() {
-        ?>
-        <link rel="stylesheet" href="<?= Constants::STYLE_NAVBAR ?>">
+            </nav>
+        </header>
         <?php
     }
 
+    /**  Affiche les boutons demandés, c'est-à-dire en fonction de $btn_mode */
     private static function putNavBarButtons(int $btn_mode) {
         ?>
         <div class="nav-buttons">
@@ -48,6 +52,10 @@ class NavBar {
         <?php
     }
 
+    /**
+     *  Affiche un bouton dont le texte est $content, les classes de style sont
+     *    la chaine $classes, et le lien lors d'un clique est $href
+     */
     private static function putButton(string $content, string $classes, string $href) {
         ?>
         <div class="<?= $classes ?>">

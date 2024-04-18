@@ -1,5 +1,5 @@
 <?php
-$error_code = 500;
+$error_code = -1;
 $error_msg = "Une erreur est survenue";
 
 if (isset($_GET["code"])) {

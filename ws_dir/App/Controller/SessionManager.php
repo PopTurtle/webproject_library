@@ -16,7 +16,7 @@ class SessionManager extends Singleton {
     public const USERCONNECT_FAILED_MAIL = -2;
     public const USERCONNECT_FAILED_PASS = -3;
 
-    // Utilisateur courant
+    /**  Utilisateur courant */
     private bool $isUserConnected;
     private ?Consumer $currentUser;
 

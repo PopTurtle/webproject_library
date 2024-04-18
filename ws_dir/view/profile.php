@@ -30,10 +30,10 @@ if (isset($_POST["mail"]) && isset($_POST["password"])) {
     <meta charset="UTF-8">
     <title>bilbiloték</title>
     <link rel="stylesheet" href=<?= Constants::STYLE_GLOBAL ?>>
-    <?php NavBar::putNavbarStyle(); ?>
+    <?php NavBar::putStyle(); ?>
 </head>
 <body>
-    <?php //NavBar::putNavBar(NavBar::BTN_HOME); ?>
+    <?php //NavBar::put(); ?>
     <main>
     </main>
 </body>
