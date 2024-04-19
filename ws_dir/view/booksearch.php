@@ -27,8 +27,9 @@ $bc = new BookSearchController();
     <main>
 
         <section class="search-result">
-            <?php $res = $bc->getSearchResult(); ?>    
-            <p class="result-count"><?= count($res) ?> résultats</p>
+            <?php $res = $bc->getSearchResult(); ?>
+            <?php $c = count($res); ?>
+            <p class="result-count"><?= $c ?> résultat<?= $c > 1 ? "s" : "" ?></p>
             <div class="result-box">
                 <?php foreach ($res as $book) {
                     ?>
@@ -40,7 +41,7 @@ $bc = new BookSearchController();
                             <?= $book->Title ?>
                         </p>
                         <p class="result-stock">
-                            <?= $book->Stock ?> exemplaires restants 
+                            <?= $book->Stock ?> exemplaires restant<?= $book->Stock > 1 ? "s" : "" ?>
                         </p>
                         <div class="result-loan-btn">
                             <p>Emprunter</p>
