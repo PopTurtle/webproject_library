@@ -16,12 +16,12 @@ class SearchBar extends Partial {
     public static function put($args = []) {
         ?>
         <div class="search-bar">
-            <form method="get" action=<?= $args["action_ref"] ?? "" ?>>
+            <form method="get" action="<?= $args['action_ref'] ?? '' ?>">
                 <input class="sb-text" type="text" name="search-data" placeholder="Rechercher un livre">
                 <select class="sb-drop" name="search-type">
-                    <option value="title">Titre</option>
-                    <option value="author">Auteur</option>
-                    <option value="category">Catégorie</option>
+                    <option value="<?= Constants::SEARCH_TYPE_TITLE ?>">Titre</option>
+                    <option value="<?= Constants::SEARCH_TYPE_AUTHOR ?>">Auteur</option>
+                    <option value="<?= Constants::SEARCH_TYPE_CATEGORY ?>">Catégorie</option>
                 </select>
                 <input class="sb-search" type="submit" value="Rechercher">
             </form>

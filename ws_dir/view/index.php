@@ -17,8 +17,8 @@ SessionManager::ensureConnectionAttempt();
     <title>bilbiloték</title>
     <link rel="stylesheet" href=<?= Constants::STYLE_GLOBAL ?>>
     <link rel="stylesheet" href=<?= Constants::STYLE_INDEX ?>>
-    <?php Navbar::putStyle(); ?>
-    <?php SearchBar::putStyle(); ?>
+    <?php Navbar::putHeader(); ?>
+    <?php SearchBar::putHeader(); ?>
 </head>
 <body>
     <?php Navbar::put(["btn_mode" => Navbar::BTN_USER]); ?>
@@ -26,7 +26,7 @@ SessionManager::ensureConnectionAttempt();
     <main>
         <section class="main-search">
             <h2 class="category-title">Bienvenue sur votre espace d'emprunt !</h2>
-            <?php SearchBar::put(""); ?>
+            <?php SearchBar::put(["action_ref" => Constants::PAGE_BOOKSEARCH]); ?>
         </section>
         
         <section class="main-news">

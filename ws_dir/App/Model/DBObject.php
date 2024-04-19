@@ -58,8 +58,6 @@ abstract class DBObject {
         if (!$this->ensureCorrectData()) {
             return false;
         }
-
-        // -----------------------------------------------------------
         $kv = $this->getPropertyValues();
         $request = "INSERT INTO " . static::TableName
                  . " (" . implode(", ", array_keys($kv)) . ") "
@@ -92,6 +90,9 @@ abstract class DBObject {
     protected static function trySelectOBJFromDB(string $request) {
         $res = Database::getConnection()->query($request);
         $rs = [];
+        if (!$res) {
+            return $rs;
+        }
         while ($val = $res->fetch()) {
             array_push($rs, static::createFromDBArr($val));
         }

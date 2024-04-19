@@ -14,6 +14,7 @@ abstract class Constants {
     public const PAGE_ERROR = "/view/misc/error.php";
     public const PAGE_LOGIN = "/view/user/login.php";
     public const PAGE_PROFILE = "/view/user/profile.php";
+    public const PAGE_BOOKSEARCH = "/view/booksearch.php";
 
     /**
      *  Chemin des feuilles de style
@@ -22,4 +23,12 @@ abstract class Constants {
     public const STYLE_INDEX = "/style/index.css";
     public const STYLE_NAVBAR = "/style/navbar.css";
     public const STYLE_SEARCHBAR = "/style/searchbar.css";
+    public const STYLE_BOOKSEARCH = "/style/booksearch.css";
+
+    /**
+     *  Types de recherche de livres disponible
+     */
+    public const SEARCH_TYPE_TITLE = "title";
+    public const SEARCH_TYPE_AUTHOR = "author";
+    public const SEARCH_TYPE_CATEGORY = "category";
 }

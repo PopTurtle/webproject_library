@@ -1,0 +1,64 @@
+
+/**  Très mal en forme, prototype */
+
+.search-result {
+  --book-box-width: 17%;
+  --book-box-height: 35vh;
+
+  padding: 0 5%;
+  margin: 0;
+}
+
+.result-count {
+    color: var(--color-palette-4);
+}
+
+.result-box {
+    display: flex;
+    position: relative;
+
+    justify-content: space-between;
+    align-items: flex-start;
+
+    row-gap: 5vh;
+
+    flex-wrap: wrap;
+
+    height: 100vh;
+
+}
+
+.result-book {
+    border: 1px dashed red; /*****************Remove*/
+
+    width: var(--book-box-width);
+    min-height: var(--book-box-height);
+}
+
+.result-cover {
+
+    border: 1px solid black;
+
+
+    display: block;
+    margin: 5%;
+    aspect-ratio: 1 / 1;
+}
+
+p.result-title {
+    color: var(--color-palette-4);
+    text-align: center;
+    font-size: .85em;
+    margin-bottom: 0;
+}
+
+p.result-stock {
+    color: var(--color-palette-2);
+    text-align: center;
+    font-size: .65em;
+    margin-top: 0;
+}
+
+.result-loan-btn {
+    border: 1px solid black; /*****************Remove*/
+}

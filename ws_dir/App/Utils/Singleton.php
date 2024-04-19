@@ -7,26 +7,23 @@ namespace App\Utils;
  */
 abstract class Singleton {
     /**  Instance courante, unique, peut être null */
-    private static $_instance;
+    private static $_instances;
 
     /**
      *  Accès à l'instance unique, si elle existe
      *  @return ?static
      */
     public static function Instance() {
-        if (static::$_instance == null) {
+        if (!isset(self::$_instances)) {
             static::createInstance();
         }
-        return static::$_instance;
+        return static::$_instances[static::class];
     }
 
     protected function __construct() { ; }
 
-    /**
-     *  Méthode appelée pour créer l'instance, si possible elle doit être
-     *    attachée à static::$_instance.
-     */
-    protected static function createInstance() {
-        static::$_instance = new static();
+    /**  Méthode appelée pour créer l'instance */
+    private static function createInstance() {
+        static::$_instances[static::class] = new static();
     }
 }

@@ -32,7 +32,7 @@ if (!$sm->isUserConnected()) {
     <meta charset="UTF-8">
     <title>bilbiloték</title>
     <link rel="stylesheet" href=<?= Constants::STYLE_GLOBAL ?>>
-    <?php NavBar::putStyle(); ?>
+    <?php NavBar::putHeader(); ?>
 </head>
 <body>
     <?php NavBar::put(); ?>

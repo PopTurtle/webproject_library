@@ -15,7 +15,7 @@ abstract class Partial {
     public abstract static function put($args);
     
     /**  Lie le fichier css associé au partial */
-    public static function putStyle() {
+    public static function putHeader() {
         if (strcmp(static::ASSOCIATED_STYLE, "") != 0) {
             static::putStyleLink(static::ASSOCIATED_STYLE);
         }
