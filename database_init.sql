@@ -15,7 +15,7 @@ CREATE TABLE book (
     stock int NOT NULL,
 
     CONSTRAINT PK_book PRIMARY KEY (book_id)
-);
+) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE consumer (
     consumer_id int auto_increment,
@@ -27,7 +27,7 @@ CREATE TABLE consumer (
     password varchar(255) NOT NULL,
     
     CONSTRAINT PK_consumer PRIMARY KEY (consumer_id)
-);
+) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE bookloan (
     book_id int NOT NULL,
@@ -42,7 +42,7 @@ CREATE TABLE bookloan (
     CONSTRAINT FK_bookloan_to_consumer
     FOREIGN KEY (consumer_id)
     REFERENCES consumer(consumer_id)
-);
+) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 -- Remplissage avec des valeurs de tests
