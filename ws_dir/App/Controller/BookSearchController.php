@@ -15,7 +15,6 @@ class BookSearchController {
 
     public function __construct()
     {
-        SessionManager::ensureConnectionAttempt();
         $this->searchStr = $_GET["search-data"] ?? "";
         $this->searchType = $_GET["search-type"] ?? "";
         $this->makeValidSearchValues();

@@ -2,10 +2,13 @@
 
 use App\Constants;
 use App\Controller\BookSearchController;
-use App\Partials\Navbar;
+use App\Model\Database;
+use App\Partials\NavBar;
 use App\Partials\SearchBar;
 
 require_once "../autoloader.php";
+
+//Database::ensureConnection();
 
 $bc = new BookSearchController();
 ?>
@@ -18,11 +21,11 @@ $bc = new BookSearchController();
     <link rel="stylesheet" href=<?= Constants::STYLE_GLOBAL ?>>
     <link rel="stylesheet" href=<?= Constants::STYLE_INDEX ?>>
     <link rel="stylesheet" href=<?= Constants::STYLE_BOOKSEARCH ?>>
-    <?php Navbar::putHeader(); ?>
+    <?php NavBar::putHeader(); ?>
     <?php SearchBar::putHeader(); ?>
 </head>
 <body>
-    <?php Navbar::put(); ?>
+    <?php NavBar::put(); ?>
 
     <main>
 

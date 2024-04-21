@@ -34,7 +34,7 @@ class SessionManager extends Singleton {
         }
     }
 
-    public static function ensureConnectionAttempt() {
+    public static function ensureUserConnectionAttempt() {
         self::Instance();
     }
 

@@ -2,12 +2,10 @@
 
 use App\Constants;
 use App\Controller\SessionManager;
-use App\Partials\Navbar;
+use App\Partials\NavBar;
 use App\Partials\SearchBar;
 
 require_once "../autoloader.php";
-
-SessionManager::ensureConnectionAttempt();
 ?>
 
 <!DOCTYPE html>
@@ -17,11 +15,11 @@ SessionManager::ensureConnectionAttempt();
     <title>bilbiloték</title>
     <link rel="stylesheet" href=<?= Constants::STYLE_GLOBAL ?>>
     <link rel="stylesheet" href=<?= Constants::STYLE_INDEX ?>>
-    <?php Navbar::putHeader(); ?>
+    <?php NavBar::putHeader(); ?>
     <?php SearchBar::putHeader(); ?>
 </head>
 <body>
-    <?php Navbar::put(["btn_mode" => Navbar::BTN_USER]); ?>
+    <?php NavBar::put(["btn_mode" => Navbar::BTN_USER]); ?>
 
     <main>
         <section class="main-search">

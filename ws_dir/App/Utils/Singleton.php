@@ -14,13 +14,13 @@ abstract class Singleton {
      *  @return ?static
      */
     public static function Instance() {
-        if (!isset(self::$_instances)) {
+        if (!isset(static::$_instances[static::class])) {
             static::createInstance();
         }
         return static::$_instances[static::class];
     }
 
-    protected function __construct() { ; }
+    protected abstract function __construct();
 
     /**  Méthode appelée pour créer l'instance */
     private static function createInstance() {

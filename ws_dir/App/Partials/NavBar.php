@@ -31,7 +31,11 @@ class NavBar extends Partial {
         <?php
     }
 
-    /**  Affiche les boutons demandés, c'est-à-dire en fonction de $btn_mode */
+    /**
+     *  Affiche les boutons demandés, c'est-à-dire en fonction de $btn_mode.
+     *  Si la valeur n'est pas correcte, un appel récursif est lancé avec
+     *    self::BTN_HOME comme valeur de $btn_mode.
+     */
     private static function putNavBarButtons(int $btn_mode) {
         ?>
         <div class="nav-buttons">
@@ -50,6 +54,7 @@ class NavBar extends Partial {
                 }
                 break;
             default:
+                self::putNavBarButtons(self::BTN_HOME);
                 break;
         }
         ?>

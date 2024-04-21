@@ -1,5 +1,10 @@
 <?php
 
+// Autoloader
+
+use App\Controller\SessionManager;
+use App\Model\Database;
+
 const app = "/App";
 const ns_cut_preg = "/^App/";
 
@@ -10,3 +15,10 @@ function autoload($class) {
 }
 
 spl_autoload_register("autoload");
+
+
+// Onlifajtpo
+
+Database::ensureConnection();
+SessionManager::ensureUserConnectionAttempt();
+
