@@ -44,5 +44,9 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
             cd ./webproject_library
+            DB_HOST=${{ secrets.DB_HOST }} \
+            DB_NAME=${{ secrets.DB_NAME }} \
+            DB_USER=${{ secrets.DB_USER }} \
+            DB_PASS=${{ secrets.DB_PASS }} \
             bash deploy.sh
         

@@ -14,10 +14,10 @@ use PDOException;
  */
 class Database extends Singleton {
     /**  Constantes de connection */
-    private const DB_DEFAULT_HOST = "database";
+    private const DB_DEFAULT_HOST = "localhost";
     private const DB_DEFAULT_NAME = "webproject_library";
     private const DB_DEFAULT_USER = "root";
-    private const DB_DEFAULT_PASS = "root";
+    private const DB_DEFAULT_PASS = "";
 
     /**  Variables d'environnements associées */
     private const DB_ENV_HOST = "DB_HOST";
@@ -43,6 +43,9 @@ class Database extends Singleton {
         $name = getenv(self::DB_ENV_NAME) ?: self::DB_DEFAULT_NAME;
         $user = getenv(self::DB_ENV_USER) ?: self::DB_DEFAULT_USER;
         $pass = getenv(self::DB_ENV_PASS) ?: self::DB_DEFAULT_PASS;
+        
+        echo "HOST <br>";
+        var_dump($host);
 
         try {
             $dsn = "mysql:host=" . $host . ";dbname=" . $name;
