@@ -39,10 +39,10 @@ class Database extends Singleton {
 
     /**  Se connecte à la BDD ou redirige sur une page d'erreur */
     protected function __construct() {
-        $host = getenv(self::DB_ENV_HOST) ?? self::DB_DEFAULT_HOST;
-        $name = getenv(self::DB_ENV_NAME) ?? self::DB_DEFAULT_NAME;
-        $user = getenv(self::DB_ENV_USER) ?? self::DB_DEFAULT_USER;
-        $pass = getenv(self::DB_ENV_PASS) ?? self::DB_DEFAULT_PASS;
+        $host = getenv(self::DB_ENV_HOST) ?: self::DB_DEFAULT_HOST;
+        $name = getenv(self::DB_ENV_NAME) ?: self::DB_DEFAULT_NAME;
+        $user = getenv(self::DB_ENV_USER) ?: self::DB_DEFAULT_USER;
+        $pass = getenv(self::DB_ENV_PASS) ?: self::DB_DEFAULT_PASS;
 
         try {
             $dsn = "mysql:host=" . $host . ";dbname=" . $name;
