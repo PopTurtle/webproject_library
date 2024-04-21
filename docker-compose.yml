@@ -19,10 +19,10 @@ services:
       dockerfile: "Dockerfile"
   database:
     image: "mysql:8.0.31"
-    command: ['mysqld', '--default-authentication-plugin=mysql_native_password', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_0900_ai_ci']
+    command: --default-authentication-plugin=mysql_native_password
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_PASS}
-      #MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_DATABASE: ${DB_NAME}
     volumes:
       - db_store:/var/lib/mysql
       - ./database_init.sql:/docker-entrypoint-initdb.d/database_init.sql
