@@ -14,10 +14,16 @@ use PDOException;
  */
 class Database extends Singleton {
     /**  Constantes de connection */
-    private const DB_HOST = "database";
-    private const DB_NAME = "webproject_library";
-    private const DB_USER = "root";
-    private const DB_PASS = "root";
+    private const DB_DEFAULT_HOST = "database";
+    private const DB_DEFAULT_NAME = "webproject_library";
+    private const DB_DEFAULT_USER = "root";
+    private const DB_DEFAULT_PASS = "root";
+
+    /**  Variables d'environnements associées */
+    private const DB_ENV_HOST = "DB_HOST";
+    private const DB_ENV_NAME = "DB_NAME";
+    private const DB_ENV_USER = "DB_USER";
+    private const DB_ENV_PASS = "DB_PASS";
 
     /**  Constantes d'erreur */
     public const ConnectionErrorCode = 500;
@@ -33,19 +39,15 @@ class Database extends Singleton {
 
     /**  Se connecte à la BDD ou redirige sur une page d'erreur */
     protected function __construct() {
+        $host = getenv(self::DB_ENV_HOST) ?? self::DB_DEFAULT_HOST;
+        $name = getenv(self::DB_ENV_NAME) ?? self::DB_DEFAULT_NAME;
+        $user = getenv(self::DB_ENV_USER) ?? self::DB_DEFAULT_USER;
+        $pass = getenv(self::DB_ENV_PASS) ?? self::DB_DEFAULT_PASS;
+
         try {
-            $dsn = "mysql:host=" . self::DB_HOST . ";dbname=" . self::DB_NAME;
-            $this->connection = new \PDO($dsn, self::DB_USER, self::DB_PASS);
+            $dsn = "mysql:host=" . $host . ";dbname=" . $name;
+            $this->connection = new \PDO($dsn, $user, $pass);
         } catch (PDOException $e) {
-            echo "Erreur de connection à la BDD <br>";
-            var_dump(self::DB_HOST); 
-            var_dump(self::DB_NAME); 
-            var_dump(self::DB_USER); 
-            var_dump(self::DB_PASS);
-            echo "<br>Exception:<br>";
-            var_dump($e->getMessage());
-
-
             Utils::showErrorCode(Database::ConnectionErrorCode, Database::ConnectionErrorMsg);
         }
     }

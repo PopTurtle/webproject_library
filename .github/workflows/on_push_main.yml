@@ -1,0 +1,33 @@
+name: Deploy website
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  Transfer_files:
+    name: Transfer files
+    runs-on: ubuntu-latest
+    steps:
+      # Previous run clean
+      - name: Clean the previous runs
+        uses: AutoModality/action-clean@v1
+      
+      # Checkout the current code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+      
+      # Transfer the code
+      - name: Transfer files
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          rm: true
+          source: ./
+          target: ~/webproject_library/
+        
