@@ -43,10 +43,6 @@ class Database extends Singleton {
         $name = getenv(self::DB_ENV_NAME) ?: self::DB_DEFAULT_NAME;
         $user = getenv(self::DB_ENV_USER) ?: self::DB_DEFAULT_USER;
         $pass = getenv(self::DB_ENV_PASS) ?: self::DB_DEFAULT_PASS;
-        
-        echo "HOST <br>";
-        var_dump($host);
-
         try {
             $dsn = "mysql:host=" . $host . ";dbname=" . $name;
             $this->connection = new \PDO($dsn, $user, $pass);
