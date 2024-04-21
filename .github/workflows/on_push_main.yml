@@ -24,10 +24,10 @@ jobs:
       - name: Transfer files
         uses: appleboy/scp-action@v0.1.7
         with:
-          host: ${{ secrets.SSH_HOST }}
+          host: erherh
           username: ${{ secrets.SSH_USER }}
           password: isefytbigmzeg,ui
-          rm: true
           source: ./
           target: ~/webproject_library/
+          rm: true
         
