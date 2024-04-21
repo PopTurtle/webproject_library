@@ -30,4 +30,19 @@ jobs:
           source: ./
           target: ~/webproject_library/
           rm: true
+  
+  deploy-website:
+    name: Deploy website
+    runs-on: ubuntu-latest
+    needs: transfer-files
+    steps:
+      - name: "Starting deploy.sh"
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: |
+            cd ./webproject_library
+            bash deploy.sh
         
