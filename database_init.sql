@@ -1,6 +1,9 @@
-DROP TABLE IF EXISTS book;
-DROP TABLE IF EXISTS consumer;
-DROP TABLE IF EXISTS bookloan;
+-- DROP TABLE IF EXISTS book;
+-- DROP TABLE IF EXISTS consumer;
+-- DROP TABLE IF EXISTS bookloan;
+
+CREATE DATABASE IF NOT EXISTS webproject_library DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+USE webproject_library;
 
 
 -- Création des tables
