@@ -24,8 +24,8 @@ jobs:
       - name: Transfer files
         uses: appleboy/scp-action@v0.1.7
         with:
-          host: erherh
-          username: ${{ secrets.SSH_USER }}
+          host: ${{ secrets.SSH_HOST }}
+          username: rencomegbh
           password: isefytbigmzeg,ui
           source: ./
           target: ~/webproject_library/
