@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  Transfer_files:
+  transfer-files:
     name: Transfer files
     runs-on: ubuntu-latest
     steps:
@@ -22,7 +22,7 @@ jobs:
       
       # Transfer the code
       - name: Transfer files
-        uses: appleboy/scp-action@v0.1.4
+        uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
