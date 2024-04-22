@@ -2,7 +2,7 @@
 /**  Très mal en forme, prototype */
 
 .search-result {
-  --book-box-width: 17%;
+  --book-box-width: 20%;
   --book-box-height: 35vh;
 
   padding: 0 5%;
@@ -15,22 +15,35 @@
 
 .result-box {
     display: flex;
+    
     position: relative;
 
-    justify-content: space-between;
-    align-items: flex-start;
-
+    align-items: center;
     row-gap: 5vh;
+    
+    margin-bottom: 50px;
+
+
 
     flex-wrap: wrap;
 
-    height: 100vh;
+    justify-content: space-between;
 
+
+}
+
+.result-box::after {
+    content: "";
+    flex: auto;
 }
 
 .result-book {
     border: 1px dashed red; /*****************Remove*/
 
+
+    margin: 0;
+    padding: 0;
+    
     width: var(--book-box-width);
     min-height: var(--book-box-height);
 }

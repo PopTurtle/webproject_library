@@ -7,11 +7,13 @@
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
+-- Supprime les tables si elles existents déjà
+
 DROP TABLE IF EXISTS book;
 DROP TABLE IF EXISTS consumer;
 DROP TABLE IF EXISTS bookloan;
 
--- Création des tables
+-- (re) Création des tables
 CREATE TABLE book (
     book_id int auto_increment,
 
