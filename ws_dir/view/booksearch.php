@@ -37,18 +37,20 @@ $bc = new BookSearchController();
                 <?php foreach ($res as $book) {
                     ?>
                     <div class="result-book">
-                        <div class="result-cover">
-                            <img alt="Text">
-                        </div>
-                        <p class="result-title">
-                            <?= $book->Title ?>
-                        </p>
-                        <p class="result-stock">
-                            <?= $book->Stock ?> exemplaires restant<?= $book->Stock > 1 ? "s" : "" ?>
-                        </p>
-                        <div class="result-loan-btn">
-                            <p>Emprunter</p>
-                        </div>
+                        <a href="<?= Constants::PAGE_BOOK . '?book_id=' . $book->Id ?>">
+                            <div class="result-cover">
+                                <img alt="Text">
+                            </div>
+                            <p class="result-title">
+                                <?= $book->Title ?>
+                            </p>
+                            <p class="result-stock">
+                                <?= $book->Stock ?> exemplaires restant<?= $book->Stock > 1 ? "s" : "" ?>
+                            </p>
+                            <div class="result-loan-btn">
+                                <p>Emprunter</p>
+                            </div>
+                        </a>
                     </div>
                 <?php } ?>
             </div>

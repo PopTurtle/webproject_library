@@ -13,8 +13,7 @@ class BookSearchController {
     private string $searchStr;
     private string $searchType;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->searchStr = $_GET["search-data"] ?? "";
         $this->searchType = $_GET["search-type"] ?? "";
         $this->makeValidSearchValues();

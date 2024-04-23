@@ -1,7 +1,6 @@
 <?php
 
 use App\Constants;
-use App\Controller\SessionManager;
 use App\Partials\NavBar;
 use App\Partials\SearchBar;
 

@@ -38,6 +38,11 @@ class Book extends DBObject {
         return static::trySelectOBJFromDB($request);
     }
 
+    /**  Renvoie le livre dont l'id est $id s'il existe, sinon null */
+    public static function getBookById(int $id) {
+        return static::getFirstOBJ([static::$all_properties["Id"] . " = $id"]);
+    }
+
     protected function ensureCorrectData(): bool {
         return false;
     }

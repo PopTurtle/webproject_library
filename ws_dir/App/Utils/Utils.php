@@ -23,7 +23,7 @@ class Utils {
      *    dont les noms sont les clés / valeurs sont celles données par
      *    $argsGet
      */
-    public static function redirectTo(string $path, $argsGet) {
+    public static function redirectTo(string $path, $argsGet=[]) {
         $argsArr = [];
         foreach ($argsGet as $k => $v) {
             array_push($argsArr, $k . "=" . $v);

@@ -32,10 +32,11 @@
 
 }
 
+/*
 .result-box::after {
     content: "";
     flex: auto;
-}
+}*/
 
 .result-book {
     border: 1px dashed red; /*****************Remove*/
@@ -46,6 +47,10 @@
     
     width: var(--book-box-width);
     min-height: var(--book-box-height);
+}
+
+.result-book a {
+    text-decoration: none;
 }
 
 .result-cover {

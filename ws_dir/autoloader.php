@@ -16,9 +16,7 @@ function autoload($class) {
 
 spl_autoload_register("autoload");
 
-
-// Onlifajtpo
+// Code nécessaire
 
 Database::ensureConnection();
 SessionManager::ensureUserConnectionAttempt();
-

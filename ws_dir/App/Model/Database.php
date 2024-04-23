@@ -27,6 +27,7 @@ class Database extends Singleton {
 
     /**  Constantes d'erreur */
     public const ConnectionErrorCode = 500;
+    public const RequestErrorCode = 501;
     private const ConnectionErrorMsg = "Une erreur de connexion s'est produite";
 
     /**  Connection courante à la BDD */
