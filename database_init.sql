@@ -12,6 +12,7 @@
 DROP TABLE IF EXISTS book;
 DROP TABLE IF EXISTS consumer;
 DROP TABLE IF EXISTS bookloan;
+DROP TABLE IF EXISTS cartitem;
 
 -- (re) Création des tables
 CREATE TABLE book (
@@ -54,6 +55,18 @@ CREATE TABLE bookloan (
     REFERENCES consumer(consumer_id)
 ) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+CREATE TABLE cartitem (
+    book_id int NOT NULL,
+    consumer_id int NOT NULL,
+
+    CONSTRAINT FK_cartitem_to_book
+    FOREIGN KEY (book_id)
+    REFERENCES book(book_id),
+
+    CONSTRAINT FK_cartitem_to_consumer
+    FOREIGN KEY (consumer_id)
+    REFERENCES consumer(consumer_id)
+) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Remplissage avec des valeurs de tests
 

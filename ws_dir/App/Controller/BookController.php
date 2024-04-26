@@ -8,7 +8,6 @@ use App\Model\DBObjects\Book;
 use App\Utils\Utils;
 
 class BookController {
-
     private ?Book $curBook;
 
     public function __construct() {

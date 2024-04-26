@@ -2,13 +2,10 @@
 
 use App\Constants;
 use App\Controller\BookSearchController;
-use App\Model\Database;
 use App\Partials\NavBar;
 use App\Partials\SearchBar;
 
 require_once "../autoloader.php";
-
-//Database::ensureConnection();
 
 $bc = new BookSearchController();
 ?>
@@ -28,7 +25,6 @@ $bc = new BookSearchController();
     <?php NavBar::put(); ?>
 
     <main>
-
         <section class="search-result">
             <?php $res = $bc->getSearchResult(); ?>
             <?php $c = count($res); ?>
@@ -47,9 +43,9 @@ $bc = new BookSearchController();
                             <p class="result-stock">
                                 <?= $book->Stock ?> exemplaires restant<?= $book->Stock > 1 ? "s" : "" ?>
                             </p>
-                            <div class="result-loan-btn">
+                            <!-- <div class="result-loan-btn">
                                 <p>Emprunter</p>
-                            </div>
+                            </div> -->
                         </a>
                     </div>
                 <?php } ?>
