@@ -28,7 +28,6 @@ $pc = new ProfileController;
                 echo "BOOK";
                 <?php
             }
-            
             ?>
         </ul>
     </main>
