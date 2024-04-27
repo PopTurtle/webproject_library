@@ -13,10 +13,11 @@ class ShoppingCartController {
 
     public function __construct()
     {
-        $this->consumer = SessionManager::Instance()->getUserConsumer();
-        if ($this->consumer === null) {
+        $sm = SessionManager::Instance();
+        if (!$sm->isUserConnected()) {
             Utils::redirectTo(Constants::PAGE_LOGIN);
         }
+        $this->consumer = $sm->getUserConsumer();
     }
 
     public function getAllShoppingCartBooks() {
