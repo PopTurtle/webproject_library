@@ -18,13 +18,9 @@ class ProfileController {
         }
         $this->sm = SessionManager::Instance();
         if (!$this->sm->isUserConnected()) {
-            Utils::redirectTo(Constants::PAGE_HOME);
+            Utils::redirectTo(Constants::PAGE_LOGIN);
         }
         $this->consumer = $this->sm->getUserConsumer();
-    }
-
-    public function getAllShoppingCartBooks() {
-        return CartItem::getShoppingCartOfCustomer($this->consumer->Id);
     }
 
     private function tryConnectUser(string $mail, string $password) {
