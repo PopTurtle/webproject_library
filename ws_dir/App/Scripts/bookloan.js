@@ -32,7 +32,6 @@ async function removeCartItem(bookId) {
     .then(response => response.json())
     .catch(err => console.error(err));
 
-  console.log(data);
   return data;
 }
 
