@@ -23,6 +23,12 @@ class BookController {
         }
     }
 
+    public function putHeader() {
+        ?>
+        <script src="<? Constants::SCRIPT_BOOKLOAN ?>"></script>
+        <?php
+    }
+
     public function getCurrentBook() : Book {
         return $this->curBook;
     }
