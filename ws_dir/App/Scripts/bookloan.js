@@ -6,9 +6,6 @@ async function addCartItem(bookId) {
 
   const data = await fetch("/API/cartitem.php", {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
     body: param
   })
     .then(response => response.json())
@@ -24,9 +21,6 @@ async function removeCartItem(bookId) {
 
   const data = await fetch("/API/cartitem.php", {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
     body: param
   })
     .then(response => response.json())

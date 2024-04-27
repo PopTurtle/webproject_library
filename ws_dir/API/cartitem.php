@@ -5,40 +5,40 @@ use App\Model\DBObjects\CartItem;
 
 require_once "../autoloader.php";
 
-$options = $_POST;
+$data = $_POST;
 
-function actionAdd($options) {
-    if (!isset($options["book_id"])) {
+function actionAdd($data) {
+    if (!isset($data["book_id"])) {
         return "no content";
     }
     $c = SessionManager::Instance()->getUserConsumer();
     if ($c === null) {
         return "no user";
     }
-    $f = CartItem::tryAddToShoppingCart(intval($options["book_id"]), $c->Id);
+    $f = CartItem::tryAddToShoppingCart(intval($data["book_id"]), $c->Id);
     return $f === false ? "no content" : "ok";
 }
 
-function actionRemove($options) {
-    if (!isset($options["book_id"])) {
+function actionRemove($data) {
+    if (!isset($data["book_id"])) {
         return "no content";
     }
     $c = SessionManager::Instance()->getUserConsumer();
     if ($c === null) {
         return "no user";
     }
-    $f = CartItem::removeFromShoppingCart(intval($options["book_id"]), $c->Id);
+    $f = CartItem::removeFromShoppingCart(intval($data["book_id"]), $c->Id);
     return $f === false ? "no content" : "ok";
 }
 
 // 
 $res = ["status" => "error"];
 
-if (isset($options["action"])) {
-    if (strcmp($options["action"], "add") == 0) {
-        $res["status"] = actionAdd($options);
-    } else if (strcmp($options["action"], "remove") == 0) {
-        $res["status"] = actionRemove($options);
+if (isset($data["action"])) {
+    if (strcmp($data["action"], "add") == 0) {
+        $res["status"] = actionAdd($data);
+    } else if (strcmp($data["action"], "remove") == 0) {
+        $res["status"] = actionRemove($data);
     }
 }
 

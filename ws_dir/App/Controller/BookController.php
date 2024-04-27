@@ -34,11 +34,13 @@ class BookController {
         return $this->curBook;
     }
 
+    /**
+     *  Affiche le bouton d'action lié à ce livre, à savoir :
+     *    - Se connecter si l'utilisateur n'est pas connecté
+     *    - Ajouter au panier si le livre n'est pas dans son panier
+     *    - Retirer du panier si le livre est déjà dans son panier
+     */
     public function putActionButton() {
-        //  Action : si user non connecté : se connecter
-        //           sinon :
-        //  si user a le livre dans son panier : ajouter au panier
-        //  sinon : retirer du panier
         $sm = SessionManager::Instance();
         $id = "btn-connect";
         $btn_text = "Se connecter pour emprunter NOT WORKING?";
