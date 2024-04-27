@@ -13,10 +13,10 @@ class ProfileController {
     private Consumer $consumer;
 
     public function __construct() {
+        $this->sm = SessionManager::Instance();
         if (isset($_POST["mail"]) && isset($_POST["password"])) {
             $this->tryConnectUser($_POST["mail"], $_POST["password"]);
         }
-        $this->sm = SessionManager::Instance();
         if (!$this->sm->isUserConnected()) {
             Utils::redirectTo(Constants::PAGE_LOGIN);
         }

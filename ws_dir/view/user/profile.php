@@ -4,7 +4,6 @@ require_once "../../autoloader.php";
 
 use App\Constants;
 use App\Controller\ProfileController;
-use App\Model\DBObjects\CartItem;
 use App\Partials\NavBar;
 
 $pc = new ProfileController();
