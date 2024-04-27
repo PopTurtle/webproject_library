@@ -21,17 +21,6 @@ $pc = new ProfileController;
 <body>
     <?php NavBar::put(); ?>
     <main>
-        <h1>Panier</h1>
-        <ul>
-            <?php
-            foreach ($pc->getAllShoppingCartBooks() as $book) {
-                echo "BOOK" . PHP_EOL;
-                var_dump($book);
-                ?>
-                <?php
-            }
-            ?>
-        </ul>
     </main>
 </body>
 </html>
