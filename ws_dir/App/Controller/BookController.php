@@ -25,7 +25,7 @@ class BookController {
 
     public function putHeader() {
         ?>
-        <script src="<? Constants::SCRIPT_BOOKLOAN ?>"></script>
+        <script src="<?= Constants::SCRIPT_BOOKLOAN ?>"></script>
         <?php
     }
 

@@ -32,7 +32,7 @@ $cb = $bc->getCurrentBook();
         
 
         <button id="loan-btn">
-            Emprunter
+            Ajouter au panier
         </button>
     </main>
 
