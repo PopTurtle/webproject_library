@@ -1,10 +1,10 @@
 
-async function bookLoan(bookId) {
+async function addCartItem(bookId) {
   const param = new URLSearchParams();
   param.append("action", "add");
   param.append("book_id", bookId);
 
-  fetch("/Api/cartitem.php", {
+  const data = await fetch("/Api/cartitem.php", {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
@@ -12,14 +12,16 @@ async function bookLoan(bookId) {
     body: param
   })
     .then(response => response.json())
-    .then(data => console.log(data))
     .catch(err => console.error(err));
+
+  return data;
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  document
-    .getElementById("loan-btn")
-    .addEventListener("click", async () => {
-      await bookLoan(22);
-    });
+  const btn = document.getElementById("loan-btn");
+  const bookId = btn.dataset.id;
+
+  btn.addEventListener("click", async () => {
+    await addCartItem(bookId);
+  });
 });
