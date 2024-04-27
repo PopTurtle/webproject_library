@@ -22,7 +22,9 @@ class NavBar extends Partial {
             <nav class="nav-main">
                 <div class="nav-content">
                     <div class="nav-logo">
-                        <img src="/App/Assets/Images/logo-full.png" alt="Logo accueil">
+                        <a href="<?= Constants::PAGE_HOME ?>">
+                            <img src="/App/Assets/Images/logo-full.png" alt="Logo accueil">
+                        </a>
                     </div>
                     <?php self::putNavBarButtons($args['btn_mode'] ?? self::BTN_HOME); ?>
                 </div>
