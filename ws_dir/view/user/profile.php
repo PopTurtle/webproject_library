@@ -7,7 +7,7 @@ use App\Controller\ProfileController;
 use App\Model\DBObjects\CartItem;
 use App\Partials\NavBar;
 
-$pc = new ProfileController;
+$pc = new ProfileController();
 ?>
 
 <!DOCTYPE html>

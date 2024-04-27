@@ -52,7 +52,7 @@ class SessionManager extends Singleton {
      */
     public function tryConnectUser(string $mail, string $password) : int {
         $c = Consumer::getConsumerByMail($mail);
-        if ($c == null) {
+        if (is_null($c)) {
             return self::USERCONNECT_FAILED_MAIL;
         }
         $ph = Utils::generatePasswordHash($password);
