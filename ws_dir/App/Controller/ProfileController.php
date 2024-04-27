@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Constants;
 use App\Controller\SessionManager;
+use App\Model\DBObjects\CartItem;
 use App\Model\DBObjects\Consumer;
 use App\Utils\Utils;
 
@@ -23,7 +24,7 @@ class ProfileController {
     }
 
     public function getAllShoppingCartBooks() {
-        return [];
+        return CartItem::getShoppingCartOfCustomer($this->consumer->Id);
     }
 
     private function tryConnectUser(string $mail, string $password) {

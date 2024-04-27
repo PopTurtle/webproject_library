@@ -6,7 +6,7 @@ use App\Model\DBObject;
 
 
 class CartItem extends DBObject {
-    protected const TableName = "ShoppingCart";
+    protected const TableName = "CartItem";
 
     protected static $all_properties = [
         "BookId" => "book_id",
@@ -24,11 +24,14 @@ class CartItem extends DBObject {
     }
 
     public static function canAddToShoppingCart(int $bookId, int $consumerId) : bool {
-        return static::isInConsumerShoppingCart($bookId, $consumerId);
+        return !static::isInConsumerShoppingCart($bookId, $consumerId);
     }
 
     public static function getShoppingCartOfCustomer(int $customer_id) {
-        echo $customer_id;
+        $request = "SELECT * FROM " . self::TableName . " " .
+                   "WHERE " . self::$all_properties['ConsumerId'] . " " .
+                   "= $customer_id";
+        return self::trySelectOBJFromDB($request);
     }
 
     public static function tryAddToShoppingCart(int $bookId, int $consumerId) {
@@ -36,12 +39,12 @@ class CartItem extends DBObject {
             return false;
         }
         $sc = new static();
-        $sc->bookId = $bookId;
-        $sc->consumerId = $consumerId;
+        $sc->BookId = $bookId;
+        $sc->ConsumerId = $consumerId;
         return $sc->tryAddToDB();
     }
 
     protected function ensureCorrectData(): bool {
-        return false;
+        return true;
     }
 }

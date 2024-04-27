@@ -15,7 +15,6 @@ $bc = new BookController;
     <meta charset="UTF-8">
     <title>bilbiloték</title>
     <link rel="stylesheet" href=<?= Constants::STYLE_GLOBAL ?>>
-    <link rel="stylesheet" href=<?= Constants::STYLE_INDEX ?>>
     <link rel="stylesheet" href=<?= Constants::STYLE_BOOKSEARCH ?>>
     <?php NavBar::putHeader(); ?>
 </head>

@@ -4,6 +4,7 @@ require_once "../../autoloader.php";
 
 use App\Constants;
 use App\Controller\ProfileController;
+use App\Model\DBObjects\CartItem;
 use App\Partials\NavBar;
 
 $pc = new ProfileController;
@@ -24,8 +25,9 @@ $pc = new ProfileController;
         <ul>
             <?php
             foreach ($pc->getAllShoppingCartBooks() as $book) {
+                echo "BOOK" . PHP_EOL;
+                var_dump($book);
                 ?>
-                echo "BOOK";
                 <?php
             }
             ?>
