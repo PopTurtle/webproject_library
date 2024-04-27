@@ -31,6 +31,10 @@ $scc = new ShoppingCartController;
             }
             ?>
         </ul>
+        <p>Date de rendu prévue: jamais</p>
+        <button>
+            Valider l'emprunt (Panier vide ?)
+        </button>
     </main>
 </body>
 </html>
