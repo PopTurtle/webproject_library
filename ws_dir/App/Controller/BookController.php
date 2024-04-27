@@ -51,13 +51,13 @@ class BookController {
             return;
         }
         $bookId = $this->curBook->Id;
-        $userId = $sm->getUserConsumer()->Id;
-        if (CartItem::canAddToShoppingCart($bookId, $userId)) {
-            $id = "btn-loan";
-            $btn_text = "Ajouter au panier";
-        } else {
+        $consumerId = $sm->getUserConsumer()->Id;
+        if (CartItem::isInConsumerShoppingCart($bookId, $consumerId)) {
             $id = "btn-unloan";
             $btn_text = "Retirer du panier";
+        } else {
+            $id = "btn-loan";
+            $btn_text = "Ajouter au panier";
         }
         ?>
         <button id="<?= $id ?>" data-id="<?= $bookId ?>">

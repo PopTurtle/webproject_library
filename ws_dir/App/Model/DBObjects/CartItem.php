@@ -20,7 +20,7 @@ class CartItem extends DBObject {
             "$bid_field = $bookId",
             "$cid_field = $consumerId"
         ]);
-        return $sc !== null;
+        return !is_null($sc);
     }
 
     public static function canAddToShoppingCart(int $bookId, int $consumerId) : bool {
