@@ -11,6 +11,9 @@ use App\Model\DBObject;
 class Bookloan extends DBObject {
     protected const TableName = "bookloan";
 
+    /**  Durée d'un prêt en jours */
+    public const LOAN_DURATION = 15;
+
     protected static $BookId = "book_id";
     protected static $ConsumerId = "consumer_id";
     protected static $DateStart = "date_start";

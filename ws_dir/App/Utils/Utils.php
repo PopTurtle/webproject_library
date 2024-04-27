@@ -19,6 +19,34 @@ class Utils {
     }
 
     /**
+     *  Renvoie la date d'aujourd'hui.
+     */
+    public static function getTodayDate() {
+        return self::getDateAt(time());
+    }
+
+    /**
+     *  Renvoie la date telle qu'elle sera dans $days jours.
+     */
+    public static function getDateIn($days) {
+        return self::getDateAt(time() + self::daysInSeconds($days));
+    }
+
+    /**
+     *  Convertis les jours en secondes.
+     */
+    public static function daysInSeconds($days) {
+        return $days * 86400;
+    }
+
+    /**
+     *  Renvoie la date au format (Année)-(Mois)-(Jour) au temps timestamp.
+     */
+    private static function getDateAt($timestamp) {
+        return date('Y-m-d', $timestamp);
+    }
+
+    /**
      *  Redirige vers la page située au chemin $path, en passant les arguments
      *    dont les noms sont les clés / valeurs sont celles données par
      *    $argsGet

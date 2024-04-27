@@ -3,10 +3,11 @@
 use App\Constants;
 use App\Controller\ShoppingCartController;
 use App\Partials\NavBar;
+use App\Utils\Utils;
 
 require_once "../../autoloader.php";
 
-$scc = new ShoppingCartController;
+$scc = new ShoppingCartController();
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +32,7 @@ $scc = new ShoppingCartController;
             }
             ?>
         </ul>
-        <p>Date de rendu prévue: jamais</p>
+        <p>Date de rendu prévue: <?= $scc->getLoanEndDate() ?></p>
         <button>
             Valider l'emprunt (Panier vide ?)
         </button>
