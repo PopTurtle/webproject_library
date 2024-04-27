@@ -66,6 +66,22 @@ abstract class DBObject {
     }
 
     /**
+     *  Retire tous les objets de la BDD dont les valeurs correspondent
+     *    avec celles de l'objet courant. Attention : des valeurs non définie
+     *    correspondent à toutes les valeurs possibles.
+     */
+    public function removeFromDB() {
+        $kv = $this->getDefinedPropertyValues();
+        $opt = [];
+        foreach ($kv as $k => $v) {
+            $opt[] = "$k = $v";
+        }
+        $request = "DELETE FROM " . static::TableName . " " .
+                   "WHERE " . implode(" AND ", $opt);
+        return Database::getConnection()->query($request);
+    }
+
+    /**
      *  S'assure que les valeurs associées aux attributs sont conformes au
      *    modèle.
      */
@@ -149,10 +165,25 @@ abstract class DBObject {
         $vs = [];
         foreach (static::$all_properties as $k => $v) {
             $t = $this->__get($k);
-            if ($t != null) {
+            if ($t !== null) {
                 $t = "\"" . $t . "\"";
             }
             $vs[$v] = $t ?? "NULL";
+        }
+        return $vs;
+    }
+
+    /**
+     *  Similaire à getPropertyValues mais ignore les attrbuts qui n'ont pas
+     *    de valeur définie.
+     */
+    protected function getDefinedPropertyValues() {
+        $vs = [];
+        foreach (static::$all_properties as $k => $v) {
+            $t = $this->__get($k);
+            if ($t !== null) {
+                $vs[$v] = "\"" . $t . "\"";
+            }
         }
         return $vs;
     }

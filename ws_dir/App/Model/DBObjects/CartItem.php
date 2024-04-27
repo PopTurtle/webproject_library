@@ -44,6 +44,13 @@ class CartItem extends DBObject {
         return $sc->tryAddToDB();
     }
 
+    public static function removeFromShoppingCart(int $bookId, int $consumerId) {
+        $sc = new static();
+        $sc->BookId = $bookId;
+        $sc->ConsumerId = $consumerId;
+        return $sc->removeFromDB();
+    }
+
     protected function ensureCorrectData(): bool {
         return true;
     }

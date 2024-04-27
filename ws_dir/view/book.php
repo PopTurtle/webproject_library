@@ -31,9 +31,7 @@ $cb = $bc->getCurrentBook();
         </section>    
         
 
-        <button id="loan-btn" data-id="<?= $cb->Id ?>">
-            Ajouter au panier
-        </button>
+        <?= $bc->putActionButton() ?>
     </main>
 
 </body>
