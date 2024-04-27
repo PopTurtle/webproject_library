@@ -55,8 +55,7 @@ class SessionManager extends Singleton {
         if (is_null($c)) {
             return self::USERCONNECT_FAILED_MAIL;
         }
-        $ph = Utils::generatePasswordHash($password);
-        if (Utils::testPassword($c->Password, $ph) != 0) {
+        if (!Utils::testPassword($password, $c->Password)) {
             return self::USERCONNECT_FAILED_PASS;
         }
         $this->currentUser = $c;

@@ -33,6 +33,8 @@ class ProfileController {
                 case SessionManager::USERCONNECT_FAILED_PASS:
                     echo "PASS INVALIDE" . PHP_EOL;
                     break;
+                default:
+                    break;
             }
         }
     }
