@@ -16,6 +16,7 @@ abstract class Constants {
     public const PAGE_PROFILE = "/view/user/profile.php";
     public const PAGE_BOOKSEARCH = "/view/booksearch.php";
     public const PAGE_BOOK = "/view/book.php";
+    public const PAGE_SHOPPINGCART = "/view/user/shoppingcart.php";
 
     /**
      *  Chemins des feuilles de style
