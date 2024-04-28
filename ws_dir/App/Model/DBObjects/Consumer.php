@@ -8,7 +8,7 @@ use App\Model\DBObject;
  *  Représente un utilisateur, de la table 'consumer'
  */
 class Consumer extends DBObject {
-    protected const TableName = "consumer";
+    public const TableName = "consumer";
 
     protected static $all_properties = [
         "Id" => "consumer_id",

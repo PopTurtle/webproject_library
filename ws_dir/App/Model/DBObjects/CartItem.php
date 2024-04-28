@@ -6,7 +6,7 @@ use App\Model\DBObject;
 
 
 class CartItem extends DBObject {
-    protected const TableName = "cartitem";
+    public const TableName = "cartitem";
 
     protected static $all_properties = [
         "BookId" => "book_id",

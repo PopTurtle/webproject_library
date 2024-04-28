@@ -25,18 +25,18 @@ use PDOStatement;
  */
 abstract class DBObject {
     /**  Nom de la table en BDD, doit être redéfini par la classe dérivée */
-    protected const TableName = self::TableName;
+    public const TableName = self::TableName;
     protected static $all_properties;
     
     private $obj_arr;
 
     /** Initialise un objet dont les attributs n'ont pas de valeur */
-    function __construct() {
+    public function __construct() {
         $this->obj_arr = [];
     }
 
     /**  Renvoie la valeur associée a un attribut si elle existe */
-    function __get($name)
+    public function __get($name)
     {
         return $this->obj_arr[$name] ?? null;
     }
@@ -45,7 +45,7 @@ abstract class DBObject {
      *  Met à jour la valeur associée à $name si possible, sinon lève une
      *  exception de type InvalidArgumentException
      */
-    function __set($name, $value)
+    public function __set($name, $value)
     {
         if (!array_key_exists($name, static::$all_properties)) {
             throw new InvalidArgumentException("Attribut inexistant: " . $name);
@@ -53,16 +53,35 @@ abstract class DBObject {
         $this->obj_arr[$name] = $value;
     }
 
+    public static function getPropertyDBName($name) {
+        return static::$all_properties[$name] ?? null;
+    }
+
+    /**
+     *  Ajoute tous les objets $objects à la BDD, en supposant qu'ils sont de
+     *    type la classe courante.
+     */
+    public static function tryAddArrayToDB($objects) : bool {
+        $properties = "(" . implode(", ", static::getAllPropertyDBName()) . ")";
+        $request = "INSERT INTO " . static::TableName . $properties . " VALUES ";
+        $values = [];
+        foreach ($objects as $obj) {
+            $values[] = "(" . implode(", ", static::getPropertyValues($obj)) . ")";
+        }
+        $request .= implode(", ", $values);
+        return Database::getConnection()->exec($request);
+    }
+
     /**  Tente d'ajouter l'objet courant à la BDD en utilisant ses valeurs. */
     public function tryAddToDB() {
         if (!$this->ensureCorrectData()) {
             return false;
         }
-        $kv = $this->getPropertyValues();
+        $kv = static::getPropertyValues($this);
         $request = "INSERT INTO " . static::TableName
                  . " (" . implode(", ", array_keys($kv)) . ") "
                  . "VALUES (" . implode(", ", array_values($kv)) . ")";
-        return Database::getConnection()->query($request);
+        return Database::getConnection()->exec($request);
     }
 
     /**
@@ -71,14 +90,14 @@ abstract class DBObject {
      *    correspondent à toutes les valeurs possibles.
      */
     public function removeFromDB() {
-        $kv = $this->getDefinedPropertyValues();
+        $kv = $this->getDefinedPropertyValues($this);
         $opt = [];
         foreach ($kv as $k => $v) {
             $opt[] = "$k = $v";
         }
         $request = "DELETE FROM " . static::TableName . " " .
                    "WHERE " . implode(" AND ", $opt);
-        return Database::getConnection()->query($request);
+        return Database::getConnection()->exec($request);
     }
 
     /**
@@ -146,25 +165,13 @@ abstract class DBObject {
     }
 
     /**
-     *  Mets à jours les valeurs de l'objet grâce à celles trouvées dans
-     *    $values.
-     */
-    protected function setValFromDBArr($values) {
-        foreach (static::$all_properties as $k => $v) {
-            if (array_key_exists($v, $values)) {
-                $this->obj_arr[$k] = $values[$v];
-            }
-        }
-    }
-
-    /**
      *  Renvoie un tableau associatif dont les clés sont les noms des attributs
-     *    en BDD et les valeurs sont celles de l'objet courant.
+     *    en BDD et les valeurs sont celles de l'objet $object.
      */
-    protected function getPropertyValues() {
+    protected static function getPropertyValues($object) {
         $vs = [];
         foreach (static::$all_properties as $k => $v) {
-            $t = $this->__get($k);
+            $t = $object->__get($k);
             if ($t !== null) {
                 $t = "\"" . $t . "\"";
             }
@@ -174,17 +181,49 @@ abstract class DBObject {
     }
 
     /**
-     *  Similaire à getPropertyValues mais ignore les attrbuts qui n'ont pas
+     *  Renvoie un tableau contenant les valeurs associées aux propriétés de
+     *    l'object $object, dans l'ordre.
+     */
+    protected static function getValues($object) {
+        $values = [];
+        foreach (static::$all_properties as $k => $v) {
+            $t = $object->__get($k);
+            if ($t !== null) {
+                $t = "\"" . $t . "\"";
+            }
+            array_push($values, $t ?? "NULL");
+        }
+        return $values;
+    }
+
+    /**
+     *  Similaire à getPropertyValues mais ignore les attributs qui n'ont pas
      *    de valeur définie.
      */
-    protected function getDefinedPropertyValues() {
+    protected static function getDefinedPropertyValues($object) {
         $vs = [];
         foreach (static::$all_properties as $k => $v) {
-            $t = $this->__get($k);
+            $t = $object->__get($k);
             if ($t !== null) {
                 $vs[$v] = "\"" . $t . "\"";
             }
         }
         return $vs;
+    }
+
+    protected static function getAllPropertyDBName() {
+        return array_values(static::$all_properties);
+    }
+
+    /**
+     *  Mets à jours les valeurs de l'objet grâce à celles trouvées dans
+     *    $values.
+     */
+    protected function setValFromDBArr($values) {
+        foreach (static::$all_properties as $k => $v) {
+            if (array_key_exists($v, $values)) {
+                $this->obj_arr[$k] = $values[$v];
+            }
+        }
     }
 }

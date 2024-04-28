@@ -66,6 +66,7 @@ class Database extends Singleton {
      *  Renvoie un booléen représentant si la requete n'a renvoyé aucune valeur.
      *  Renvoie null si une erreur est survenue lors de l'execution de la
      *    requete.
+     *  @return bool|null
      */
     public function isEmptyQuery($request) {
         $r = $this->connection()->query($request);
