@@ -29,4 +29,9 @@ class ShoppingCartController {
     public function getLoanEndDate() {
         return Utils::getDateIn(Bookloan::LOAN_DURATION);
     }
+
+    //
+    public function validateShoppingCart() : bool {
+        return Bookloan::makeLoanFromShoppingCart($this->consumer->Id);
+    }
 }
