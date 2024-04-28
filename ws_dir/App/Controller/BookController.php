@@ -46,9 +46,11 @@ class BookController {
         $btn_text = "Se connecter pour emprunter NOT WORKING?";
         if (!$sm->isUserConnected()) {
             ?>
-            <button id="<?= $id ?>" data-id="<?= $this->curBook->Id ?>">
-                <?= $btn_text ?>
-            </button>
+            <a href="<?= Constants::PAGE_LOGIN ?>">
+                <button id="<?= $id ?>" data-id="<?= $this->curBook->Id ?>">
+                    <?= $btn_text ?>
+                </button>
+            </a>
             <?php
             return;
         }
