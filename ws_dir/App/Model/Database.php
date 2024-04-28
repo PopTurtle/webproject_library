@@ -53,7 +53,7 @@ class Database extends Singleton {
     }
 
     public static function getConnection() {
-        return static::Instance()->connection;
+        return static::Instance()->connection();
     }
 
     public function connection(): \PDO {
