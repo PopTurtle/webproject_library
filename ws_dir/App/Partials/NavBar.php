@@ -50,6 +50,7 @@ class NavBar extends Partial {
                 $sm = SessionManager::Instance();
                 if ($sm->isUserConnected()) {
                     self::putButton("Mon panier", "nav-button btn-shopping-cart", Constants::PAGE_SHOPPINGCART);
+                    self::putButton("Me déconnecter", "nav-button btn-log-out", Constants::PAGE_HOME . "?logout=yes");
                     self::putButton("Mon profil", "nav-button btn-profil", Constants::PAGE_PROFILE);
                 } else {
                     self::putButton("Administrateur", "nav-button btn-admin-connect", "");

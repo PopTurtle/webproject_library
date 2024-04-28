@@ -1,10 +1,13 @@
 <?php
 
 use App\Constants;
+use App\Controller\HomeController;
 use App\Partials\NavBar;
 use App\Partials\SearchBar;
 
 require_once "../autoloader.php";
+
+$hc = new HomeController;
 ?>
 
 <!DOCTYPE html>

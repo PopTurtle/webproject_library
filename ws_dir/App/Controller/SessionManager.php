@@ -72,7 +72,7 @@ class SessionManager extends Singleton {
      *  @pre isset($_SESSION[self::SESS_USER_ID])
      */
     private function tryConnectUserNoPass(int $id) : int {
-        if ($id !== self::NOT_CONNECTED_USER_ID) {
+        if ($id === self::NOT_CONNECTED_USER_ID) {
             return self::USERCONNECT_FAILED_PASS;
         }
         $c = Consumer::getConsumerByID($id);
