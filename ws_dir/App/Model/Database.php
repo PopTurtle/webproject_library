@@ -52,11 +52,26 @@ class Database extends Singleton {
         }
     }
 
+    /**  Renvoie la connection PDO, méthode statique */
     public static function getConnection() {
         return static::Instance()->connection();
     }
 
+    /**  Renvoie la connection PDO, méthode d'instance */
     public function connection(): \PDO {
         return $this->connection;
+    }
+
+    /**
+     *  Renvoie un booléen représentant si la requete n'a renvoyé aucune valeur.
+     *  Renvoie null si une erreur est survenue lors de l'execution de la
+     *    requete.
+     */
+    public function isEmptyQuery($request) {
+        $r = $this->connection()->query($request);
+        if ($r === false) {
+            return null;
+        }
+        return $r->fetch() === false;
     }
 }
