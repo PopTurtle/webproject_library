@@ -14,7 +14,7 @@ $hc = new HomeController;
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>bilbiloték</title>
+    <title>Bibliothèque municipale</title>
     <link rel="stylesheet" href=<?= Constants::STYLE_GLOBAL ?>>
     <link rel="stylesheet" href=<?= Constants::STYLE_INDEX ?>>
     <?php NavBar::putHeader(); ?>
@@ -22,15 +22,15 @@ $hc = new HomeController;
 </head>
 <body>
     <?php NavBar::put(["btn_mode" => Navbar::BTN_USER]); ?>
-
     <main>
         <section class="main-search">
-            <h2 class="category-title">Bienvenue sur votre espace d'emprunt !</h2>
-            <?php SearchBar::put(["action_ref" => Constants::PAGE_BOOKSEARCH]); ?>
+            <h1>Bienvenue sur votre espace d'emprunt !</h2>
+            <?php SearchBar::put(["action_ref" => $hc->searchBarAction()]); ?>
+            <a href="<?= $hc->everyBookLink() ?>" class="button btn-color-1">Voir tous les livres</a>
         </section>
         
         <section class="main-news">
-            <h2 class="category-title">Les nouveautés</h2>
+            <h1 class="category-title">Les nouveautés</h2>
         </section>
     </main>
 

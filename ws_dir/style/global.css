@@ -4,22 +4,32 @@
     --color-palette-3: #7D759B;
     --color-palette-4: #F1A74E;
 
-    --primary-font: none;
+    --primary-font: 'Helvetica Neue', sans-serif;
+}
+
+@font-face {
+    font-family: "Helvetica Neue";
+    src: url("../../App/Assets/Fonts/HelveticaNeue/HelveticaNeueMedium.otf");
+    font-weight: normal;
 }
 
 @font-face {
     font-family: "Helvetica Neue";
     src: url("../../App/Assets/Fonts/HelveticaNeue/HelveticaNeueLight.otf");
+    font-weight: light;
 }
 
 body {
-    font-family: sans-serif;
+    font-family: var(--primary-font);
+    font-weight: normal;
+    font-size: 1.5rem;
     margin: 0;
 }
 
+/*  Image de fond */
 body::after {
     content: "";
-    position:fixed;
+    position: fixed;
     height: 1200px;
     width: 1200px;
 
@@ -35,9 +45,24 @@ body::after {
     z-index: -1000;
 }
 
-.category-title {
-    color: var(--color-palette-1);
-    text-align: center;
-    font-size: 1.7rem;
-    margin: 2rem auto;
+.button {
+    --btn-font-size: 1.3rem;
+    --btn-padding-h: 1rem;
+
+    color: white;
+    background-color: var(--color-palette-4);
+    text-decoration: none;
+    letter-spacing: 1px;
+
+    font-size: var(--btn-font-size);
+    padding: var(--btn-padding-h) 2rem;
+    border-radius: calc(var(--btn-font-size) + var(--btn-padding-h) / 2);
+}
+
+.button.btn-color-1 {
+    background-color: var(--color-palette-4);
+}
+
+.button:hover {
+    filter: brightness(95%);
 }

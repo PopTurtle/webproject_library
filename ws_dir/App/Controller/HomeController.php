@@ -12,4 +12,12 @@ class HomeController {
             Utils::redirectTo(Constants::PAGE_HOME);
         }
     }
+
+    public function searchBarAction() {
+        return Constants::PAGE_BOOKSEARCH;
+    }
+
+    public function everyBookLink() {
+        return Constants::PAGE_BOOKSEARCH;
+    }
 }
