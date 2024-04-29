@@ -20,6 +20,9 @@ $pc = new ProfileController();
 <body>
     <?php NavBar::put(); ?>
     <main>
+        <section>
+            <?php var_dump($pc->currentLoans()); ?>
+        </section>
     </main>
 </body>
 </html>

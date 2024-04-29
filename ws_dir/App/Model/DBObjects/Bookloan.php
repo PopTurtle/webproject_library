@@ -33,11 +33,11 @@ class Bookloan extends DBObject {
      */
     public static function makeLoanFromShoppingCart(int $consumerId) : bool {
         //  Test que le panier n'est pas vide
-        if (self::isEmptyShoppingCart($consumerId)) {
+        if (CartItem::isEmptyShoppingCart($consumerId)) {
             return false;
         }
         //  Test que tous les livres du panier sont en stock
-        if (self::everyBookFromShoppingCartInStock($consumerId) !== true) {
+        if (CartItem::everyBookFromShoppingCartInStock($consumerId) !== true) {
             return false;
         }
         //  Transfère les livres du panier en un emprunt
@@ -46,26 +46,10 @@ class Bookloan extends DBObject {
         return self::transferShoppingCartIntoLoan($consumerId, $date_start, $date_end);
     }
 
-    /**
-     *  Renvoie si le panier de consumerId est vide
-     *  @return bool|null
-     */
-    public static function isEmptyShoppingCart(int $consumerId) : bool {
-        $request = "SELECT * FROM " . CartItem::TableName . " WHERE consumer_id = $consumerId";
-        return Database::Instance()->isEmptyQuery($request);
-    }
-
-    /**
-     *  Renvoie si tous les livres d'un panier sont en stock
-     *  @return bool|null
-     */
-    public static function everyBookFromShoppingCartInStock(int $consumerId) {
-        $bid_field = Book::getPropertyDBName("Id");
-        $request = "SELECT b.$bid_field FROM " . BOOK::TableName . " as b, " . CartItem::TableName ." as ci
-                    WHERE ci." . CartItem::getPropertyDBName("ConsumerId") . " = $consumerId
-                        AND b.$bid_field = ci." . CartItem::getPropertyDBName("BookId") . "
-                        AND b." . Book::getPropertyDBName("Stock") . " <= 0";
-        return Database::Instance()->isEmptyQuery($request);
+    public static function getAllCurrentLoans($consumerId) {
+        $request = "SELECT * FROM " . self::TableName . "
+                    WHERE " . self::getPropertyDBName("ConsumerId") . " = $consumerId";
+        return self::trySelectOBJFromDB($request);
     }
 
     /**

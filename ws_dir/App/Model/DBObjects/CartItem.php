@@ -2,6 +2,7 @@
 
 namespace App\Model\DBObjects;
 
+use App\Model\Database;
 use App\Model\DBObject;
 
 
@@ -49,6 +50,28 @@ class CartItem extends DBObject {
         $sc->BookId = $bookId;
         $sc->ConsumerId = $consumerId;
         return $sc->removeFromDB();
+    }
+    
+    /**
+     *  Renvoie si le panier de consumerId est vide
+     *  @return bool|null
+     */
+    public static function isEmptyShoppingCart(int $consumerId) : bool {
+        $request = "SELECT * FROM " . self::TableName . " WHERE consumer_id = $consumerId";
+        return Database::Instance()->isEmptyQuery($request);
+    }
+
+    /**
+     *  Renvoie si tous les livres d'un panier sont en stock
+     *  @return bool|null
+     */
+    public static function everyBookFromShoppingCartInStock(int $consumerId) {
+        $bid_field = Book::getPropertyDBName("Id");
+        $request = "SELECT b.$bid_field FROM " . BOOK::TableName . " as b, " . self::TableName ." as ci
+                    WHERE ci." . self::getPropertyDBName("ConsumerId") . " = $consumerId
+                        AND b.$bid_field = ci." . CartItem::getPropertyDBName("BookId") . "
+                        AND b." . Book::getPropertyDBName("Stock") . " <= 0";
+        return Database::Instance()->isEmptyQuery($request);
     }
 
     protected function ensureCorrectData(): bool {

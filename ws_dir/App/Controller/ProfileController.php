@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Constants;
 use App\Controller\SessionManager;
+use App\Model\DBObjects\Bookloan;
 use App\Model\DBObjects\CartItem;
 use App\Model\DBObjects\Consumer;
 use App\Utils\Utils;
@@ -11,6 +12,8 @@ use App\Utils\Utils;
 class ProfileController {
     private SessionManager $sm;
     private Consumer $consumer;
+
+    private $currentLoans;
 
     public function __construct() {
         $this->sm = SessionManager::Instance();
@@ -21,6 +24,13 @@ class ProfileController {
             Utils::redirectTo(Constants::PAGE_LOGIN);
         }
         $this->consumer = $this->sm->getUserConsumer();
+    }
+
+    public function currentLoans() {
+        if (is_null($this->currentLoans)) {
+            $this->currentLoans = Bookloan::getAllCurrentLoans($this->consumer->Id);
+        }
+        return $this->currentLoans;
     }
 
     private function tryConnectUser(string $mail, string $password) {
