@@ -1,40 +1,10 @@
-
-async function addCartItem(bookId) {
-  const param = new URLSearchParams();
-  param.append("action", "add");
-  param.append("book_id", bookId);
-
-  const data = await fetch("/API/cartitem.php", {
-    method: 'POST',
-    body: param
-  })
-    .then(response => response.json())
-    .catch(err => console.error(err));
-
-  return data;
-}
-
-async function removeCartItem(bookId) {
-  const param = new URLSearchParams();
-  param.append("action", "remove");
-  param.append("book_id", bookId);
-
-  const data = await fetch("/API/cartitem.php", {
-    method: 'POST',
-    body: param
-  })
-    .then(response => response.json())
-    .catch(err => console.error(err));
-
-  return data;
-}
+import { addBookToCart, removeBookFromCart } from "./shoppingcart.js";
 
 function manageButtonLoan(btn) {
   const bookId = btn.dataset.id;
-  btn.addEventListener("click", async function addClick () {
+  btn.addEventListener("click", function addClick () {
     btn.removeEventListener("click", addClick);
-    const res = await addCartItem(bookId);
-    if ("status" in res && res["status"] === "ok") {
+    if (addBookToCart(bookId)) {
       btn.innerHTML = "Ajouté avec succès!";
     } else {
       btn.innerHTML = "Une erreur s'est produite :(";
@@ -44,10 +14,9 @@ function manageButtonLoan(btn) {
 
 function manageButtonUnloan(btn) {
   const bookId = btn.dataset.id;
-  btn.addEventListener("click", async function removeClick() {
+  btn.addEventListener("click", function removeClick() {
     btn.removeEventListener("click", removeClick);
-    const res = await removeCartItem(bookId);
-    if ("status" in res && res["status"] === "ok") {
+    if (removeBookFromCart(bookId)) {
       btn.innerHTML = "Retiré avec succès !";
     } else {
       btn.innerHTML = "Une erreur s'est produite :(";
