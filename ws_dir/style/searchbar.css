@@ -1,7 +1,6 @@
 :root {
     --search-bar-height-tot: 10vh;
     --search-bar-height-field: 7vh;
-    --search-bar-width-field: 45%;
     --search-bar-height-content: 60%;
     --search-bar-sbutton-size: 50px;
     --search-bar-sbutton-color: orange;
@@ -22,13 +21,18 @@
     align-items: center;
     justify-content: space-around;
 
-    width: var(--search-bar-width-field);
+    flex-grow: 1;
     height: var(--search-bar-height-field);
     
     box-shadow: 0px 6px 6px #00000029;
     border-radius: 30px;
 
     background-color: white;
+    transition-duration: 200ms;
+}
+
+.search-bar form:focus-within {
+    box-shadow: 0px 6px 6px #00000040;
 }
 
 .search-bar .sb-text {
@@ -59,7 +63,7 @@
     font-family: var(--primary-font);
     font-size: 1.2rem;
     border: none;
-    border-radius: 20px;
+    border-radius: 15px;
     cursor: pointer;
 }
 

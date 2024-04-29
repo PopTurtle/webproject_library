@@ -42,13 +42,13 @@ class NavBar extends Partial {
         ?>
         <div class="nav-buttons">
         <?php
+        $c = "button btn-shadow btn-mw ";
         switch ($btn_mode) {
             case self::BTN_HOME:
-                self::putButton("Accueil", "nav-button btn-home", Constants::PAGE_HOME);
+                self::putButton("Accueil", $c . "btn-color-1", Constants::PAGE_HOME);
                 break;
             case self::BTN_USER:
                 $sm = SessionManager::Instance();
-                $c = "button btn-shadow ";
                 if ($sm->isUserConnected()) {
                     self::putButton("Me déconnecter", $c . "btn-color-2", Constants::PAGE_HOME . "?logout=yes");
                     self::putButton("Mon panier", $c . "btn-color-2", Constants::PAGE_SHOPPINGCART);

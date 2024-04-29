@@ -25,6 +25,14 @@ $bc = new BookSearchController();
     <?php NavBar::put(); ?>
 
     <main>
+        <section class="search-container">
+            <div class="search-bar-container">
+                <?php SearchBar::put() ?>
+            </div>
+            <a href="">BOUTON</a>
+        </section>
+
+
         <section class="search-result">
             <?php $res = $bc->getSearchResult(); ?>
             <?php $c = count($res); ?>

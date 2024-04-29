@@ -1,6 +1,15 @@
+.search-container {
+    display: flex;
+    flex-direction: row;
+    
+}
+
+
 
 /**  Très mal en forme, prototype */
 
+
+/*
 .search-result {
   --book-box-width: 20%;
   --book-box-height: 35vh;
@@ -37,9 +46,9 @@
     content: "";
     flex: auto;
 }*/
-
+/*
 .result-book {
-    border: 1px dashed red; /*****************Remove*/
+    border: 1px dashed red; 
 
 
     margin: 0;
@@ -78,5 +87,5 @@ p.result-stock {
 }
 
 .result-loan-btn {
-    border: 1px solid black; /*****************Remove*/
-}
+    border: 1px solid black;
+}*/

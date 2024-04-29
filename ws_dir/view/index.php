@@ -25,7 +25,9 @@ $hc = new HomeController;
     <main>
         <section class="main-search">
             <h1>Bienvenue sur votre espace d'emprunt !</h2>
-            <?php SearchBar::put(["action_ref" => $hc->searchBarAction()]); ?>
+            <div class="search-bar-container">
+                <?php SearchBar::put(["action_ref" => $hc->searchBarAction()]); ?>
+            </div>
             <a href="<?= $hc->everyBookLink() ?>" class="button btn-color-1">Voir tous les livres</a>
         </section>
         

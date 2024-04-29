@@ -35,7 +35,7 @@ body::after {
 
     top:0;
     right: 0;
-    transform: translate(15%, -14%) rotate(-4deg);
+    transform: translate(7%, -14%) rotate(-4deg);
 
     background-image: url("/App/Assets/Images/logo.png");
     background-size: cover;
@@ -49,9 +49,12 @@ body::after {
     --btn-font-size: 1.3rem;
     --btn-padding-h: 1rem;
 
+    width: auto;
+
     color: white;
     background-color: var(--color-palette-4);
     text-decoration: none;
+    text-align: center;
     letter-spacing: 1px;
 
     font-size: var(--btn-font-size);
@@ -69,6 +72,10 @@ body::after {
 
 .button:hover {
     filter: brightness(95%);
+}
+
+.button.btn-mw {
+    min-width: 190px;
 }
 
 .button.btn-shadow {
