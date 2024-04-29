@@ -25,9 +25,16 @@
     height: var(--nav-bar-height);
 }
 
+.nav-content *:first-child {
+    margin-left: var(--nav-side-padding);
+}
+
+.nav-content *:last-child {
+    margin-right: var(--nav-side-padding);
+}
+
 .nav-logo {
     height: 100%;
-    margin-left: var(--nav-side-padding);
 }
 
 .nav-logo img {
@@ -36,5 +43,8 @@
 }
 
 .nav-buttons {
-    margin-right: var(--nav-side-padding);
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    text-wrap: nowrap;
 }

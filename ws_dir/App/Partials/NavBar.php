@@ -48,13 +48,14 @@ class NavBar extends Partial {
                 break;
             case self::BTN_USER:
                 $sm = SessionManager::Instance();
+                $c = "button btn-shadow ";
                 if ($sm->isUserConnected()) {
-                    self::putButton("Mon panier", "nav-button btn-shopping-cart", Constants::PAGE_SHOPPINGCART);
-                    self::putButton("Me déconnecter", "nav-button btn-log-out", Constants::PAGE_HOME . "?logout=yes");
-                    self::putButton("Mon profil", "nav-button btn-profil", Constants::PAGE_PROFILE);
+                    self::putButton("Me déconnecter", $c . "btn-color-2", Constants::PAGE_HOME . "?logout=yes");
+                    self::putButton("Mon panier", $c . "btn-color-2", Constants::PAGE_SHOPPINGCART);
+                    self::putButton("Mon profil", $c . "btn-color-1", Constants::PAGE_PROFILE);
                 } else {
-                    self::putButton("Administrateur", "nav-button btn-admin-connect", "");
-                    self::putButton("Se connecter", "nav-button btn-connect", Constants::PAGE_LOGIN);
+                    self::putButton("Administrateur", $c . "btn-color-2", "");
+                    self::putButton("Se connecter", $c . "btn-color-1", Constants::PAGE_LOGIN);
                 }
                 break;
             default:
@@ -72,11 +73,9 @@ class NavBar extends Partial {
      */
     private static function putButton(string $content, string $classes, string $href) {
         ?>
-        <div class="<?= $classes ?>">
-            <a href="<?= $href ?>">
-                <p><?= $content ?></p>
-            </a>
-        </div>
+        <a class="<?= $classes ?>" href="<?= $href ?>">
+            <?= $content ?>    
+        </a>
         <?php
     }
 }
