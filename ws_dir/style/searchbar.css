@@ -36,7 +36,7 @@
     height: var(--search-bar-height-content);
     
     font-family: "Helvetica Neue", sans-serif;
-    font-size: calc(var(--search-bar-height-field) / 2);
+    font-size: 2rem;
 
     border: none;
 }
@@ -50,8 +50,21 @@
 }
 
 .search-bar .sb-drop {
-    width: 20%;
+    width: 25%;
     height: var(--search-bar-height-content);
+
+    padding-left: 10px;
+    background-color: var(--color-palette-2);
+    color: white;
+    font-family: var(--primary-font);
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.search-bar .sb-drop:hover {
+    filter: brightness(95%);
 }
 
 .search-bar .sb-search {
@@ -64,4 +77,9 @@
 
     background-color: var(--search-bar-sbutton-color);
     cursor: pointer;
+
+    background-image: url("/App/Assets/Images/magnifying_glass.png");
+    background-size: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
 }
