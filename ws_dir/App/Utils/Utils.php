@@ -26,7 +26,8 @@ class Utils {
     }
 
     /**
-     *  Renvoie la date telle qu'elle sera dans $days jours.
+     *  Renvoie la date telle qu'elle sera dans $days jours. Par défaut la
+     *    chaine de fin est "s".
      */
     public static function getDateIn($days) {
         return self::getDateAt(time() + self::daysInSeconds($days));
@@ -70,5 +71,12 @@ class Utils {
      */
     public static function showErrorCode($code, $msg) {
         self::redirectTo(Constants::PAGE_ERROR, ["code" => $code, "msg" => $msg]);
+    }
+
+    /**
+     *  Concatène la chaine $end à $s si count > 1, sinon renvoie $s
+     */
+    public static function plural(string $s, int $count, string $end="s") {
+        return $s . ($count > 1 ? $end : "");
     }
 }

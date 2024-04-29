@@ -44,4 +44,8 @@ class BookSearchController {
     public function getSearchResult() {
         return Book::getBooks($this->searchStr, $this->searchType);
     }
+
+    public function everyBookLink() {
+        return Constants::PAGE_BOOKSEARCH;
+    }
 }

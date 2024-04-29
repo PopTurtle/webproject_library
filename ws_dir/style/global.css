@@ -4,24 +4,24 @@
     --color-palette-3: #7D759B;
     --color-palette-4: #F2A74E;
 
-    --primary-font: 'Helvetica Neue', sans-serif;
+    --primary-font: 'Helvetica Neue', serif;
 }
 
 @font-face {
     font-family: "Helvetica Neue";
     src: url("../../App/Assets/Fonts/HelveticaNeue/HelveticaNeueMedium.otf");
-    font-weight: normal;
+    font-weight: 500;
 }
 
 @font-face {
     font-family: "Helvetica Neue";
     src: url("../../App/Assets/Fonts/HelveticaNeue/HelveticaNeueLight.otf");
-    font-weight: light;
+    font-weight: 300;
 }
 
 body {
     font-family: var(--primary-font);
-    font-weight: normal;
+    font-weight: 500;
     font-size: 1.5rem;
     margin: 0;
 }
