@@ -1,37 +1,83 @@
 import { addBookToCart, removeBookFromCart } from "./shoppingcart.js";
 
-function manageButtonLoan(btn) {
+let btnState;
+let btnLoan;
+let btnUnloan;
+
+let btnStateDisplay;
+let btnLoanDisplay;
+let btnUnloanDisplay;
+
+function hideBtnState() {
+  btnState.style.display = "none";
+}
+
+function setBtnStateText(text) {
+  btnState.innerHTML = text;
+  btnState.style.display = btnStateDisplay;
+}
+
+function setButton(btn, requestAction, onSuccess, successStr, failStr) {
   const bookId = btn.dataset.id;
-  btn.addEventListener("click", function addClick () {
-    btn.removeEventListener("click", addClick);
-    if (addBookToCart(bookId)) {
-      btn.innerHTML = "Ajouté avec succès!";
+  btn.addEventListener("click", async function onClick() {
+    btn.removeEventListener("click", onClick);
+    if (await requestAction(bookId)) {
+      setBtnStateText(successStr);
+      btn.style.display = "none";
+      onSuccess();
     } else {
-      btn.innerHTML = "Une erreur s'est produite :(";
+      setBtnStateText(failStr);
     }
   });
 }
 
-function manageButtonUnloan(btn) {
-  const bookId = btn.dataset.id;
-  btn.addEventListener("click", function removeClick() {
-    btn.removeEventListener("click", removeClick);
-    if (removeBookFromCart(bookId)) {
-      btn.innerHTML = "Retiré avec succès !";
-    } else {
-      btn.innerHTML = "Une erreur s'est produite :(";
-    }
-  });
+function setButtonLoan() {
+  btnLoan.style.display = btnLoanDisplay;
+  setButton(
+    btnLoan,
+    addBookToCart,
+    setButtonUnloan,
+    "Ajouté avec succès !",
+    "Une erreur s'est produite :("
+  );
 }
 
+function setButtonUnloan() {
+  btnUnloan.style.display = btnUnloanDisplay;
+  setButton(
+    btnUnloan,
+    removeBookFromCart,
+    setButtonLoan,
+    "Retiré avec succès !",
+    "Une erreur s'est produite :("
+  );
+}
+
+/**
+ *  Gère les boutons associés à l'emprunt dans la page d'un livre (Main)
+ */
 document.addEventListener('DOMContentLoaded', () => {
-  const btnLoan = document.getElementById("btn-loan");
-  if (btnLoan !== null) {
-    manageButtonLoan(btnLoan);
+  const loanContainer = document.getElementById("loan-container");
+  if (loanContainer === null) {
+    return;
   }
 
-  const btnUnloan = document.getElementById("btn-unloan");
-  if (btnUnloan !== null) {
-    manageButtonUnloan(btnUnloan);
+  btnState = document.getElementById("btn-state");
+  btnLoan = document.getElementById("btn-loan");
+  btnUnloan = document.getElementById("btn-unloan")
+
+  btnStateDisplay = btnState.style.display;
+  btnLoanDisplay = btnLoan.style.display;
+  btnUnloanDisplay = btnUnloan.style.display;
+
+  hideBtnState();
+  btnLoan.style.display = "none";
+  btnUnloan.style.display = "none";
+
+  const isLoan = loanContainer.dataset.isLoan;
+  if (isLoan === "1") {
+    setButtonLoan();
+  } else {
+    setButtonUnloan();
   }
 });

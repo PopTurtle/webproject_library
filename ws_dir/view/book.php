@@ -2,6 +2,8 @@
 
 use App\Constants;
 use App\Controller\BookController;
+use App\Controller\SessionManager;
+use App\Model\DBObjects\CartItem;
 use App\Partials\NavBar;
 
 require_once "../autoloader.php";
@@ -31,7 +33,31 @@ $cb = $bc->getCurrentBook();
         </section>    
         
 
-        <?= $bc->putActionButton() ?>
+        <?php
+        if (!SessionManager::Instance()->isUserConnected()) {
+            ?>
+            <a href="<?= Constants::PAGE_LOGIN ?>">
+                <button id="btn-connect">
+                    Se connecter pour emprunter
+                </button>
+            </a>
+            <?php
+        } else {
+            $cid = SessionManager::Instance()->getUserConsumer()->Id;
+            $isLoan = CartItem::isInConsumerShoppingCart($cb->Id, $cid) ? "0" : "1";
+            ?>
+            <div id="loan-container" data-is-loan="<?= $isLoan ?>">
+                <button id="btn-loan" data-id="<?= $cb->Id ?>">
+                    Ajouter au panier
+                </button>
+                <button id="btn-unloan" data-id="<?= $cb->Id ?>">
+                    Retirer du panier
+                </button>
+                <p id="btn-state"></p>
+            </div>
+            <?php
+        }
+        ?>
     </main>
 
 </body>
