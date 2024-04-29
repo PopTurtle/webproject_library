@@ -46,11 +46,11 @@ $cb = $bc->getCurrentBook();
             $cid = SessionManager::Instance()->getUserConsumer()->Id;
             $isLoan = CartItem::isInConsumerShoppingCart($cb->Id, $cid) ? "0" : "1";
             ?>
-            <div id="loan-container" data-is-loan="<?= $isLoan ?>">
-                <button id="btn-loan" data-id="<?= $cb->Id ?>">
+            <div id="loan-container" data-is-loan="<?= $isLoan ?>" data-book-id="<?= $cb->Id ?>">
+                <button id="btn-loan">
                     Ajouter au panier
                 </button>
-                <button id="btn-unloan" data-id="<?= $cb->Id ?>">
+                <button id="btn-unloan">
                     Retirer du panier
                 </button>
                 <p id="btn-state"></p>

@@ -1,5 +1,7 @@
 import { addBookToCart, removeBookFromCart } from "./shoppingcart.js";
 
+let bookId;
+
 let btnState;
 let btnLoan;
 let btnUnloan;
@@ -18,7 +20,6 @@ function setBtnStateText(text) {
 }
 
 function setButton(btn, requestAction, onSuccess, successStr, failStr) {
-  const bookId = btn.dataset.id;
   btn.addEventListener("click", async function onClick() {
     btn.removeEventListener("click", onClick);
     if (await requestAction(bookId)) {
@@ -73,6 +74,8 @@ document.addEventListener('DOMContentLoaded', () => {
   hideBtnState();
   btnLoan.style.display = "none";
   btnUnloan.style.display = "none";
+
+  bookId = loanContainer.dataset.bookId;
 
   const isLoan = loanContainer.dataset.isLoan;
   if (isLoan === "1") {
