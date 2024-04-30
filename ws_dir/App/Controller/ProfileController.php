@@ -33,6 +33,10 @@ class ProfileController {
         return $this->currentLoans;
     }
 
+    public function currentConsumer() {
+        return $this->consumer;
+    }
+
     private function tryConnectUser(string $mail, string $password) {
         $res = $this->sm->tryConnectUser($mail, $password);
         if ($res != 0) {
