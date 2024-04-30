@@ -36,16 +36,20 @@ class ProfileController {
     private function tryConnectUser(string $mail, string $password) {
         $res = $this->sm->tryConnectUser($mail, $password);
         if ($res != 0) {
+            $redirectUrl = Constants::PAGE_LOGIN;
+            $args = [];
             switch ($res) {
                 case SessionManager::USERCONNECT_FAILED_MAIL:
-                    echo "MAIL INVALIDE" . PHP_EOL;
+                    $args["error"] = "mail";
                     break;
                 case SessionManager::USERCONNECT_FAILED_PASS:
-                    echo "PASS INVALIDE" . PHP_EOL;
+                    $args["error"] = "password";
+                    $args["mail"] = $mail;
                     break;
                 default:
                     break;
             }
+            Utils::redirectTo($redirectUrl, $args);
         }
     }
 }

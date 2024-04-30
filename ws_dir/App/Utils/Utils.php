@@ -60,8 +60,9 @@ class Utils {
         $argsStr = implode("&", $argsArr);
         header(
             "Location: " . $path
-            . "?" . $argsStr
+            . (count($argsGet) === 0 ? "" : "?" . $argsStr)
         );
+        exit(0);
     }
 
     /**

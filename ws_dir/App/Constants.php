@@ -26,6 +26,7 @@ abstract class Constants {
     public const STYLE_NAVBAR = "/style/navbar.css";
     public const STYLE_SEARCHBAR = "/style/searchbar.css";
     public const STYLE_BOOKSEARCH = "/style/booksearch.css";
+    public const STYLE_LOGIN = "/style/login.css";
 
     /**
      *  Chemins des scripts
