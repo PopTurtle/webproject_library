@@ -16,26 +16,29 @@ $scc = new ShoppingCartController();
     <meta charset="UTF-8">
     <title>bilbiloték</title>
     <link rel="stylesheet" href=<?= Constants::STYLE_GLOBAL ?>>
+    <link rel="stylesheet" href=<?= Constants::STYLE_SHOPPINGCART ?>>
     <?php NavBar::putHeader(); ?>
 </head>
 <body>
     <?php NavBar::put(); ?>
     <main>
-        <h1>Panier</h1>
-        <ul>
-            <?php
-            foreach ($scc->getAllShoppingCartBooks() as $book) {
-                echo "BOOK" . PHP_EOL;
-                var_dump($book);
-                ?>
+        <section class="sc-section">
+            <h1>Mon panier</h1>
+            <div class="sc-container">
                 <?php
-            }
-            ?>
-        </ul>
-        <p>Date de rendu prévue: <?= $scc->getLoanEndDate() ?></p>
-        <button>
-            Valider l'emprunt (Panier vide ?)
-        </button>
+                foreach ($scc->getAllShoppingCartBooks() as $book) {
+                    ?>
+                    <div>
+                        <?php var_dump($book); ?>
+                    </div>
+                    <?php
+                    break;
+                }
+                ?>
+            </div>
+            <p>Date de rendu prévue: dd/mm/yyyy</p>
+            <a href="" class="button">Valider l'emprunt</a>
+        </section>
     </main>
 </body>
 </html>

@@ -1,0 +1,30 @@
+.sc-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3vh;
+}
+
+.sc-section h1 {
+    color: var(--color-palette-1);
+    font-size: 2.2rem;
+    letter-spacing: 1px;
+}
+
+.sc-section p {
+    color: var(--color-palette-5);
+    font-style: italic;
+    font-weight: 300;
+    margin: 0;
+}
+
+.sc-container {
+    display: flex;
+    align-self: flex-start;
+}
+
+.sc-container > div {
+    width: 15vw;
+    margin:10px;
+    background-color: red;
+}
