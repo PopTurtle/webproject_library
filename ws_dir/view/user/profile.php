@@ -28,12 +28,13 @@ $cl = $pc->currentLoans();
             <div class="profile-container">
                 <div class="profile-actions">
                     <p><?= $cc->Firstname ?> <?= $cc->Lastname ?></p>
-                    <a href="">Emprunter un livre</a>
-                    <a href="">Renouveler un emprunt</a>
-                    <a href="">Rendre un livre</a>
+                    <a href="" class="button btn-color-3">Emprunter un livre</a>
+                    <a href="" class="button btn-color-3">Renouveler un emprunt</a>
+                    <a href="" class="button btn-color-3">Rendre un livre</a>
                 </div>
                 <div class="profile-loans-container">
                     <h2>Mes emprunts</h2>
+                    <?php var_dump($cl); ?>
                     <div class="profile-loans">
                         <div></div>
                         <div></div>
@@ -44,8 +45,6 @@ $cl = $pc->currentLoans();
                     </div>
                 </div>
             </div>
-
-            <?php var_dump($pc->currentLoans()); ?>
         </section>
     </main>
 </body>

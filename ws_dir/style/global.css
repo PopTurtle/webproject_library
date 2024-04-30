@@ -71,6 +71,10 @@ body::after {
     background-color: var(--color-palette-3);
 }
 
+.button.btn-color-3 {
+    background-color: var(--color-palette-2);
+}
+
 .button:hover {
     filter: brightness(95%);
 }
