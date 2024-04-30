@@ -7,6 +7,9 @@
 }
 
 .search-bar {
+    --sb-form-padding: 3%;
+    --sb-text-width: 60%;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -19,7 +22,8 @@
     display: flex;
     position: relative;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
+    padding: 0 var(--sb-form-padding);
 
     flex-grow: 1;
     height: var(--search-bar-height-field);
@@ -36,13 +40,11 @@
 }
 
 .search-bar .sb-text {
-    width: 60%;
+    width: var(--sb-text-width);
     height: var(--search-bar-height-content);
-    
     font-family: "Helvetica Neue", sans-serif;
     font-weight: 300;
     font-size: 2rem;
-
     border: none;
 }
 
@@ -52,6 +54,22 @@
 
 .search-bar .sb-text:focus {
     outline: none;
+}
+
+.search-bar form::before {
+    content: "";
+    position: absolute;
+    background: var(--color-palette-5);
+    background: linear-gradient(90deg, var(--color-palette-5) 0%, white 100%);;
+    bottom: 20%;
+    left: 3%;
+    width: 0;
+    height: 3px;
+    transition-duration: 200ms;
+}
+
+.search-bar form:focus-within::before {
+    width: calc(var(--sb-text-width) - var(--sb-form-padding));
 }
 
 .search-bar .sb-drop {

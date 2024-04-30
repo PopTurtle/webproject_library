@@ -40,6 +40,11 @@
 .nav-logo img {
     max-height: 100%;
     max-width: 100%;
+    transition-duration: 200ms;
+}
+
+.nav-logo img:hover {
+    transform: scale(120%) rotate(-10deg);
 }
 
 .nav-buttons {

@@ -47,7 +47,12 @@ body::after {
 }
 
 .button {
+    --btn-color: var(--color-palette-4);
+    --btn-padding-h: 1rem;
+    --btn-padding-w: 2rem;
+
     display: flex;
+    position: relative;
     justify-content: center;
     align-items: center;
 
@@ -55,25 +60,40 @@ body::after {
     height: 2rem;
 
     color: white;
-    background-color: var(--color-palette-4);
+    background-color: var(--btn-color);
     text-decoration: none;
     letter-spacing: 1px;
 
     font-size: 1.3rem;
-    padding: 1rem 2rem;
+    padding: var(--btn-padding-h) var(--btn-padding-w);
     border-radius: 5rem;
 }
 
+.button::after {
+    content: "";
+    position: absolute;
+    background-color: var(--btn-color);
+    filter: brightness(90%);
+    bottom: var(--btn-padding-h);
+    width: 0;
+    height: 3px;
+    transition-duration: 200ms;
+}
+
+.button:hover::after {
+    width: calc(75% - 2 * var(--btn-padding-w));
+}
+
 .button.btn-color-1 {
-    background-color: var(--color-palette-4);
+    --btn-color: var(--color-palette-4);
 }
 
 .button.btn-color-2 {
-    background-color: var(--color-palette-3);
+    --btn-color: var(--color-palette-3);
 }
 
 .button.btn-color-3 {
-    background-color: var(--color-palette-2);
+    --btn-color: var(--color-palette-2);
 }
 
 .button:hover {

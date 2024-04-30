@@ -9,6 +9,11 @@
     font-size: 2rem;
 }
 
+a.button {
+    font-size: 1rem;
+    text-wrap: nowrap;
+}
+
 .profile-container {
     display: flex;
     gap: 5%;
@@ -35,8 +40,6 @@
 .profile-loans-container {
     flex-grow: 1;
 }
-
-
 
 
 
