@@ -46,20 +46,21 @@ body::after {
 }
 
 .button {
-    --btn-font-size: 1.3rem;
-    --btn-padding-h: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     width: auto;
+    height: 2rem;
 
     color: white;
     background-color: var(--color-palette-4);
     text-decoration: none;
-    text-align: center;
     letter-spacing: 1px;
 
-    font-size: var(--btn-font-size);
-    padding: var(--btn-padding-h) 2rem;
-    border-radius: calc(var(--btn-font-size) + var(--btn-padding-h) / 2);
+    font-size: 1.3rem;
+    padding: 1rem 2rem;
+    border-radius: 5rem;
 }
 
 .button.btn-color-1 {

@@ -22,30 +22,37 @@ $lc = new LoginController;
     <?php NavBar::put(); ?>
 
     <main>
-        <h2 class="category-title">Se connecter</h2>
+        <section class="login-form">
+            <h1>Se connecter</h1>
+            <form method="post" action="<?= Constants::PAGE_PROFILE ?>" class="connect-main">
+                <div class="login-text-input">
+                    <?php $i = $lc->generateInputInfo("mail"); ?>
+                    <label for="<?= $i["label_for"] ?>">Mail</label>
+                    <input
+                        type="text"
+                        value="<?= $i["prev"] ?? "" ?>"
+                        name="<?= $i["input_name"] ?>"
+                        id="<?= $i["input_id"] ?>"
+                        class="<?= $i["input_classes"] ?>"
+                        >
+                </div>
 
-        <form method="post" action="<?= Constants::PAGE_PROFILE ?>" class="connect-main">
-            <?php $i = $lc->generateInputInfo("mail"); ?>
-            <label for="<?= $i["label_for"] ?>">Mail</label>
-            <input
-                type="text"
-                value="<?= $i["prev"] ?? "" ?>"
-                name="<?= $i["input_name"] ?>"
-                id="<?= $i["input_id"] ?>"
-                class="<?= $i["input_classes"] ?>"
-                >
-            
-            <?php $i = $lc->generateInputInfo("password"); ?>
-            <label for="<?= $i["label_for"] ?>">Mot de passe</label>
-            <input
-                type="text"
-                name="<?= $i["input_name"] ?>"
-                id="<?= $i["input_id"] ?>"
-                class="<?= $i["input_classes"] ?>"
-                >
-            
-            <input type="submit" value="Connexion">
-        </form>
+                <div class="login-text-input">
+                    <?php $i = $lc->generateInputInfo("password"); ?>
+                    <label for="<?= $i["label_for"] ?>">Mot de passe</label>
+                    <input
+                        type="password"
+                        name="<?= $i["input_name"] ?>"
+                        id="<?= $i["input_id"] ?>"
+                        class="<?= $i["input_classes"] ?>"
+                        >
+                </div>
+                
+                <div class="login-submit-container">
+                    <input type="submit" value="Connexion">
+                </div>
+            </form>
+        </section>
     </main>
 
 </body>
