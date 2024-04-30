@@ -96,10 +96,6 @@ body::after {
     --btn-color: var(--color-palette-2);
 }
 
-.button:hover {
-    /* filter: brightness(95%); */
-}
-
 .button.btn-mw {
     min-width: 190px;
 }
