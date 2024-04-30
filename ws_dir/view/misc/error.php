@@ -1,4 +1,10 @@
 <?php
+
+use App\Constants;
+
+$removeNecessaryCode = true;
+require_once ("../../autoloader.php");
+
 $error_code = -1;
 $error_msg = "Une erreur est survenue";
 
@@ -20,6 +26,8 @@ if (isset($_GET["msg"])) {
 <body>
     <h1>Erreur <?= $error_code ?></h1>
     <p><?= $error_msg ?></p>
-    
+    <a href="<?= Constants::PAGE_HOME ?>">
+        Tenter de retourner à l'accueil
+    </a>
 </body>
 </html>

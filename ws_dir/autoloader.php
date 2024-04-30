@@ -1,6 +1,6 @@
 <?php
 
-// Autoloader
+//  Autoloader
 
 use App\Controller\SessionManager;
 use App\Model\Database;
@@ -16,7 +16,11 @@ function autoload($class) {
 
 spl_autoload_register("autoload");
 
-// Code nécessaire
+//  Code nécessaire
+//  Donner une valeur quelconque à $removeNecessaryCode
+//    pour ne pas executer ce code
 
-Database::ensureConnection();
-SessionManager::ensureUserConnectionAttempt();
+if (!isset($removeNecessaryCode)) {
+    Database::ensureConnection();
+    SessionManager::ensureUserConnectionAttempt();
+}
