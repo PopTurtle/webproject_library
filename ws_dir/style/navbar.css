@@ -44,7 +44,7 @@
 }
 
 .nav-logo img:hover {
-    transform: scale(120%) rotate(-10deg);
+    transform: scale(110%) rotate(-3deg);
 }
 
 .nav-buttons {
