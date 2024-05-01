@@ -31,6 +31,14 @@ function bookLoanRenew($data) {
     return Bookloan::renewLoan($c->Id, $bookId) ? "ok" : "no content";
 }
 
+function validateShoppingCart() {
+    $c = SessionManager::Instance()->getUserConsumer();
+    if (is_null($c)) {
+        return "no user";
+    }
+    return Bookloan::makeLoanFromShoppingCart($c->Id) ? "ok" : "no content";
+}
+
 // 
 $res = ["status" => "error"];
 
@@ -39,6 +47,8 @@ if (isset($data["action"])) {
         $res["status"] = bookLoanReturn($data);
     } else if (strcmp($data["action"], "renew") == 0) {
         $res["status"] = bookLoanRenew($data);
+    } else if (strcmp($data["action"], "validate") == 0) {
+        $res["status"] = validateShoppingCart();
     }
 }
 

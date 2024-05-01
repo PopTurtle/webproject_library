@@ -15,6 +15,7 @@ $scc = new ShoppingCartController();
 <head>
     <meta charset="UTF-8">
     <title>bilbiloték</title>
+    <script src="<?= Constants::SCRIPT_SHOPPINGCART ?>" type="module"></script>
     <link rel="stylesheet" href=<?= Constants::STYLE_GLOBAL ?>>
     <link rel="stylesheet" href=<?= Constants::STYLE_SHOPPINGCART ?>>
     <?php NavBar::putHeader(); ?>
@@ -32,12 +33,13 @@ $scc = new ShoppingCartController();
                         <?php var_dump($book); ?>
                     </div>
                     <?php
-                    break;
                 }
                 ?>
             </div>
             <p>Date de rendu prévue: dd/mm/yyyy</p>
             <a href="" class="button">Valider l'emprunt</a>
+
+            <button id="validate-shopping-cart">Débuter un emprunt</button>
         </section>
     </main>
 </body>

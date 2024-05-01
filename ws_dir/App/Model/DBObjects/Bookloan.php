@@ -29,7 +29,7 @@ class Bookloan extends DBObject {
 
     /**
      *  Transfert les livres du panier vers un prêt qui se terminera dans
-     *    LOAN_DURATION jours.
+     *    LOAN_DURATION jours. Renvoie true en cas de succès, sinon false.
      */
     public static function makeLoanFromShoppingCart(int $consumerId) : bool {
         //  Test que le panier n'est pas vide

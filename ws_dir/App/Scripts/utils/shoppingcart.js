@@ -40,3 +40,18 @@ export async function removeBookFromCart(bookId) {
 
   return "status" in data && data["status"] === "ok";
 }
+
+/**   */
+export async function validateShoppingCart() {
+  const param = new URLSearchParams();
+  param.append("action", "validate");
+
+  const data = await fetch("/API/bookloan.php", {
+    method: 'POST',
+    body: param
+  })
+    .then(response => response.json())
+    .catch(err => console.error(err));
+
+  return "status" in data && data["status"] === "ok";
+}
