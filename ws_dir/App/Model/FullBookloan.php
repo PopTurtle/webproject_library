@@ -29,7 +29,7 @@ class FullBookloan {
         $rs = [];
         while ($arr = $res->fetch()) {
             $arr[Bookloan::getPropertyDBName("BookId")] = $arr[Book::getPropertyDBName("Id")];
-            $arr[Bookloan::getPropertyDBName("ConsumerId")] = $consumerId;
+            $arr[Bookloan::getPropertyDBName("ConsumerId")] = strval($consumerId);
             $b = Book::createFromDBArr($arr);
             $bl = Bookloan::createFromDBArr($arr);
             array_push($rs, new static($b, $bl));
