@@ -13,9 +13,11 @@ export function replaceElt(elt, statusMsg) {
   const msg = msgElement(statusMsg);
   insertBefore(msg, elt);
   elt.remove();
+  return msg;
 }
 
-export function addStatusAfter(elt, statusMsg) {
+export function addStatusBefore(elt, statusMsg) {
   const msg = msgElement(statusMsg);
   insertBefore(msg, elt)
+  return msg;
 }

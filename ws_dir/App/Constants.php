@@ -18,6 +18,7 @@ abstract class Constants {
     public const PAGE_BOOK = "/view/book.php";
     public const PAGE_SHOPPINGCART = "/view/user/shoppingcart.php";
     public const PAGE_RETURNBOOK = "/view/book_management/return_book.php";
+    public const PAGE_RENEWBOOK = "/view/book_management/renew_book.php";
 
     /**
      *  Chemins des feuilles de style
@@ -36,6 +37,7 @@ abstract class Constants {
      */
     public const SCRIPT_BOOK_CARTITEM = "/App/Scripts/book_cartitem.js";
     public const SCRIPT_BOOKLOAN_RETURN = "/App/Scripts/bookloan_return.js";
+    public const SCRIPT_BOOKLOAN_RENEW = "/App/Scripts/bookloan_renew.js";
 
     /**
      *  Types de recherche de livres disponible

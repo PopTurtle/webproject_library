@@ -44,7 +44,7 @@ class ProfileController {
     }
     
     public function renewLoanURL() : string {
-        return "";
+        return Constants::PAGE_RENEWBOOK;
     }
 
     public function returnBookURL() : string {
