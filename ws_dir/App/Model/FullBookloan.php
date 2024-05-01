@@ -21,15 +21,29 @@ class FullBookloan {
      *    d'erreur.
      */
     public static function getFullBookLoansFromConsumer(int $consumerId) {
-        $request = "SELECT b.*, date_start, date_end FROM book as b, bookloan as bl WHERE bl.consumer_id = 1 AND b.book_id = bl.book_id";
+        $btable = Book::TableName;
+        $bltable = Bookloan::TableName;
+
+        $bl_bid = Bookloan::getPropertyDBName("BookId");
+        $bl_cid = Bookloan::getPropertyDBName("ConsumerId");
+        $bl_ds = Bookloan::getPropertyDBName("DateStart");
+        $bl_de = Bookloan::getPropertyDBName("DateEnd");
+        $b_bid = Book::getPropertyDBName("Id");
+        
+        $request = "
+            SELECT b.*, $bl_ds, $bl_de 
+            FROM $btable as b, $bltable as bl 
+            WHERE bl.$bl_cid = $consumerId
+                AND b.$b_bid = bl.$bl_bid";
+                
         $res = Database::getConnection()->query($request);
         if (!$res) {
             return false;
         }
         $rs = [];
         while ($arr = $res->fetch()) {
-            $arr[Bookloan::getPropertyDBName("BookId")] = $arr[Book::getPropertyDBName("Id")];
-            $arr[Bookloan::getPropertyDBName("ConsumerId")] = strval($consumerId);
+            $arr[$bl_bid] = $arr[$b_bid];
+            $arr[$bl_cid] = strval($consumerId);
             $b = Book::createFromDBArr($arr);
             $bl = Bookloan::createFromDBArr($arr);
             array_push($rs, new static($b, $bl));
