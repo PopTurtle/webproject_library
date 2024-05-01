@@ -41,6 +41,7 @@ if ($allLoans === false) {
             $loan = $bl->loan();
             ?>
             <div>
+                <p class="renew-date-end">Date fin: <?= $loan->DateEnd ?></p>
                 <?php var_dump($bl); ?>
                 <button data-book-id="<?= $book->Id ?>" class="renew-book">
                     Renouveler l'emprunt

@@ -19,12 +19,26 @@ function bookLoanReturn($data) {
     return Bookloan::returnLoan($c->Id, $bookId) ? "ok" : "no content";
 }
 
+function bookLoanRenew($data) {
+    if (!isset($data['book_id'])) {
+        return "no content";
+    }
+    $bookId = $data['book_id'];
+    $c = SessionManager::Instance()->getUserConsumer();
+    if (is_null($c)) {
+        return "no user";
+    }
+    return Bookloan::renewLoan($c->Id, $bookId) ? "ok" : "no content";
+}
+
 // 
 $res = ["status" => "error"];
 
 if (isset($data["action"])) {
     if (strcmp($data["action"], "return") == 0) {
         $res["status"] = bookLoanReturn($data);
+    } else if (strcmp($data["action"], "renew") == 0) {
+        $res["status"] = bookLoanRenew($data);
     }
 }
 

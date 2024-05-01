@@ -59,6 +59,23 @@ class Bookloan extends DBObject {
         return $bl->removeFromDB(1) !== false;
     }
 
+    public static function renewLoan(int $consumerId, int $bookId) : bool {
+        $bl_table = Bookloan::TableName;
+        $bid = Bookloan::getPropertyDBName("BookId");
+        $cid = Bookloan::getPropertyDBName("ConsumerId");
+        $de = Bookloan::getPropertyDBName("DateEnd");
+        
+        $new_date_end = Utils::getDateIn(self::LOAN_DURATION + 1);
+        $request = "
+            UPDATE $bl_table
+            SET $de = '$new_date_end'
+            WHERE
+                $cid = $consumerId
+                AND $bid = $bookId";
+        
+        return Database::getConnection()->exec($request) !== false;
+    }
+
     /**
      *  Convertie le panier de $consumerId en un emprunt (bookloan) qui commence
      *    à $date_start et fini à $date_end.

@@ -15,5 +15,16 @@ export async function returnLoan(bookId) {
 }
 
 export async function renewLoan(bookId) {
-  return false;
+  const param = new URLSearchParams();
+  param.append("action", "renew");
+  param.append("book_id", bookId);
+
+  const data = await fetch("/API/bookloan.php", {
+    method: 'POST',
+    body: param
+  })
+    .then(response => response.json())
+    .catch(err => console.error(err));
+  
+  return "status" in data && data["status"] === "ok";
 }
