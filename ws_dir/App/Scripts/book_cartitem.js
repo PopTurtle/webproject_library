@@ -1,4 +1,4 @@
-import { addBookToCart, removeBookFromCart } from "./shoppingcart.js";
+import { addBookToCart, removeBookFromCart } from "./utils/shoppingcart.js";
 
 let bookId;
 

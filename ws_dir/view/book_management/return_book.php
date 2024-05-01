@@ -23,6 +23,7 @@ if ($allLoans === false) {
 <head>
     <meta charset="UTF-8">
     <title>rendre liver</title>
+    <script src="<?= Constants::SCRIPT_BOOKLOAN_RETURN ?>" type="module"></script>
     <link rel="stylesheet" href=<?= Constants::STYLE_GLOBAL ?>>
     <?php NavBar::putHeader(); ?>
 </head>
@@ -36,10 +37,12 @@ if ($allLoans === false) {
             <?php
         }
         foreach ($allLoans as $bl) {
+            $book = $bl->book();
+            $loan = $bl->loan();
             ?>
             <div>
                 <?php var_dump($bl); ?>
-                <button>
+                <button data-book-id="<?= $book->Id ?>" class="return-book">
                     Rendre le livre
                 </button>
             </div>

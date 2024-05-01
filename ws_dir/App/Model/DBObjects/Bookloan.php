@@ -52,6 +52,13 @@ class Bookloan extends DBObject {
         return self::trySelectOBJFromDB($request);
     }
 
+    public static function returnLoan(int $consumerId, int $bookId) : bool {
+        $bl = new static();
+        $bl->ConsumerId = $consumerId;
+        $bl->BookId = $bookId;
+        return $bl->removeFromDB(1) !== false;
+    }
+
     /**
      *  Convertie le panier de $consumerId en un emprunt (bookloan) qui commence
      *    à $date_start et fini à $date_end.

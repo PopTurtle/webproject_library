@@ -89,7 +89,7 @@ abstract class DBObject {
      *    avec celles de l'objet courant. Attention : des valeurs non définie
      *    correspondent à toutes les valeurs possibles.
      */
-    public function removeFromDB() {
+    public function removeFromDB($limit = 0) {
         $kv = $this->getDefinedPropertyValues($this);
         $opt = [];
         foreach ($kv as $k => $v) {
@@ -97,6 +97,9 @@ abstract class DBObject {
         }
         $request = "DELETE FROM " . static::TableName . " " .
                    "WHERE " . implode(" AND ", $opt);
+        if ($limit !== 0) {
+            $request .= " LIMIT $limit";
+        }
         return Database::getConnection()->exec($request);
     }
 
