@@ -28,9 +28,9 @@ $cl = $pc->currentLoans();
             <div class="profile-container">
                 <div class="profile-actions">
                     <p><?= $cc->Firstname ?> <?= $cc->Lastname ?></p>
-                    <a href="" class="button btn-color-3">Emprunter un livre</a>
-                    <a href="" class="button btn-color-3">Renouveler un emprunt</a>
-                    <a href="" class="button btn-color-3">Rendre un livre</a>
+                    <a href="<?= $pc->loanBookURL() ?>" class="button btn-color-3">Emprunter un livre</a>
+                    <a href="<?= $pc->renewLoanURL() ?>" class="button btn-color-3">Renouveler un emprunt</a>
+                    <a href="<?= $pc->returnBookURL() ?>" class="button btn-color-3">Rendre un livre</a>
                 </div>
                 <div class="profile-loans-container">
                     <h2>Mes emprunts</h2>

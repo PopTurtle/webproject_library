@@ -24,3 +24,13 @@ if (!isset($removeNecessaryCode)) {
     Database::ensureConnection();
     SessionManager::ensureUserConnectionAttempt();
 }
+
+/**
+ *  TODO:
+ *    ensureCorrectData() pour tous les DBObjects
+ *    Page renouveler emprunt
+ *    Page rendre un livre
+ *    Administrateur -x
+ *    Valider l'emprunt du panier
+ *    <title> de toutes les pages
+ */

@@ -101,6 +101,17 @@ abstract class DBObject {
     }
 
     /**
+     *  Renvoie un nouvel objet dont les valeur seront celles associées
+     *    au tableau $values. $values contient des clés qui sont les noms
+     *    des attributs trouvés en BDD, et leur valeur.
+     */
+    public static function createFromDBArr($values) {
+        $v = new static();
+        $v->setValFromDBArr($values);
+        return $v;
+    }
+
+    /**
      *  S'assure que les valeurs associées aux attributs sont conformes au
      *    modèle.
      */
@@ -150,17 +161,6 @@ abstract class DBObject {
             return null;
         }
         $v = static::createFromDBArr($vinfo);
-        return $v;
-    }
-
-    /**
-     *  Renvoie un nouvel objet dont les valeur seront celles associées
-     *    au tableau $values. $values contient des clés qui sont les noms
-     *    des attributs trouvés en BDD, et leur valeur.
-     */
-    protected static function createFromDBArr($values) {
-        $v = new static();
-        $v->setValFromDBArr($values);
         return $v;
     }
 

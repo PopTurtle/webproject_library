@@ -4,9 +4,8 @@ namespace App\Controller;
 
 use App\Constants;
 use App\Controller\SessionManager;
-use App\Model\DBObjects\Bookloan;
-use App\Model\DBObjects\CartItem;
 use App\Model\DBObjects\Consumer;
+use App\Model\FullBookloan;
 use App\Utils\Utils;
 
 class ProfileController {
@@ -26,15 +25,30 @@ class ProfileController {
         $this->consumer = $this->sm->getUserConsumer();
     }
 
+    /**
+     *  Peut renvoyer false === erreur lors de la requete
+     */
     public function currentLoans() {
         if (is_null($this->currentLoans)) {
-            $this->currentLoans = Bookloan::getAllCurrentLoans($this->consumer->Id);
+            $this->currentLoans = FullBookloan::getFullBookLoansFromConsumer($this->consumer->Id);
         }
         return $this->currentLoans;
     }
 
     public function currentConsumer() {
         return $this->consumer;
+    }
+
+    public function loanBookURL() : string {
+        return Constants::PAGE_BOOKSEARCH;
+    }
+    
+    public function renewLoanURL() : string {
+        return "";
+    }
+
+    public function returnBookURL() : string {
+        return Constants::PAGE_RETURNBOOK;
     }
 
     private function tryConnectUser(string $mail, string $password) {

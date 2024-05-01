@@ -67,6 +67,7 @@ body::after {
     font-size: 1.3rem;
     padding: var(--btn-padding-h) var(--btn-padding-w);
     border-radius: 5rem;
+    transition-duration: 300ms;
 }
 
 .button::after {
