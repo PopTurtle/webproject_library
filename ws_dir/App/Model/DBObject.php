@@ -119,11 +119,17 @@ abstract class DBObject {
         return $v;
     }
 
-    public static function generateAddForm(string $inputClasses) {
+    public static function generateAddForm(string $inputClasses = "") {
         if (count(static::FormAddElts) === 0) {
             return false;
         }
         return static::generateAddFormExclusive($inputClasses, static::FormAddElts);
+    }
+
+    public static function generateAllFormArgs() {
+        foreach (array_keys(static::FormAddElts) as $k) {
+            yield static::FormAddPrefix . static::getPropertyDBName($k);
+        }
     }
 
     public static function treatAddForm($data, &$propertyError = null) : int {

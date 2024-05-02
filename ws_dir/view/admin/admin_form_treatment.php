@@ -5,23 +5,28 @@ use App\Controller\AdminFormTreatmentController;
 use App\Controller\Misc\FormMaker;
 use App\Controller\SessionManager;
 use App\Model\Database;
+use App\Model\DBObjects\Book;
 use App\Partials\NavBar;
 use App\Utils\Utils;
 
 require_once "../../autoloader.php";
 
 SessionManager::Instance()->adminPage();
-
 $aftc = new AdminFormTreatmentController;
+
+if (!$aftc->wasFormTreated()) {
+    Utils::redirectTo(Constants::PAGE_ADMIN_MAIN);
+}
 
 switch ($aftc->getFormTreatmentResult()) {
     case AdminFormTreatmentController::TREAT_COMPLETE:
         break;
     case AdminFormTreatmentController::TREAT_INCORRECT_DATA:
-        Utils::redirectTo(
-            $aftc->previousFormURL(),
-            [FormMaker::FIELD_ERROR_GET => $aftc->getFieldError()]
-        );
+        $args = [FormMaker::FIELD_ERROR_GET => $aftc->getFieldError()];
+        foreach ($aftc->previousFormArgGenerator()() as $arg) {
+            $args[$arg] = $_GET[$arg];
+        }
+        Utils::redirectTo($aftc->previousFormURL(), $args);
         break;
     case AdminFormTreatmentController::TREAT_DB_ERROR:
         Utils::showErrorCode(

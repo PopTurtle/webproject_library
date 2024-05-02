@@ -18,6 +18,7 @@ class AdminFormTreatmentController {
     private int $formResult;
 
     private string $previousForm;
+    private $previousFormArgGenerator;
     private string $fieldErrorName;
 
     public function __construct()
@@ -48,10 +49,15 @@ class AdminFormTreatmentController {
         return $this->previousForm;
     }
 
+    public function previousFormArgGenerator() {
+        return $this->previousFormArgGenerator;
+    }
+
     private function tryTreatForm($formname, $data) : int {
         switch ($formname) {
             case self::FORM_ADD_BOOK:
                 $this->previousForm = Constants::PAGE_ADMIN_ADDBOOK;
+                $this->previousFormArgGenerator = function () { return Book::generateAllFormArgs(); };
                 return $this->treatFormAddBook($data);
         }
     }
@@ -63,7 +69,6 @@ class AdminFormTreatmentController {
             $this->fieldErrorName = Book::FormAddPrefix . $perror;
             return self::TREAT_INCORRECT_DATA;
         }
-        echo "LA"; exit(0);
         return $r === 0 ? self::TREAT_COMPLETE : self::TREAT_DB_ERROR;
     }
 }
