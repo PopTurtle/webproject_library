@@ -68,7 +68,7 @@
     transition-duration: 200ms;
 }
 
-.search-bar form:focus-within::before {
+.search-bar form:has(.sb-text:focus)::before {
     width: calc(var(--sb-text-width) - var(--sb-form-padding));
 }
 

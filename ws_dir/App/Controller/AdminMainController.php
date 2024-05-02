@@ -13,7 +13,6 @@ class AdminMainController {
 
     private function tryConnect(string $password) {
         $r = SessionManager::Instance()->tryConnectAdmin($password);
-        
         echo $r;
     }
 }
