@@ -21,6 +21,7 @@ class Book extends DBObject {
         "Stock" => "stock"
     ];
 
+    protected const FormAddPrefix = "book_";
     protected const FormAddElts = [
         "Title" => ["type" => "text", "fn" => "Titre"],
         "Author" => ["type" => "text", "fn" => "Auteur"],
@@ -29,7 +30,6 @@ class Book extends DBObject {
         "Category" => ["type" => "text", "fn" => "Catégorie"],
         "Stock" => ["type" => "number", "fn" => "Stock"]
     ];
-    protected const FormAddPrefix = "book_";
 
     /**
      *  Renvoie tous les livres dont le champs $type (title, author...) contient

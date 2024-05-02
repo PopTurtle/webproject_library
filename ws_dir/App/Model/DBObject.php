@@ -30,7 +30,7 @@ abstract class DBObject {
 
     protected static $all_properties;
     
-    protected const FormArgPrefix = "";
+    protected const FormAddPrefix = "";
     protected const FormAddElts = [];
 
     private $obj_arr;
@@ -248,7 +248,7 @@ abstract class DBObject {
             if (!array_key_exists($k, $elts)) {
                 continue;
             }
-            $f = $fm->generateInputInfo(static::FormArgPrefix . $v, $inputClasses);
+            $f = $fm->generateInputInfo(static::FormAddPrefix . $v, $inputClasses);
             $f["label_content"] = $elts[$k]["fn"];
             $f["input_type"] = $elts[$k]["type"];
             yield $f;
