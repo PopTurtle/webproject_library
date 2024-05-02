@@ -25,6 +25,8 @@
     }
 
     form.simple-form label {
+        display: inline;
+        margin-right: auto;
         color: var(--color-palette-2);
         font-size: 1.6rem;
         font-weight: 300;
@@ -77,8 +79,21 @@
 }
 
 @layer form-anim {
-    form.simple-form div:has(> input):focus-within label {
-        transform: translateX(10%);
+    form.simple-form div:has(> input:focus) label {
+        transform: translateX(1em);
+    }
+
+    form.simple-form div label::before {
+        content: "▶";
+        position: absolute;
+        transform: rotate(90deg);
+        opacity: 0;
+        transition-duration: 200ms;
+    }
+
+    form.simple-form div:has(> input:focus) label::before {
+        transform: translateX(-1em);
+        opacity: 1;
     }
 
     .form-container h1 {
@@ -86,7 +101,7 @@
     }
 
     .form-container:has(input[type="submit"]:hover) h1 {
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.35);
     }
 }
 
