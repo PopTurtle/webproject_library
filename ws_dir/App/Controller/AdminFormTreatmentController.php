@@ -10,6 +10,8 @@ class AdminFormTreatmentController {
     public const FORM_ADD_BOOK = "addbook";
 
     public const TREAT_COMPLETE = 0;
+    public const TREAT_INCORRECT_DATA = -1;
+    public const TREAT_DB_ERROR = -2;
 
     private bool $formTreated;
     private int $formResult;
@@ -47,6 +49,12 @@ class AdminFormTreatmentController {
     }
 
     private function treatFormAddBook($data) : int {
-        return Book::treatAddForm($data);
+        $perror = "";
+        $r = Book::treatAddForm($data, $perror);
+        if (strcmp($perror, "") !== 0) {
+            $this->fieldErrorName = $perror . " NON";
+            return self::TREAT_INCORRECT_DATA;
+        }
+        return $r === 0 ? self::TREAT_COMPLETE : self::TREAT_DB_ERROR;
     }
 }

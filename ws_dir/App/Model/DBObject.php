@@ -78,8 +78,8 @@ abstract class DBObject {
     }
 
     /**  Tente d'ajouter l'objet courant à la BDD en utilisant ses valeurs. */
-    public function tryAddToDB() : bool {
-        if (!$this->ensureCorrectData()) {
+    public function tryAddToDB(&$propertyError = null) : bool {
+        if (!$this->ensureCorrectData($propertyError)) {
             return false;
         }
         $kv = static::getPropertyValues($this);
@@ -126,15 +126,15 @@ abstract class DBObject {
         return static::generateAddFormExclusive($inputClasses, static::FormAddElts);
     }
 
-    public static function treatAddForm($data) : int {
-        return static::treatAddFormExclusive($data);
+    public static function treatAddForm($data, &$propertyError = null) : int {
+        return static::treatAddFormExclusive($data, $propertyError);
     }
 
     /**
      *  S'assure que les valeurs associées aux attributs sont conformes au
      *    modèle.
      */
-    protected abstract function ensureCorrectData() : bool;
+    protected abstract function ensureCorrectData(&$propertyError = null) : bool;
 
     /**
      *  Renvoie le résultat de la requête associée à :
@@ -259,7 +259,7 @@ abstract class DBObject {
         }
     }
 
-    protected static function treatAddFormExclusive($data) : int {
+    protected static function treatAddFormExclusive($data, &$propertyError = null) : int {
         $object = new static();
         foreach (static::$all_properties as $k => $v) {
             $arg = static::FormAddPrefix . $v;
@@ -267,6 +267,6 @@ abstract class DBObject {
                 $object->{$k} = $data[$arg];
             }
         }
-        return $object->tryAddToDB() ? 0 : -1;
+        return $object->tryAddToDB($propertyError) ? 0 : -1;
     }
 }

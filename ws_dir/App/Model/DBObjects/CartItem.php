@@ -74,7 +74,7 @@ class CartItem extends DBObject {
         return Database::Instance()->isEmptyQuery($request);
     }
 
-    protected function ensureCorrectData(): bool {
+    protected function ensureCorrectData(&$propertyError = null): bool {
         return true;
     }
 }

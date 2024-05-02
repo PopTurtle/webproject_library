@@ -129,7 +129,7 @@ class Bookloan extends DBObject {
         return $c->commit();
     }
 
-    protected function ensureCorrectData() : bool {
+    protected function ensureCorrectData(&$propertyError = null) : bool {
         return false;
     }
 }

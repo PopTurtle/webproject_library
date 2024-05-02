@@ -29,7 +29,7 @@ class Consumer extends DBObject {
         return static::getFirstOBJ([static::$all_properties["Id"] . " = $id"]);
     }
 
-    protected function ensureCorrectData(): bool {
+    protected function ensureCorrectData(&$propertyError = null): bool {
         return false;
     }
 }
