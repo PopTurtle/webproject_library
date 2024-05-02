@@ -1,6 +1,7 @@
 <?php
 
 use App\Constants;
+use App\Controller\AdminFormTreatmentController;
 use App\Controller\SessionManager;
 use App\Model\DBObjects\Book;
 use App\Partials\NavBar;
@@ -24,7 +25,7 @@ SessionManager::Instance()->adminPage();
     <main>
         <section class="form-container">
             <h1>Ajouter un livre</h1>
-            <form action="" class="simple-form">
+            <form action="<?= Constants::PAGE_ADMIN_FORM_TREATMENT ?>" class="simple-form">
                 <?php
                 foreach (Book::generateAddForm("") as $f) {
                     ?>
@@ -41,6 +42,11 @@ SessionManager::Instance()->adminPage();
                     <?php
                 }
                 ?>
+                <input
+                    type="hidden"
+                    name="<?= AdminFormTreatmentController::FORM_NAME_GET ?>"
+                    value="<?= AdminFormTreatmentController::FORM_ADD_BOOK ?>"
+                    >
                 <div>
                     <input type="submit" value="Ajouter un livre">
                 </div>

@@ -22,6 +22,7 @@ abstract class Constants {
     public const PAGE_ADMIN_LOGIN = "/view/admin/admin_login.php";
     public const PAGE_ADMIN_MAIN = "/view/admin/admin_main.php";
     public const PAGE_ADMIN_ADDBOOK = "/view/admin/admin_addbook.php";
+    public const PAGE_ADMIN_FORM_TREATMENT = "/view/admin/admin_form_treatment.php";
 
     /**
      *  Chemins des feuilles de style
