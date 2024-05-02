@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Model\DBObjects\Book;
+
 class AdminFormTreatmentController {
     public const FORM_NAME_GET = "formname";
 
@@ -32,7 +34,7 @@ class AdminFormTreatmentController {
     public function getFormTreatmentResult() : int {
         return $this->formResult;
     }
-    
+
     public function getFieldError() : string {
         return $this->fieldErrorName;
     }
@@ -45,7 +47,6 @@ class AdminFormTreatmentController {
     }
 
     private function treatFormAddBook($data) : int {
-        var_dump($data);
-        return self::TREAT_COMPLETE;
+        return Book::treatAddForm($data);
     }
 }

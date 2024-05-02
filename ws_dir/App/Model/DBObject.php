@@ -78,7 +78,7 @@ abstract class DBObject {
     }
 
     /**  Tente d'ajouter l'objet courant à la BDD en utilisant ses valeurs. */
-    public function tryAddToDB() {
+    public function tryAddToDB() : bool {
         if (!$this->ensureCorrectData()) {
             return false;
         }
@@ -124,6 +124,10 @@ abstract class DBObject {
             return false;
         }
         return static::generateAddFormExclusive($inputClasses, static::FormAddElts);
+    }
+
+    public static function treatAddForm($data) : int {
+        return static::treatAddFormExclusive($data);
     }
 
     /**
@@ -253,5 +257,16 @@ abstract class DBObject {
             $f["input_type"] = $elts[$k]["type"];
             yield $f;
         }
+    }
+
+    protected static function treatAddFormExclusive($data) : int {
+        $object = new static();
+        foreach (static::$all_properties as $k => $v) {
+            $arg = static::FormAddPrefix . $v;
+            if (array_key_exists($arg, $data)) {
+                $object->{$k} = $data[$arg];
+            }
+        }
+        return $object->tryAddToDB() ? 0 : -1;
     }
 }
