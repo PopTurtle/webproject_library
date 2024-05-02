@@ -22,9 +22,8 @@ $fm = FormMaker::Instance();
 </head>
 <body>
     <?php NavBar::put(); ?>
-
     <main>
-        <section class="login-form">
+        <section class="login-form-section">
             <h1>Se connecter</h1>
             <form method="post" action="<?= Constants::PAGE_PROFILE ?>" class="simple-form">
                 <div>
@@ -52,10 +51,7 @@ $fm = FormMaker::Instance();
                     <input type="submit" value="Connexion">
                 </div>
             </form>
-
-
         </section>
     </main>
-
 </body>
 </html>
