@@ -63,6 +63,7 @@ class AdminFormTreatmentController {
             $this->fieldErrorName = Book::FormAddPrefix . $perror;
             return self::TREAT_INCORRECT_DATA;
         }
+        echo "LA"; exit(0);
         return $r === 0 ? self::TREAT_COMPLETE : self::TREAT_DB_ERROR;
     }
 }

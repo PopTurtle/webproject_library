@@ -3,7 +3,9 @@
 namespace App\Model\DBObjects;
 
 use App\Constants;
+use App\Model\Database;
 use App\Model\DBObject;
+use App\Utils\Utils;
 
 /**
  *  Représente un livre, de la table 'book'
@@ -54,9 +56,20 @@ class Book extends DBObject {
     }
 
     protected function ensureCorrectData(&$propertyError = null): bool {
-        if (!is_null($propertyError)) {
-            $propertyError = "title";
-        }
-        return false;
+        $m = Database::MAX_STRLEN;
+        $test = function ($property, $result) use (&$propertyError) {
+            if (!$result && !is_null($propertyError)) {
+                $propertyError = static::getPropertyDBName($property);
+            }
+            return $result;
+        };
+
+        return $test("Id", is_null($this->Id))
+            && $test("Title", Utils::isNonEmptyString($this->Title, $m))
+            && $test("Author", Utils::isNonEmptyString($this->Author, $m))
+            && $test("Editor", Utils::isNonEmptyString($this->Editor, $m))
+            && $test("PublicationYear", Utils::isInt($this->PublicationYear))
+            && $test("Category", Utils::isNonEmptyString($this->Category, $m))
+            && $test("Stock", Utils::isNonEmptyString($this->Stock, $m));
     }
 }

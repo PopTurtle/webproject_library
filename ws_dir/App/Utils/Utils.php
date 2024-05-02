@@ -80,4 +80,19 @@ class Utils {
     public static function plural(string $s, int $count, string $end="s") {
         return $s . ($count > 1 ? $end : "");
     }
+
+    public static function isNonEmptyString(string $str, int $maxLen = 0) : bool {
+        if (strcmp($str, "") === 0) {
+            return false;
+        }
+        return $maxLen <= 0 || strlen($str) <= $maxLen;
+    }
+
+    public static function isInt($val, int $min = null, int $max = null) {
+        $val = filter_var($val, FILTER_VALIDATE_INT);
+        if ($val === false) {
+            return false;
+        }
+        return (is_null($min) || $min <= $val) && (is_null($max) || $val <= $max);
+    }
 }

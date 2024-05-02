@@ -30,6 +30,9 @@ class Database extends Singleton {
     public const RequestErrorCode = 501;
     private const ConnectionErrorMsg = "Une erreur de connexion s'est produite";
 
+    /**  Config */
+    public const MAX_STRLEN = 255;
+
     /**  Connection courante à la BDD */
     private \PDO $connection;
 
