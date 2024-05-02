@@ -1,19 +1,23 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Misc;
 
-class LoginController {
+use App\Utils\Singleton;
+
+class FormMaker extends Singleton {
+    public const FIELD_ERROR_GET = "error";
+    public const FIELD_ERROR_CLASS = "field-error";
     private string $fieldErrorName;
 
-    public function __construct()
+    protected function __construct()
     {
-        if (isset($_GET["error"])) {
-            $this->fieldErrorName = $_GET["error"];
+        if (isset($_GET[self::FIELD_ERROR_GET])) {
+            $this->fieldErrorName = $_GET[self::FIELD_ERROR_GET];
         } else {
             $this->fieldErrorName = "";
         }
     }
-    
+
     public function fieldErrorName() : string {
         return $this->fieldErrorName;
     }
@@ -26,7 +30,7 @@ class LoginController {
             "input_classes" => $input_classes
         ];
         if (strcmp($this->fieldErrorName(), $name) === 0) {
-            $ls["input_classes"] .= " field-error";
+            $ls["input_classes"] .= " " . self::FIELD_ERROR_CLASS;
         }
         if (isset($_GET[$name])) {
             $ls["prev"] = $_GET[$name];

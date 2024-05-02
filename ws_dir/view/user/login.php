@@ -4,9 +4,10 @@ require_once "../../autoloader.php";
 
 use App\Constants;
 use App\Controller\LoginController;
+use App\Controller\Misc\FormMaker;
 use App\Partials\NavBar;
 
-$lc = new LoginController;
+$fm = FormMaker::Instance();
 ?>
 
 <!DOCTYPE html>
@@ -16,6 +17,7 @@ $lc = new LoginController;
     <title>bilbiloték</title>
     <link rel="stylesheet" href=<?= Constants::STYLE_GLOBAL ?>>
     <link rel="stylesheet" href=<?= Constants::STYLE_LOGIN ?>>
+    <link rel="stylesheet" href=<?= Constants::STYLE_FORM ?>>
     <?php NavBar::putHeader(); ?>
 </head>
 <body>
@@ -24,9 +26,9 @@ $lc = new LoginController;
     <main>
         <section class="login-form">
             <h1>Se connecter</h1>
-            <form method="post" action="<?= Constants::PAGE_PROFILE ?>" class="connect-main">
-                <div class="login-text-input">
-                    <?php $i = $lc->generateInputInfo("mail"); ?>
+            <form method="post" action="<?= Constants::PAGE_PROFILE ?>" class="simple-form">
+                <div>
+                    <?php $i = $fm->generateInputInfo("mail"); ?>
                     <label for="<?= $i["label_for"] ?>">Mail</label>
                     <input
                         type="text"
@@ -36,9 +38,8 @@ $lc = new LoginController;
                         class="<?= $i["input_classes"] ?>"
                         >
                 </div>
-
-                <div class="login-text-input">
-                    <?php $i = $lc->generateInputInfo("password"); ?>
+                <div>
+                    <?php $i = $fm->generateInputInfo("password"); ?>
                     <label for="<?= $i["label_for"] ?>">Mot de passe</label>
                     <input
                         type="password"
@@ -47,11 +48,12 @@ $lc = new LoginController;
                         class="<?= $i["input_classes"] ?>"
                         >
                 </div>
-                
-                <div class="login-submit-container">
+                <div>
                     <input type="submit" value="Connexion">
                 </div>
             </form>
+
+
         </section>
     </main>
 
