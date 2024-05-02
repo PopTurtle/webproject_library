@@ -3,7 +3,6 @@
 use App\Constants;
 use App\Controller\AdminMainController;
 use App\Partials\NavBar;
-use App\Utils\Utils;
 
 require_once "../../autoloader.php";
 
@@ -22,6 +21,13 @@ $amc = new AdminMainController;
     <?php NavBar::put(); ?>
     <main>
         <p>Page admin</p>
+        <p>Retourner à l'accueil pour vous déconnecter de l'interface administrateur</p>
+        <p>Ajouter livre</p>
+        <a href="<?= Constants::PAGE_ADMIN_ADDBOOK ?>">Ajouter un livre</a>
+        <p>Supprimer livre</p>
+        <p>Mettre à jour livre</p>
+        <p>Ajouter utilisateur</p>
+        <p>Supprimer utilisateur</p>
     </main>
 </body>
 </html>

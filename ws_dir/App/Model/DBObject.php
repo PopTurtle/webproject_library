@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use App\Controller\Misc\FormMaker;
 use InvalidArgumentException;
 use PDOStatement;
 
@@ -26,8 +27,12 @@ use PDOStatement;
 abstract class DBObject {
     /**  Nom de la table en BDD, doit être redéfini par la classe dérivée */
     public const TableName = self::TableName;
+
     protected static $all_properties;
     
+    protected const FormArgPrefix = "";
+    protected const FormAddElts = [];
+
     private $obj_arr;
 
     /** Initialise un objet dont les attributs n'ont pas de valeur */
@@ -112,6 +117,13 @@ abstract class DBObject {
         $v = new static();
         $v->setValFromDBArr($values);
         return $v;
+    }
+
+    public static function generateAddForm(string $inputClasses) {
+        if (count(static::FormAddElts) === 0) {
+            return false;
+        }
+        return static::generateAddFormExclusive($inputClasses, static::FormAddElts);
     }
 
     /**
@@ -227,6 +239,19 @@ abstract class DBObject {
             if (array_key_exists($v, $values)) {
                 $this->obj_arr[$k] = $values[$v];
             }
+        }
+    }
+
+    protected static function generateAddFormExclusive(string $inputClasses, $elts) {
+        $fm = FormMaker::Instance();
+        foreach (static::$all_properties as $k => $v) {
+            if (!array_key_exists($k, $elts)) {
+                continue;
+            }
+            $f = $fm->generateInputInfo(static::FormArgPrefix . $v, $inputClasses);
+            $f["label_content"] = $elts[$k]["fn"];
+            $f["input_type"] = $elts[$k]["type"];
+            yield $f;
         }
     }
 }
