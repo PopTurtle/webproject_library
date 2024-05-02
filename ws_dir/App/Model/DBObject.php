@@ -30,7 +30,7 @@ abstract class DBObject {
 
     protected static $all_properties;
     
-    protected const FormAddPrefix = "";
+    public const FormAddPrefix = "";
     protected const FormAddElts = [];
 
     private $obj_arr;

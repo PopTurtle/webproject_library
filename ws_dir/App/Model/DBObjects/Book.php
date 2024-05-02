@@ -21,7 +21,7 @@ class Book extends DBObject {
         "Stock" => "stock"
     ];
 
-    protected const FormAddPrefix = "book_";
+    public const FormAddPrefix = "book_";
     protected const FormAddElts = [
         "Title" => ["type" => "text", "fn" => "Titre"],
         "Author" => ["type" => "text", "fn" => "Auteur"],
@@ -55,7 +55,7 @@ class Book extends DBObject {
 
     protected function ensureCorrectData(&$propertyError = null): bool {
         if (!is_null($propertyError)) {
-            $propertyError = "TEST";
+            $propertyError = "title";
         }
         return false;
     }
