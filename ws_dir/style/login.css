@@ -1,13 +1,1 @@
-.login-form-section {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: 5vh 33% 0
-}
-
-.login-form-section h1 {
-    color: var(--color-palette-1);
-    text-align: center;
-    font-size: 1.7rem;
-    letter-spacing: 1px;
-}
+/** To delete */

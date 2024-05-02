@@ -19,6 +19,8 @@ abstract class Constants {
     public const PAGE_SHOPPINGCART = "/view/user/shoppingcart.php";
     public const PAGE_RETURNBOOK = "/view/book_management/return_book.php";
     public const PAGE_RENEWBOOK = "/view/book_management/renew_book.php";
+    public const PAGE_ADMIN_LOGIN = "/view/admin/admin_login.php";
+    public const PAGE_ADMIN_MAIN = "/view/admin/admin_main.php";
 
     /**
      *  Chemins des feuilles de style

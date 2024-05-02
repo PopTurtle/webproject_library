@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Constants;
 use App\Model\DBObjects\Consumer;
 use App\Utils\Singleton;
 use App\Utils\Utils;
@@ -15,14 +16,19 @@ class SessionManager extends Singleton {
     public const USERCONNECT_FAILED_DB = -1;
     public const USERCONNECT_FAILED_MAIL = -2;
     public const USERCONNECT_FAILED_PASS = -3;
+    public const ADMINCONNECT_FAILED_PASS = -1;
 
     private const NOT_CONNECTED_USER_ID = -1;
+    private const ADMIN_ID = 1;
+
+    private const ADMIN_PASS = "\$2y\$10\$yJa8vfPL43s7Qsqa6Gi5SuRyVwMXGlrd6Xnvo84u7WnXwg.CSGupm";
 
     /**  Utilisateur courant */
     private bool $isUserConnected;
     private ?Consumer $currentUser;
 
     public const SESS_USER_ID = "user_id";
+    public const SESS_ADMIN_ID = "admin_id";
 
     protected function __construct()
     {
@@ -40,8 +46,13 @@ class SessionManager extends Singleton {
         self::Instance();
     }
 
-    public function isUserConnected(): bool {
+    public function isUserConnected() : bool {
         return $this->isUserConnected;
+    }
+
+    public function isUserAdmin() : bool {
+        return isset($_SESSION[self::SESS_ADMIN_ID])
+            && $_SESSION[self::SESS_ADMIN_ID] === self::ADMIN_ID;
     }
 
     public function getUserConsumer(): ?Consumer {
@@ -66,6 +77,14 @@ class SessionManager extends Singleton {
         return 0;
     }
 
+    public function tryConnectAdmin(string $password) : int {
+        if (!Utils::testPassword($password, self::ADMIN_PASS)) {
+            return self::ADMINCONNECT_FAILED_PASS;
+        }
+        $_SESSION[self::SESS_ADMIN_ID] = self::ADMIN_ID;
+        return 0;
+    }
+
     /**
      *  Essaie de connecter un utilisateur si il s'est déjà connecter
      *    auparavant, en utilisant l'ID stocké dans la session.
@@ -84,7 +103,17 @@ class SessionManager extends Singleton {
         return 0;
     }
 
+    public function adminPage() {
+        if (!$this->isUserAdmin()) {
+            Utils::redirectTo(Constants::PAGE_HOME);
+        }
+    }
+
     public function logOutUser() {
         $_SESSION[self::SESS_USER_ID] = self::NOT_CONNECTED_USER_ID;
+    }
+
+    public function logOutAdmin() {
+        unset($_SESSION[self::SESS_ADMIN_ID]);
     }
 }

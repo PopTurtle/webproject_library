@@ -3,7 +3,6 @@
 require_once "../../autoloader.php";
 
 use App\Constants;
-use App\Controller\LoginController;
 use App\Controller\Misc\FormMaker;
 use App\Partials\NavBar;
 
@@ -16,14 +15,13 @@ $fm = FormMaker::Instance();
     <meta charset="UTF-8">
     <title>bilbiloték</title>
     <link rel="stylesheet" href=<?= Constants::STYLE_GLOBAL ?>>
-    <link rel="stylesheet" href=<?= Constants::STYLE_LOGIN ?>>
     <link rel="stylesheet" href=<?= Constants::STYLE_FORM ?>>
     <?php NavBar::putHeader(); ?>
 </head>
 <body>
     <?php NavBar::put(); ?>
     <main>
-        <section class="login-form-section">
+        <section class="form-container">
             <h1>Se connecter</h1>
             <form method="post" action="<?= Constants::PAGE_PROFILE ?>" class="simple-form">
                 <div>

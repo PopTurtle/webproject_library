@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Constants;
+use App\Controller\Misc\FormMaker;
 use App\Controller\SessionManager;
 use App\Model\DBObjects\Consumer;
 use App\Model\FullBookloan;
@@ -58,10 +59,10 @@ class ProfileController {
             $args = [];
             switch ($res) {
                 case SessionManager::USERCONNECT_FAILED_MAIL:
-                    $args["error"] = "mail";
+                    $args[FormMaker::FIELD_ERROR_GET] = "mail";
                     break;
                 case SessionManager::USERCONNECT_FAILED_PASS:
-                    $args["error"] = "password";
+                    $args[FormMaker::FIELD_ERROR_GET] = "password";
                     $args["mail"] = $mail;
                     break;
                 default:

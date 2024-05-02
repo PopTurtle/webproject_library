@@ -1,4 +1,20 @@
-@layer form, error;
+@layer container, form, error;
+
+@layer container {
+    section.form-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 5vh 33% 0
+    }
+
+    .form-container h1 {
+        color: var(--color-palette-1);
+        text-align: center;
+        font-size: 1.7rem;
+        letter-spacing: 1px;
+    }
+}
 
 @layer form {
     form.simple-form {

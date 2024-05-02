@@ -54,7 +54,7 @@ class NavBar extends Partial {
                     self::putButton("Mon panier", $c . "btn-color-2", Constants::PAGE_SHOPPINGCART);
                     self::putButton("Mon profil", $c . "btn-color-1", Constants::PAGE_PROFILE);
                 } else {
-                    self::putButton("Administrateur", $c . "btn-color-2", "");
+                    self::putButton("Administrateur", $c . "btn-color-2", Constants::PAGE_ADMIN_LOGIN);
                     self::putButton("Se connecter", $c . "btn-color-1", Constants::PAGE_LOGIN);
                 }
                 break;

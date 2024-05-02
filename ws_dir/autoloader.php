@@ -33,4 +33,6 @@ if (!isset($removeNecessaryCode)) {
  *    Administrateur -x
  *    -- Valider l'emprunt du panier
  *    <title> de toutes les pages
+ *    Supprimer login.css (Constants et fichier) ainsi que LoginController.php
+ *    Déplacer le SessionManager ?
  */
