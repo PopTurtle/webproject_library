@@ -1,4 +1,4 @@
-@layer container, form, error;
+@layer container, form, form-anim, error;
 
 @layer container {
     section.form-container {
@@ -19,6 +19,7 @@
 @layer form {
     form.simple-form {
         display: flex;
+        position: relative;
         flex-direction: column;
         gap: 3vh;
     }
@@ -76,6 +77,16 @@
 
     form.simple-form div > input[type="submit"]:hover {
         filter: brightness(95%);
+    }
+}
+
+@layer form-anim {
+    .form-container h1 {
+        transition-duration: 200ms;
+    }
+
+    .form-container:has(input[type="submit"]:hover) h1 {
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
     }
 }
 

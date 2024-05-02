@@ -2,6 +2,10 @@
 
 namespace App\Controller;
 
+use App\Constants;
+use App\Controller\Misc\FormMaker;
+use App\Utils\Utils;
+
 class AdminMainController {
     public function __construct()
     {
@@ -13,6 +17,9 @@ class AdminMainController {
 
     private function tryConnect(string $password) {
         $r = SessionManager::Instance()->tryConnectAdmin($password);
-        echo $r;
+        if ($r != 0) {
+            $args = [FormMaker::FIELD_ERROR_GET => "password"];
+            Utils::redirectTo(Constants::PAGE_ADMIN_LOGIN, $args);
+        }
     }
 }
