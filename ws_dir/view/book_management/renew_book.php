@@ -27,6 +27,7 @@ if ($allLoans === false) {
     <script src="<?= Constants::SCRIPT_BOOKLOAN_RENEW ?>" type="module"></script>
     <link rel="stylesheet" href=<?= Constants::STYLE_GLOBAL ?>>
     <link rel="stylesheet" href=<?= Constants::STYLE_RENEW_BOOK ?>>
+    <link rel="stylesheet" href=<?= Constants::STYLE_DISPLAY_BOOK ?>>
     <?php NavBar::putHeader(); ?>
     <?php GridDisplayer::putHeader(); ?>
 </head>
@@ -55,7 +56,7 @@ if ($allLoans === false) {
                             <?= Utils::formatDate($loan->DateEnd) ?>
                         </span>
                     </p>
-                    <div class="renew-button-container">
+                    <div class="action-button-container renew-button-container">
                         <button data-book-id="<?= $book->Id ?>" class="renew-book">
                             Renouveler l'emprunt
                         </button>
