@@ -27,6 +27,7 @@ $amc = new AdminMainController;
         <p>Supprimer livre</p>
         <p>Mettre à jour livre</p>
         <p>Ajouter utilisateur</p>
+        <a href="<?= Constants::PAGE_ADMIN_ADDUSER ?>">Ajouter un utilisateur</a>
         <p>Supprimer utilisateur</p>
     </main>
 </body>

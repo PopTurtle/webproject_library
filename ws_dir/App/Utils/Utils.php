@@ -95,4 +95,16 @@ class Utils {
         }
         return (is_null($min) || $min <= $val) && (is_null($max) || $val <= $max);
     }
+
+    public static function isCorrectDate($date) {
+        $date_r = date_parse($date);
+        if ($date_r["error_count"] + $date_r["warning_count"] > 0) {
+            return false;
+        }
+        return checkdate($date_r['month'], $date_r['day'], $date_r['year']);
+    }
+
+    public static function isValidMail($mail) {
+        return filter_var($mail, FILTER_VALIDATE_EMAIL);
+    }
 }

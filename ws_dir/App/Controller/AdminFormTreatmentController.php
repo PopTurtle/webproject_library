@@ -4,11 +4,13 @@ namespace App\Controller;
 
 use App\Constants;
 use App\Model\DBObjects\Book;
+use App\Model\DBObjects\Consumer;
 
 class AdminFormTreatmentController {
     public const FORM_NAME_GET = "formname";
 
     public const FORM_ADD_BOOK = "addbook";
+    public const FORM_ADD_USER = "adduser";
 
     public const TREAT_COMPLETE = 0;
     public const TREAT_INCORRECT_DATA = -1;
@@ -59,16 +61,28 @@ class AdminFormTreatmentController {
                 $this->previousForm = Constants::PAGE_ADMIN_ADDBOOK;
                 $this->previousFormArgGenerator = function () { return Book::generateAllFormArgs(); };
                 return $this->treatFormAddBook($data);
+            case self::FORM_ADD_USER:
+                $this->previousForm = Constants::PAGE_ADMIN_ADDUSER;
+                $this->previousFormArgGenerator = function () { return Consumer::generateAllFormArgs(); };
+                return $this->treatFormAddUser($data);
         }
     }
 
-    private function treatFormAddBook($data) : int {
+    private function treatForm($data, $modelClassname) : int {
         $perror = "";
-        $r = Book::treatAddForm($data, $perror);
+        $r = $modelClassname::treatAddForm($data, $perror);
         if (strcmp($perror, "") !== 0) {
-            $this->fieldErrorName = Book::FormAddPrefix . $perror;
+            $this->fieldErrorName = $modelClassname::FormAddPrefix . $perror;
             return self::TREAT_INCORRECT_DATA;
         }
         return $r === 0 ? self::TREAT_COMPLETE : self::TREAT_DB_ERROR;
+    }
+
+    private function treatFormAddBook($data) : int {
+        return $this->treatForm($data, Book::class);
+    }
+
+    private function treatFormAddUser($data) : int {
+        return $this->treatForm($data, Consumer::class);
     }
 }
