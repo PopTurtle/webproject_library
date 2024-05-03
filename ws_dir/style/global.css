@@ -71,6 +71,8 @@ body::after {
 }
 
 .button::after {
+    --underline-width: calc(75% - 2 * var(--btn-padding-w));
+    --abs-pos: (50% - var(--underline-width) / 2);
     content: "";
     position: absolute;
     background-color: var(--btn-color);
@@ -79,12 +81,12 @@ body::after {
     width: 0;
     height: 3px;
     transition-duration: 250ms;
-    right: calc(2 * var(--btn-padding-w));
+    right: calc(var(--abs-pos));
 }
 
 .button:hover::after {
-    left: calc(2 * var(--btn-padding-w));
-    width: calc(75% - 2 * var(--btn-padding-w));
+    left: calc(var(--abs-pos));
+    width: calc(var(--underline-width));
 }
 
 .button.btn-color-1 {

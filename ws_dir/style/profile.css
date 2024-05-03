@@ -9,7 +9,7 @@
     font-size: 2rem;
 }
 
-a.button {
+.profile-actions a.button {
     font-size: 1rem;
     text-wrap: nowrap;
 }
