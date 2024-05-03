@@ -40,6 +40,15 @@ class Consumer extends DBObject {
         return static::getFirstOBJ([static::$all_properties["Id"] . " = $id"]);
     }
 
+    public function tryAddToDB(&$propertyError = null) : bool {
+        // Le mot de passe doit être haché.
+        $pw = $this->Password;
+        $this->Password = Utils::generatePasswordHash($pw);
+        $r = parent::tryAddToDB($propertyError);
+        $this->Password = $pw;
+        return $r;
+    }
+
     protected function ensureCorrectData(&$propertyError = null): bool {
         $m = Database::MAX_STRLEN;
         $test = function ($property, $result) use (&$propertyError) {

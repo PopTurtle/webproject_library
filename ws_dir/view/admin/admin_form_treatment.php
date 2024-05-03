@@ -31,7 +31,7 @@ switch ($aftc->getFormTreatmentResult()) {
     case AdminFormTreatmentController::TREAT_DB_ERROR:
         Utils::showErrorCode(
             Database::ConnectionErrorCode,
-            "Une erreur est survenue lors de l'ajout du livre"
+            "Une erreur est survenue lors de l'appel à la base de donnée"
         );
     default:
         Utils::redirectTo(Constants::PAGE_ADMIN_MAIN);
