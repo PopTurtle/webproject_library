@@ -35,6 +35,13 @@ $fm = FormMaker::Instance();
                         id="<?= $i["input_id"] ?>"
                         class="<?= $i["input_classes"] ?>"
                         >
+                        <?php
+                        if ($i["is_error"]) {
+                            ?>
+                            <p class="error-msg">Le mot de passe n'est pas valide.</p>
+                            <?php
+                        }
+                        ?>
                 </div>
                 <div>
                     <input type="submit" value="Connexion">

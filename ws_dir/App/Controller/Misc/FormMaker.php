@@ -27,9 +27,11 @@ class FormMaker extends Singleton {
             "label_for" => $name,
             "input_name" => $name,
             "input_id" => $name,
-            "input_classes" => $input_classes
+            "input_classes" => $input_classes,
+            "is_error" => false,
         ];
         if (strcmp($this->fieldErrorName(), $name) === 0) {
+            $ls["is_error"] = true;
             $ls["input_classes"] .= " " . self::FIELD_ERROR_CLASS;
         } else if (isset($_GET[$name])) {
             $ls["prev"] = $_GET[$name];

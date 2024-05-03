@@ -39,6 +39,13 @@ SessionManager::Instance()->adminPage();
                             id="<?= $f["input_id"] ?>"
                             class="<?= $f["input_classes"] ?>"
                             >
+                        <?php
+                        if ($f["is_error"]) {
+                            ?>
+                            <p class="error-msg">Le champ ci-dessus n'est pas valide.</p>
+                            <?php
+                        }
+                        ?>
                     </div>
                     <?php
                 }

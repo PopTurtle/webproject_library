@@ -7,6 +7,7 @@ use App\Controller\Misc\FormMaker;
 use App\Partials\NavBar;
 
 $fm = FormMaker::Instance();
+$had_error = false;
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +26,12 @@ $fm = FormMaker::Instance();
             <h1>Se connecter</h1>
             <form method="post" action="<?= Constants::PAGE_PROFILE ?>" class="simple-form">
                 <div>
-                    <?php $i = $fm->generateInputInfo("mail"); ?>
+                    <?php
+                    $i = $fm->generateInputInfo("mail");
+                    if ($i["is_error"]) {
+                        $had_error = true;
+                    }
+                    ?>
                     <label for="<?= $i["label_for"] ?>">Mail</label>
                     <input
                         type="text"
@@ -36,7 +42,12 @@ $fm = FormMaker::Instance();
                         >
                 </div>
                 <div>
-                    <?php $i = $fm->generateInputInfo("password"); ?>
+                    <?php
+                    $i = $fm->generateInputInfo("password");
+                    if ($i["is_error"]) {
+                        $had_error = true;
+                    }
+                    ?>
                     <label for="<?= $i["label_for"] ?>">Mot de passe</label>
                     <input
                         type="password"
@@ -45,6 +56,13 @@ $fm = FormMaker::Instance();
                         class="<?= $i["input_classes"] ?>"
                         >
                 </div>
+                <?php
+                if ($had_error) {
+                    ?>
+                    <p class="error-msg">Au moins 1 des champs n'est pas valide.</p>
+                    <?php
+                }
+                ?>
                 <div>
                     <input type="submit" value="Connexion">
                 </div>

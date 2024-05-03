@@ -114,4 +114,11 @@
     form.simple-form .field-error:focus {
         outline: 2px solid rgb(255, 150, 150);
     }
+
+    form.simple-form .error-msg {
+        color: red;
+        margin: 0;
+        font-size: 1.2rem;
+        font-weight: 300;
+    }
 }
