@@ -2,17 +2,20 @@ import { renewLoan } from "./utils/bookloan.js";
 import { addStatusBefore, replaceElt } from "./utils/status.js";
 
 document.addEventListener('DOMContentLoaded', () => {
-  const btns = document.getElementsByClassName("renew-book");
-  let dateEndObjects = document.getElementsByClassName("renew-date-end");
-  const dateEndText = dateEndObjects.length > 0 ? dateEndObjects[0] : null;
+  const containers = document.getElementsByClassName("book-container");
 
-  let lastMsgElt = null;
-  for (const button of btns) {
-    const bookId = button.dataset.bookId;
+  for (const container of containers) {
+    const button = container.getElementsByClassName("renew-book")[0];
+    const dateEndObject = container.getElementsByClassName("loan-end-date")[0];
+    let lastMsgElt = null;
     button.addEventListener("click", async () => {
+      const bookId = button.dataset.bookId;
       if (confirm("Renouveler l'emprunt ?")) {
         if (await renewLoan(bookId)) {
           replaceElt(button, "L'emprunt a bien été renouvelé.");
+          if (dateEndObject !== undefined) {
+            dateEndObject.classList.add("renewed");
+          }
           if (dateEndText !== null) {
             dateEndText.innerHTML = "Nouvelle date ?";
           }

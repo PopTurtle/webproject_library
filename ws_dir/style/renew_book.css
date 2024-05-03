@@ -32,8 +32,22 @@
         font-weight: 500;
     }
 
-    .book-container button {
+    .book-container p > span.renewed::after {
+        content: "\a0 ▶ Renouvelé !";
+        position: absolute;
+        font-weight: 300;
+        animation: renew-text-appear 500ms ease-in-out;
+    }
+
+    .book-container .renew-button-container {
+        display: flex;
+        flex-direction: column;
         align-self: flex-end;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .book-container .renew-button-container button {
         padding: 1rem 2rem;
         color: white;
         font-family: var(--primary-font);
@@ -45,8 +59,24 @@
         cursor: pointer;
     }
 
-    .book-container button:hover {
+    .book-container .renew-button-container button:hover {
         filter: brightness(95%);
         box-shadow: 0px 3px 6px #00000029;
+    }
+
+    .book-container .renew-button-container p {
+        margin-top: 1rem;
+        margin-bottom: 0;
+    }
+}
+
+@keyframes renew-text-appear {
+    0% {
+        opacity: 0;
+        translate: 50px 0;
+    }
+    100% {
+        opacity: 1;
+        translate: 0 0;
     }
 }

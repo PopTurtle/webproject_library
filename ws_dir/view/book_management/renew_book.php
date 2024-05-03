@@ -55,9 +55,11 @@ if ($allLoans === false) {
                             <?= Utils::formatDate($loan->DateEnd) ?>
                         </span>
                     </p>
-                    <button data-book-id="<?= $book->Id ?>" class="renew-book">
-                        Renouveler l'emprunt
-                    </button>
+                    <div class="renew-button-container">
+                        <button data-book-id="<?= $book->Id ?>" class="renew-book">
+                            Renouveler l'emprunt
+                        </button>
+                    </div>
                 </div>
                 <?php
             }
