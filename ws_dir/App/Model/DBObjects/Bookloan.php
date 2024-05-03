@@ -65,7 +65,7 @@ class Bookloan extends DBObject {
         $cid = Bookloan::getPropertyDBName("ConsumerId");
         $de = Bookloan::getPropertyDBName("DateEnd");
         
-        $new_date_end = Utils::getDateIn(self::LOAN_DURATION + 1);
+        $new_date_end = Utils::getDateIn(self::LOAN_DURATION);
         $request = "
             UPDATE $bl_table
             SET $de = '$new_date_end'
