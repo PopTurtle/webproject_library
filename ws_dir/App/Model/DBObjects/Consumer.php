@@ -49,6 +49,24 @@ class Consumer extends DBObject {
         return $r;
     }
 
+    /**
+     *  Test si un e-mail est déjà utilisé. Si c'est le cas, renvoie 0, sinon
+     *    renvoie -1. Renvoie -2 en cas d'erreur de connexion à la BDD
+     *  Il est supposé que $mail est valide.
+     */
+    public static function isMailAlreadyTaken(string $mail) : int {
+        $cm = self::getPropertyDBName("Mail");
+        $request = "
+            SELECT $cm FROM consumer
+            WHERE $cm LIKE \"$mail\"";
+        $r = Database::Instance()->isEmptyQuery($request);
+        if ($r === null) {
+            return -2;
+        }
+
+        return $r ? 0 : -1;
+    }
+
     protected function ensureCorrectData(&$propertyError = null): bool {
         $m = Database::MAX_STRLEN;
         $test = function ($property, $result) use (&$propertyError) {
@@ -58,11 +76,22 @@ class Consumer extends DBObject {
             return $result;
         };
 
+        // Vérifie que le mail n'est pas déjà pris
+        if (!$test("Mail", Utils::isValidMail($this->Mail))) {
+            return false;
+        }
+        $r = static::isMailAlreadyTaken($this->Mail);
+        if ($r !== 0) {
+            if ($r === -1 && !is_null($propertyError)) {
+                $propertyError = static::getPropertyDBName("Mail");
+            }
+            return false;
+        }
+
         return $test("Id", is_null($this->Id))
             && $test("Firstname", Utils::isNonEmptyString($this->Firstname, $m))
             && $test("Lastname", Utils::isNonEmptyString($this->Lastname, $m))
             && $test("Birthdate", Utils::isCorrectDate($this->Birthdate))
-            && $test("Mail", Utils::isValidMail($this->Mail))
             && $test("Password", Utils::isNonEmptyString($this->Password, $m));
     }
 }

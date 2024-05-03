@@ -137,8 +137,8 @@ abstract class DBObject {
     }
 
     /**
-     *  S'assure que les valeurs associées aux attributs sont conformes au
-     *    modèle.
+     *  S'assure que les valeurs associées aux attributs serait conformes au
+     *    modèle si on ajoutait l'objet.
      */
     protected abstract function ensureCorrectData(&$propertyError = null) : bool;
 
