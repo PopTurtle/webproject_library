@@ -65,7 +65,7 @@
     left: 3%;
     width: 0;
     height: 3px;
-    transition-duration: 200ms;
+    transition-duration: 325ms;
 }
 
 .search-bar form:has(.sb-text:focus)::before {

@@ -113,6 +113,7 @@
     
     form.simple-form .field-error:focus {
         outline: 2px solid rgb(255, 150, 150);
+        background-color: rgb(255, 230, 230);
     }
 
     form.simple-form .error-msg {

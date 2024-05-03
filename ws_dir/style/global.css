@@ -78,10 +78,12 @@ body::after {
     bottom: var(--btn-padding-h);
     width: 0;
     height: 3px;
-    transition-duration: 200ms;
+    transition-duration: 250ms;
+    right: calc(2 * var(--btn-padding-w));
 }
 
 .button:hover::after {
+    left: calc(2 * var(--btn-padding-w));
     width: calc(75% - 2 * var(--btn-padding-w));
 }
 
