@@ -12,6 +12,7 @@ require_once "../autoloader.php";
 $bc = new BookSearchController();
 $res = $bc->fetchSearchResult();
 $loans = $bc->getBookIdsInLoan();
+$cartitems = $bc->getBookIdsInCart();
 $bcount = count($res);
 ?>
 
@@ -22,6 +23,7 @@ $bcount = count($res);
     <title>bilbiloték</title>
     <link rel="stylesheet" href=<?= Constants::STYLE_GLOBAL ?>>
     <link rel="stylesheet" href=<?= Constants::STYLE_BOOKSEARCH ?>>
+    <script src="<?= Constants::SCRIPT_BOOKSEARCH ?>" type="module"></script>
     <?php NavBar::putHeader(); ?>
     <?php SearchBar::putHeader(); ?>
 </head>
@@ -57,35 +59,38 @@ $bcount = count($res);
                                 </p>
                             </div>
                         </a>
-                        <div>
                         <?php
-                        $inLoan = in_array($book->Id, $loans);
-                        $inStock = $book->Stock > 0;
-                        $disabled = $inLoan || !$inStock;
-
-                        if ($disabled) {
-                            ?>
-                            <button class="book-result-button" disabled>
-                                <?= $inLoan ? "Déjà emprunter" : "Indisponible" ?>
-                            </button>
-                            <?php
-                        } else if (!SessionManager::Instance()->isUserConnected()) {
-                            ?>
-                            <a href="<?= Constants::PAGE_LOGIN ?>" class="book-result-button">
-                                Emprunter    
-                            </a>
-                            <?php
-                        } else {
-                            ?>
-                            <button class="btn-loan book-result-button">
-                                Emprunter
-                            </button>
-                            <button class="btn-unloan book-result-button">
-                                Retirer du panier
-                            </button>
-                            <?php
-                        }
+                        $inCart = in_array($book->Id, $cartitems) ? 1 : 0;
                         ?>
+                        <div class="btn-container" data-book-id=<?= $book->Id ?> data-is-in-cart=<?= $inCart ?>>
+                            <?php
+                            $inLoan = in_array($book->Id, $loans);
+                            $inStock = $book->Stock > 0;
+                            $disabled = $inLoan || !$inStock;
+
+                            if ($disabled) {
+                                ?>
+                                <button class="book-result-button" disabled>
+                                    <?= $inLoan ? "Déjà emprunter" : "Indisponible" ?>
+                                </button>
+                                <?php
+                            } else if (!SessionManager::Instance()->isUserConnected()) {
+                                ?>
+                                <a href="<?= Constants::PAGE_LOGIN ?>" class="book-result-button">
+                                    Emprunter    
+                                </a>
+                                <?php
+                            } else {
+                                ?>
+                                <button class="btn-loan book-result-button">
+                                    Ajouter au panier
+                                </button>
+                                <button class="btn-unloan book-result-button">
+                                    Retirer du panier
+                                </button>
+                                <?php
+                            }
+                            ?>
                         </div>
                     </div>
                     <?php

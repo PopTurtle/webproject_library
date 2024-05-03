@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Constants;
 use App\Model\DBObjects\Book;
 use App\Model\DBObjects\Bookloan;
+use App\Model\DBObjects\CartItem;
 use App\Model\DBObjects\Consumer;
 
 class BookSearchController {
@@ -49,6 +50,17 @@ class BookSearchController {
         }
         foreach (Bookloan::getAllCurrentLoans($this->consumer->Id) as $bl) {
             $rs[] = intval($bl->BookId);
+        }
+        return $rs;
+    }
+
+    public function getBookIdsInCart() {
+        $rs = [];
+        if (is_null($this->consumer)) {
+            return $rs;
+        }
+        foreach (CartItem::getShoppingCartOfCustomer($this->consumer->Id) as $ci) {
+            $rs[] = intval($ci->BookId);
         }
         return $rs;
     }

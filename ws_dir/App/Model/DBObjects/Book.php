@@ -41,7 +41,7 @@ class Book extends DBObject {
         $field = self::$all_properties["Title"];
         if (strcmp($type, Constants::SEARCH_TYPE_AUTHOR) == 0) {
             $field = self::$all_properties["Author"];
-        } elseif (strcmp($type, Constants::SEARCH_TYPE_CATEGORY) == 0) {
+        } else if (strcmp($type, Constants::SEARCH_TYPE_CATEGORY) == 0) {
             $field = self::$all_properties["Category"];
         }
         $request = "SELECT * FROM " . self::TableName . " "
