@@ -19,7 +19,7 @@ $cb = $bc->getCurrentBook();
     <title>bilbiloték</title>
     <link rel="stylesheet" href=<?= Constants::STYLE_GLOBAL ?>>
     <link rel="stylesheet" href=<?= Constants::STYLE_BOOKSEARCH ?>>
-    <?php $bc->putHeader(); ?>
+    <script src="<?= Constants::SCRIPT_BOOK_CARTITEM ?>" type="module"></script>
     <?php NavBar::putHeader(); ?>
 </head>
 <body>

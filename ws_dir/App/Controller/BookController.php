@@ -24,12 +24,6 @@ class BookController {
         }
     }
 
-    public function putHeader() {
-        ?>
-        <script src="<?= Constants::SCRIPT_BOOK_CARTITEM ?>" type="module"></script>
-        <?php
-    }
-
     public function getCurrentBook() : Book {
         return $this->curBook;
     }

@@ -4,19 +4,20 @@ namespace App\Controller;
 
 use App\Constants;
 use App\Model\DBObjects\Book;
+use App\Model\DBObjects\Bookloan;
+use App\Model\DBObjects\Consumer;
 
 class BookSearchController {
-
-    private bool $validSearchResult;
-    private $result;
-
     private string $searchStr;
     private string $searchType;
+
+    private ?Consumer $consumer;
 
     public function __construct() {
         $this->searchStr = $_GET["search-data"] ?? "";
         $this->searchType = $_GET["search-type"] ?? "";
         $this->makeValidSearchValues();
+        $this->consumer = SessionManager::Instance()->getUserConsumer();
     }
 
     private function makeValidSearchValues() {
@@ -37,12 +38,23 @@ class BookSearchController {
         }
     }
 
-    public function getSearchStr() : string {
-        return $this->searchStr;
+    public function fetchSearchResult() {
+        return Book::getBooks($this->searchStr, $this->searchType);
     }
 
-    public function getSearchResult() {
-        return Book::getBooks($this->searchStr, $this->searchType);
+    public function getBookIdsInLoan() {
+        $rs = [];
+        if (is_null($this->consumer)) {
+            return $rs;
+        }
+        foreach (Bookloan::getAllCurrentLoans($this->consumer->Id) as $bl) {
+            $rs[] = intval($bl->BookId);
+        }
+        return $rs;
+    }
+
+    public function getSearchStr() : string {
+        return $this->searchStr;
     }
 
     public function everyBookLink() {

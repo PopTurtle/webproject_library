@@ -2,6 +2,7 @@
 
 use App\Constants;
 use App\Controller\BookSearchController;
+use App\Controller\SessionManager;
 use App\Partials\NavBar;
 use App\Partials\SearchBar;
 use App\Utils\Utils;
@@ -9,6 +10,9 @@ use App\Utils\Utils;
 require_once "../autoloader.php";
 
 $bc = new BookSearchController();
+$res = $bc->fetchSearchResult();
+$loans = $bc->getBookIdsInLoan();
+$bcount = count($res);
 ?>
 
 <!DOCTYPE html>
@@ -32,18 +36,9 @@ $bc = new BookSearchController();
             <a href="<?= $bc->everyBookLink() ?>" class="button btn-color-1">Voir tous les livres</a>
         </section>
         <section class="search-result">
-            <?php
-            $res = $bc->getSearchResult();
-            $bcount = count($res);
-            ?>
             <p class="result-count">
                 <?= Utils::plural("$bcount résultat", $bcount); ?>
             </p>
-
-
-
-
-
             <div class="result-box">
                 <?php
                 foreach ($res as $book) {
@@ -62,9 +57,36 @@ $bc = new BookSearchController();
                                 </p>
                             </div>
                         </a>
-                        <button class="book-result-button">
-                            Indisponible
-                        </button>
+                        <div>
+                        <?php
+                        $inLoan = in_array($book->Id, $loans);
+                        $inStock = $book->Stock > 0;
+                        $disabled = $inLoan || !$inStock;
+
+                        if ($disabled) {
+                            ?>
+                            <button class="book-result-button" disabled>
+                                <?= $inLoan ? "Déjà emprunter" : "Indisponible" ?>
+                            </button>
+                            <?php
+                        } else if (!SessionManager::Instance()->isUserConnected()) {
+                            ?>
+                            <a href="<?= Constants::PAGE_LOGIN ?>" class="book-result-button">
+                                Emprunter    
+                            </a>
+                            <?php
+                        } else {
+                            ?>
+                            <button class="btn-loan book-result-button">
+                                Emprunter
+                            </button>
+                            <button class="btn-unloan book-result-button">
+                                Retirer du panier
+                            </button>
+                            <?php
+                        }
+                        ?>
+                        </div>
                     </div>
                     <?php
                 }
