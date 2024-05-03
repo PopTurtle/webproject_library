@@ -34,7 +34,8 @@ if ($allLoans === false) {
 <body>
     <?php NavBar::put(); ?>
     <main>
-        <section class="books-section">
+        <section class="display-book">
+            <h1>Renouvellement des emprunts</h1>
             <?php
             if (count($allLoans) === 0) {
                 ?>

@@ -2,7 +2,14 @@
 
 @layer section {
     section.display-book {
-        padding: 5vw;
+        display: flex;
+        flex-direction: column;
+        padding: 1vh 5vw;
+    }
+
+    section.display-book h1 {
+        color: var(--color-palette-1);
+        text-align: center;
     }
 }
 

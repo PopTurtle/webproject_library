@@ -1,11 +1,5 @@
 @layer displayer, section, renew, content;
 
-@layer section {
-    section.books-section {
-        padding: 5vw;
-    }
-}
-
 @layer renew {
     .book-container p > span.renewed::after {
         content: "\a0 ▶ Renouvelé !";
