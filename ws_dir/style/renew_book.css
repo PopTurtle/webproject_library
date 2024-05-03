@@ -1,0 +1,36 @@
+@layer displayer, section, content;
+
+@layer section {
+    section.books-section {
+        padding: 5vw;
+    }
+}
+
+@layer content {
+    .book-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .book-container > * {
+        margin: 0;
+    }
+
+    .book-container h2 {
+        color: var(--color-palette-1);
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .book-container p {
+        color: var(--color-palette-3);
+        font-size: 1.5rem;
+        font-weight: 300;
+    }
+
+    .book-container p > span {
+        font-weight: 500;
+    }
+
+    
+}

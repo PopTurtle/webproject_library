@@ -1,0 +1,19 @@
+@layer displayer {
+    .display-frame {
+        --col-count: 2;
+        --grid-gap: 2rem;
+        display: grid;
+        grid-template-columns: repeat(
+            auto-fill,
+            calc((100% - var(--grid-gap) * (var(--col-count) - 1))/ var(--col-count))
+            );
+        gap: var(--grid-gap);
+    }
+    
+    .display-frame > div {
+        background-color: white;
+        border-radius: 2rem;
+        padding: 2rem;
+        box-shadow: 0px 3px 12px #00000029;
+    }
+}

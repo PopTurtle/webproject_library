@@ -47,6 +47,10 @@ class Utils {
         return date('Y-m-d', $timestamp);
     }
 
+    public static function formatDate($date) {
+        return $date;
+    }
+
     /**
      *  Redirige vers la page située au chemin $path, en passant les arguments
      *    dont les noms sont les clés / valeurs sont celles données par
