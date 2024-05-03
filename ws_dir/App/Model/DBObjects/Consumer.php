@@ -41,7 +41,14 @@ class Consumer extends DBObject {
     }
 
     public function tryAddToDB(&$propertyError = null) : bool {
-        // Le mot de passe doit être haché.
+        //  Vérifie que le mot de passe n'est pas vide
+        if (strcmp($this->Password, "") === 0) {
+            if (!is_null($propertyError)) {
+                $propertyError = static::getPropertyDBName("Password");
+            }
+            return false;
+        }
+        //  Le mot de passe doit être haché.
         $pw = $this->Password;
         $this->Password = Utils::generatePasswordHash($pw);
         $r = parent::tryAddToDB($propertyError);
