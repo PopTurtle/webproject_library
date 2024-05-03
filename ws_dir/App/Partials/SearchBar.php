@@ -20,6 +20,7 @@ class SearchBar extends Partial {
                 <input
                     class="sb-text"
                     type="text"
+                    value="<?= $args["search_data"] ?? '' ?>"
                     name="search-data"
                     placeholder="Rechercher un livre"
                     autocomplete="off"

@@ -33,7 +33,7 @@ $bcount = count($res);
     <main>
         <section class="search-container">
             <div class="search-bar-container">
-                <?php SearchBar::put() ?>
+                <?php SearchBar::put(["search_data" => $bc->getSearchStr()]); ?>
             </div>
             <a href="<?= $bc->everyBookLink() ?>" class="button btn-color-1">Voir tous les livres</a>
         </section>
