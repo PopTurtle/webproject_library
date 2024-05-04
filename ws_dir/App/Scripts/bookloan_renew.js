@@ -1,6 +1,8 @@
 import { renewLoan } from "./utils/bookloan.js";
 import { addStatusBefore, replaceElt } from "./utils/status.js";
 
+error("NOT WORKING ! TO FIX");
+
 document.addEventListener('DOMContentLoaded', () => {
   const containers = document.getElementsByClassName("book-container");
 

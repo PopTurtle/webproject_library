@@ -24,7 +24,7 @@ abstract class APIPage {
         $dataAction = $data[static::actionKey];
         foreach ($actions as $action => $infos) {
             if (strcmp($action, $dataAction) === 0) {
-                if (!static::meetRequirement($data, $infos["require"])) {
+                if (isset($infos["require"]) && !static::meetRequirement($data, $infos["require"])) {
                     return "no content";
                 }
                 return $infos["callback"]($data);

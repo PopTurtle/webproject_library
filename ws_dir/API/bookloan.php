@@ -1,9 +1,60 @@
 <?php
 
+use API\APIPage;
 use App\Controller\SessionManager;
 use App\Model\DBObjects\Bookloan;
 
 require_once "../autoloader.php";
+
+class APIBookloan extends APIPage {
+    protected static function executeActions(&$data)
+    {
+        return static::tryActions($data, [
+                "return" => [
+                    "require" => ["book_id"],
+                    "callback" => function (&$d) { return static::returnLoan(intval($d["book_id"])); }
+                ],
+                "renew" => [
+                    "require" => ["book_id"],
+                    "callback" => function (&$d) { return static::renewLoan(intval($d["book_id"])); }
+                ],
+                "validate" => [
+                    "callback" => function (&$d) { return static::validateShoppingCart(); }
+                ]
+            ]
+        );
+    }
+
+    private static function returnLoan(int $bookId) {
+        $c = SessionManager::Instance()->getUserConsumer();
+        if (is_null($c)) {
+            return "no user";
+        }
+        return Bookloan::returnLoan($c->Id, $bookId) ? "ok" : "no content";
+    }
+
+    private static function renewLoan(int $bookId) {
+        $c = SessionManager::Instance()->getUserConsumer();
+        if (is_null($c)) {
+            return "no user";
+        }
+        return Bookloan::renewLoan($c->Id, $bookId) ? "ok" : "no content";
+    }
+
+    private static function validateShoppingCart() {
+        $c = SessionManager::Instance()->getUserConsumer();
+        if (is_null($c)) {
+            return "no user";
+        }
+        return Bookloan::makeLoanFromShoppingCart($c->Id) ? "ok" : "no content";
+    }
+}
+
+$data = $_POST;
+APIBookloan::workData($data);
+APIBookloan::echoData($data);
+
+exit();
 
 $data = $_POST;
 

@@ -28,12 +28,11 @@ if (!isset($removeNecessaryCode)) {
 /**
  *  TODO:
  *    ensureCorrectData() pour tous les DBObjects
- *    -- Page renouveler emprunt
- *    -- Page rendre un livre
  *    Administrateur -x
  *    -- Valider l'emprunt du panier
  *    <title> de toutes les pages
  *    Supprimer login.css (Constants et fichier) ainsi que LoginController.php
  *    Déplacer le SessionManager ?
  *    trySelectObj :: return null en cas d'erreur ?
+ *    fix bookloan return/renew
  */
