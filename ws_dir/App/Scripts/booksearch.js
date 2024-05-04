@@ -13,11 +13,11 @@ function manageContainer(container) {
 
     (isInCart ? loanBtn : unloanBtn).style.display = "none";
 
-    const action = (btn1, btn2, btn2Display, func) => {
+    const action = async (btn1, btn2, btn2Display, func) => {
       if (hadError) {
         return;
       }
-      if (func(bookId)) {
+      if (await func(bookId)) {
         btn1.style.display = "none";
         btn2.style.display = btn2Display;
       } else {
