@@ -9,8 +9,8 @@ const app = "/App";
 const ns_cut_preg = "/^App/";
 
 function autoload($class) {
-    $rpath = str_replace("\\", '/', preg_replace(ns_cut_preg, "", $class));
-    $fn = __DIR__ . app . $rpath . ".php";
+    $rpath = str_replace("\\", "/", $class);
+    $fn = __DIR__ . "/" . $rpath . ".php";
     require_once $fn;
 }
 
