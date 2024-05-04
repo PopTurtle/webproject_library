@@ -9,7 +9,9 @@ require_once "../autoloader.php";
 class APIBookloan extends APIPage {
     protected static function executeActions(&$data)
     {
-        return static::tryActions($data, [
+        $data[static::resultKey] = static::tryActions(
+            $data,
+            [
                 "return" => [
                     "require" => ["book_id"],
                     "callback" => function (&$d) { return static::returnLoan(intval($d["book_id"])); }
