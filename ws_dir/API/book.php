@@ -11,8 +11,16 @@ class APIBook extends APIPage {
         $data[static::resultKey] = static::tryActions(
             $data,
             [
+                "delete" => [
+                    "require" => ["book_id"],
+                    "callback" => function (&$d) { return self::deleteBook(intval($d["book_id"])); }
+                ]
             ]
         );
+    }
+
+    private static function deleteBook(int $bookId) : string {
+        return Book::deleteBookById($bookId) ? "ok" : "no content";
     }
 }
 

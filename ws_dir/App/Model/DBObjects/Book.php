@@ -58,6 +58,12 @@ class Book extends DBObject {
         return static::getFirstOBJ([static::$all_properties["Id"] . " = $id"]);
     }
 
+    public static function deleteBookById(int $id) : bool {
+        $b = new static();
+        $b->Id = $id;
+        return $b->removeFromDB() !== false;
+    }
+
     protected function ensureCorrectData(&$propertyError = null): bool {
         $m = Database::MAX_STRLEN;
         $test = function ($property, $result) use (&$propertyError) {

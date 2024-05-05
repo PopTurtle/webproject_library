@@ -3,6 +3,9 @@ import { replaceElt } from "../utils/status.js";
 
 function manageDeleteButton(button, bookId) {
   button.addEventListener("click", async function delbtnClick () {
+    if (!confirm("Supprimer le livre ?")) {
+      return;
+    }
     button.removeEventListener("click", delbtnClick);
     if (await deleteBook(bookId)) {
       replaceElt(button, "Le livre a bien été supprimé");
