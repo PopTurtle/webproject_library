@@ -50,6 +50,7 @@ abstract class Constants {
     public const SCRIPT_BOOKLOAN_RENEW = "/App/Scripts/bookloan_renew.js";
     public const SCRIPT_SHOPPINGCART = "/App/Scripts/shoppingcart.js";
     public const SCRIPT_BOOKSEARCH = "/App/Scripts/booksearch.js";
+    public const SCRIPT_ADMIN_DELETE_BOOK = "/App/Scripts/admin/delete_book.js";
 
     /**
      *  Types de recherche de livres disponible
