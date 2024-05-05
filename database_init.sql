@@ -118,7 +118,10 @@ VALUES
 INSERT INTO consumer
 (consumer_id, firstname, lastname, birthdate, mail, password)
 VALUES
-(NULL, "Michel", "Samba", "1946-01-31", "michel.samba@gmiel.com", "$2y$10$pSNKCsO.PpTjJhot.f7Yd.Gpl0ZDNpvfcnoVAt0RcEBcwU9CbJ4dq");
+(NULL, "Michel", "Samba", "1946-01-31", "michel.samba@gmail.com", "$2y$10$pSNKCsO.PpTjJhot.f7Yd.Gpl0ZDNpvfcnoVAt0RcEBcwU9CbJ4dq"), -- MDP: ElRacioMcQueen
+(NULL, "Abbas", "Ourdi", "1954-05-16", "abbas.ourdi@gmail.com", "$2y$10$FZ7v.idm9VgCpn7ZkVxWAuXjkPXRtwY3wWuQV2El1DGZ/2XiWNmny"), -- MDP: Motdepasse123
+(NULL, "Jean", "Bon", "1964-02-17", "jean.bon@gmail.com", "$2y$10$8noswzqsXrIgsmrHBlk5peURsGkz5rDP2zcPLZG4Q2cQlcZoLs/gS"), -- MDP: bibliotèk
+(NULL, "Odile", "Crock", "2000-01-31", "crock.odile123@gmail.com", "$2y$10$y3Kdmxjjl6j5dMtWjOHCN.uZ0CXmJie9/5s/8znzGuONArLM8n35S"); -- MDP: j'aipasdidee
 
 -- Emprunts
 INSERT INTO bookloan
