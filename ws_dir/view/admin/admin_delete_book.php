@@ -24,6 +24,7 @@ $adbc = new AdminDeleteBookController;
     <title>bilbiloték</title>
     <link rel="stylesheet" href=<?= Constants::STYLE_GLOBAL ?>>
     <link rel="stylesheet" href=<?= Constants::STYLE_FORM ?>>
+    <link rel="stylesheet" href=<?= Constants::STYLE_ADMIN_DELETE ?>>
     <script src="<?= Constants::SCRIPT_ADMIN_DELETE_BOOK ?>" type="module"></script>
     <?php NavBar::putHeader(); ?>
 </head>
@@ -79,7 +80,7 @@ $adbc = new AdminDeleteBookController;
                         <h1><?= $b->Title ?></h1>
                         <p><?= $b->Author ?> - <?= $b->PublicationYear ?></p>
                         <p>Identifiant: <?= $b->Id ?></p>
-                        <div class="delete-book-btn">
+                        <div class="del-btn-container delete-book-btn">
                             <button id="del-btn" data-book-id=<?= $b->Id ?>>Supprimer le livre</button>
                         </div>
                     </div>

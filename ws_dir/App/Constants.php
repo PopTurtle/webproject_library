@@ -41,6 +41,7 @@ abstract class Constants {
     public const STYLE_GRID_DISPLAYER = "/style/misc/grid_displayer.css";
     public const STYLE_RENEW_BOOK = "/style/renew_book.css";
     public const STYLE_DISPLAY_BOOK = "/style/misc/display_book.css";
+    public const STYLE_ADMIN_DELETE = "/style/admin_delete.css";
 
     /**
      *  Chemins des scripts
