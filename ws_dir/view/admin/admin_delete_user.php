@@ -1,7 +1,7 @@
 <?php
 
 use App\Constants;
-use App\Controller\AdminDeleteBookController;
+use App\Controller\AdminDeleteUserController;
 use App\Controller\Misc\FormMaker;
 use App\Controller\SessionManager;
 use App\Partials\NavBar;
@@ -10,7 +10,7 @@ require_once "../../autoloader.php";
 
 SessionManager::Instance()->adminPage();
 $fm = FormMaker::Instance();
-$adbc = new AdminDeleteBookController;
+$aduc = new AdminDeleteUserController;
 ?>
 
 <!DOCTYPE html>
@@ -28,12 +28,12 @@ $adbc = new AdminDeleteBookController;
     <?php NavBar::put(); ?>
     <main>
         <section class="form-container">
-                <h1>Supprimer un livre</h1>
+                <h1>Supprimer un utilisateur</h1>
                 <p>Les champs sont optionnels, n'en saisir qu'un seul suffit.</p>
-                <form method="get" action="<?= Constants::PAGE_ADMIN_DELETE_BOOK ?>" class="simple-form">
+                <form method="get" action="<?= Constants::PAGE_ADMIN_DELETE_USER ?>" class="simple-form">
                     <div>
-                        <?php $i = $fm->generateInputInfo("book_id"); ?>
-                        <label for="<?= $i["label_for"] ?>">Identifiant du livre</label>
+                        <?php $i = $fm->generateInputInfo("consumer_id"); ?>
+                        <label for="<?= $i["label_for"] ?>">Identifiant de l'utilisateur</label>
                         <input
                             type="number"
                             value="<?= $i["prev"] ?? "" ?>"
@@ -43,8 +43,8 @@ $adbc = new AdminDeleteBookController;
                             >
                     </div>
                     <div>
-                        <?php $i = $fm->generateInputInfo("book_title"); ?>
-                        <label for="<?= $i["label_for"] ?>">Titre</label>
+                        <?php $i = $fm->generateInputInfo("consumer_mail"); ?>
+                        <label for="<?= $i["label_for"] ?>">Mail de l'utilisateur</label>
                         <input
                             type="text"
                             value="<?= $i["prev"] ?? "" ?>"
@@ -60,24 +60,24 @@ $adbc = new AdminDeleteBookController;
             </section>
 
             <?php
-            if ($adbc->hasFormResult()) {
-                $b = $adbc->getSearchResult();
+            if ($aduc->hasFormResult()) {
+                $c = $aduc->getSearchResult();
                 ?>
 
                 <section class="search-result-section">
                 <?php
-                if ($b === null) {
+                if ($c === null) {
                     ?>
                     <p>Aucun résultat pour cette recherche</p>
                     <?php
                 } else {
                     ?>
                     <div class="result-container">
-                        <h1><?= $b->Title ?></h1>
-                        <p><?= $b->Author ?> - <?= $b->PublicationYear ?></p>
-                        <p>Identifiant: <?= $b->Id ?></p>
+                        <h1><?= $c->Lastname ?> <?= $c->Firstname ?></h1>
+                        <p><?= $c->Mail ?></p>
+                        <p>Identifiant: <?= $c->Id ?></p>
                         <div class="del-btn-container">
-                            <button id="del-btn" data-book-id=<?= $b->Id ?>>Supprimer le livre</button>
+                            <button id="del-btn" data-consumer-id=<?= $c->Id ?>>Supprimer l'utilisateur</button>
                         </div>
                     </div>
                     <?php

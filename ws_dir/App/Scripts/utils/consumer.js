@@ -1,10 +1,10 @@
 
-export async function deleteBook(bookId) {
+export async function deleteConsumer(consumerId) {
   const param = new URLSearchParams();
   param.append("action", "delete");
-  param.append("book_id", bookId);
+  param.append("consumer_id", consumerId);
 
-  const data = await fetch("/API/book.php", {
+  const data = await fetch("/API/consumer.php", {
     method: 'POST',
     body: param
   })

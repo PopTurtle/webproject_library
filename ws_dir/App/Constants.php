@@ -25,6 +25,7 @@ abstract class Constants {
     public const PAGE_ADMIN_ADDUSER = "/view/admin/admin_adduser.php";
     public const PAGE_ADMIN_FORM_TREATMENT = "/view/admin/admin_form_treatment.php";
     public const PAGE_ADMIN_DELETE_BOOK = "/view/admin/admin_delete_book.php";
+    public const PAGE_ADMIN_DELETE_USER = "/view/admin/admin_delete_user.php";
 
     /**
      *  Chemins des feuilles de style
@@ -51,7 +52,7 @@ abstract class Constants {
     public const SCRIPT_BOOKLOAN_RENEW = "/App/Scripts/bookloan_renew.js";
     public const SCRIPT_SHOPPINGCART = "/App/Scripts/shoppingcart.js";
     public const SCRIPT_BOOKSEARCH = "/App/Scripts/booksearch.js";
-    public const SCRIPT_ADMIN_DELETE_BOOK = "/App/Scripts/admin/delete_book.js";
+    public const SCRIPT_ADMIN_DELETE = "/App/Scripts/admin/admin_delete.js";
 
     /**
      *  Types de recherche de livres disponible

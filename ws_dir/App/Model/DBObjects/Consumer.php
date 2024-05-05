@@ -40,6 +40,12 @@ class Consumer extends DBObject {
         return static::getFirstOBJ([static::$all_properties["Id"] . " = $id"]);
     }
 
+    public static function deleteConsumerByID(int $id) : bool {
+        $c = new static();
+        $c->Id = $id;
+        return $c->removeFromDB() !== false;
+    }
+
     public function tryAddToDB(&$propertyError = null) : bool {
         //  Vérifie que le mot de passe n'est pas vide
         if (strcmp($this->Password, "") === 0) {

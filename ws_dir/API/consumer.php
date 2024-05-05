@@ -2,32 +2,32 @@
 
 use API\APIPage;
 use App\Controller\SessionManager;
-use App\Model\DBObjects\Book;
+use App\Model\DBObjects\Consumer;
 
 require_once "../autoloader.php";
 
-class APIBook extends APIPage {
+class APIConsumer extends APIPage {
     protected static function executeActions(&$data)
     {
         $data[static::resultKey] = static::tryActions(
             $data,
             [
                 "delete" => [
-                    "require" => ["book_id"],
-                    "callback" => function (&$d) { return self::deleteBook(intval($d["book_id"])); }
+                    "require" => ["consumer_id"],
+                    "callback" => function (&$d) { return self::deleteConsumer(intval($d["consumer_id"])); }
                 ]
             ]
         );
     }
 
-    private static function deleteBook(int $bookId) : string {
+    private static function deleteConsumer(int $id) {
         if (!SessionManager::Instance()->isUserAdmin()) {
             return "no permission";
         }
-        return Book::deleteBookById($bookId) ? "ok" : "no content";
+        return Consumer::deleteConsumerByID($id) ? "ok" : "no content";
     }
 }
 
 $data = $_POST;
-APIBook::workData($data);
-APIBook::echoData($data);
+APIConsumer::workData($data);
+APIConsumer::echoData($data);
