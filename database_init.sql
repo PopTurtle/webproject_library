@@ -9,10 +9,10 @@
 
 -- Supprime les tables si elles existents déjà
 
+DROP TABLE IF EXISTS cartitem;
+DROP TABLE IF EXISTS bookloan;
 DROP TABLE IF EXISTS book;
 DROP TABLE IF EXISTS consumer;
-DROP TABLE IF EXISTS bookloan;
-DROP TABLE IF EXISTS cartitem;
 
 -- (re) Création des tables
 CREATE TABLE book (
@@ -48,11 +48,13 @@ CREATE TABLE bookloan (
 
     CONSTRAINT FK_bookloan_to_book
     FOREIGN KEY (book_id)
-    REFERENCES book(book_id),
+    REFERENCES book(book_id)
+    ON DELETE CASCADE,
 
     CONSTRAINT FK_bookloan_to_consumer
     FOREIGN KEY (consumer_id)
     REFERENCES consumer(consumer_id)
+    ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE cartitem (
@@ -61,11 +63,13 @@ CREATE TABLE cartitem (
 
     CONSTRAINT FK_cartitem_to_book
     FOREIGN KEY (book_id)
-    REFERENCES book(book_id),
+    REFERENCES book(book_id)
+    ON DELETE CASCADE,
 
     CONSTRAINT FK_cartitem_to_consumer
     FOREIGN KEY (consumer_id)
     REFERENCES consumer(consumer_id)
+    ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Remplissage avec des valeurs de tests
