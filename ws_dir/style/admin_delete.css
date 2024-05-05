@@ -1,5 +1,11 @@
 
 @layer section {
+    section > p {
+        margin-top: 0;
+        color: var(--color-palette-3);
+        font-weight: 300;
+    }
+
     section.search-result-section {
         display: flex;
         justify-content: center;
