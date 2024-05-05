@@ -80,7 +80,7 @@ $adbc = new AdminDeleteBookController;
                         <p><?= $b->Author ?> - <?= $b->PublicationYear ?></p>
                         <p>Identifiant: <?= $b->Id ?></p>
                         <div class="delete-book-btn">
-                            <button>Supprimer le livre</button>
+                            <button id="del-btn" data-book-id=<?= $b->Id ?>>Supprimer le livre</button>
                         </div>
                     </div>
                     <?php
