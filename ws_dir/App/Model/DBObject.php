@@ -30,7 +30,8 @@ abstract class DBObject {
 
     protected static $all_properties;
     
-    public const FormAddPrefix = "";
+    public const FormPrefix = "";
+    protected const FormElts = [];
     protected const FormAddElts = [];
 
     private $obj_arr;
@@ -123,18 +124,23 @@ abstract class DBObject {
         if (count(static::FormAddElts) === 0) {
             return false;
         }
-        return static::generateAddFormExclusive($inputClasses, static::FormAddElts);
+        $fae = static::getFormAddElts();
+        return static::generateFormExclusive($inputClasses, $fae);
     }
 
-    public static function generateAllFormArgs() {
-        foreach (array_keys(static::FormAddElts) as $k) {
-            yield static::FormAddPrefix . static::getPropertyDBName($k);
+    public static function generateAllAddFormArgs() {
+        foreach (array_keys(static::getFormAddElts()) as $k) {
+            yield static::FormPrefix . static::getPropertyDBName($k);
         }
     }
 
     public static function treatAddForm($data, &$propertyError = null) : int {
         return static::treatAddFormExclusive($data, $propertyError);
     }
+
+    // public static function generateUpdateForm(string $inputClasses = "") {
+    //     return static::generateFormExclusive($inputClasses, static::)
+    // }
 
     /**
      *  S'assure que les valeurs associées aux attributs serait conformes au
@@ -252,13 +258,23 @@ abstract class DBObject {
         }
     }
 
-    protected static function generateAddFormExclusive(string $inputClasses, $elts) {
+    protected static function getFormAddElts() {
+        $fae = [];
+        foreach (static::FormAddElts as $elt) {
+            if (array_key_exists($elt, static::FormElts)) {
+                $fae[$elt] = static::FormElts[$elt];
+            }
+        }
+        return $fae;
+    }
+
+    protected static function generateFormExclusive(string $inputClasses, $elts) {
         $fm = FormMaker::Instance();
         foreach (static::$all_properties as $k => $v) {
             if (!array_key_exists($k, $elts)) {
                 continue;
             }
-            $f = $fm->generateInputInfo(static::FormAddPrefix . $v, $inputClasses);
+            $f = $fm->generateInputInfo(static::FormPrefix . $v, $inputClasses);
             $f["label_content"] = $elts[$k]["fn"];
             $f["input_type"] = $elts[$k]["type"];
             yield $f;
@@ -268,11 +284,24 @@ abstract class DBObject {
     protected static function treatAddFormExclusive($data, &$propertyError = null) : int {
         $object = new static();
         foreach (static::$all_properties as $k => $v) {
-            $arg = static::FormAddPrefix . $v;
+            $arg = static::FormPrefix . $v;
             if (array_key_exists($arg, $data)) {
                 $object->{$k} = $data[$arg];
             }
         }
+        var_dump($object);
         return $object->tryAddToDB($propertyError) ? 0 : -1;
+    }
+
+    /**
+     *  Produit un tableau contenant les informations nécessaire pour passer
+     *    un DBObject dans un formulaire
+     */
+    public function generatePrefilledInputs() {
+        $rs = [];
+        foreach (static::$all_properties as $k => $v) {
+            $rs[static::FormPrefix . $v] = $this->{$k} ?? "";
+        }
+        return $rs;
     }
 }

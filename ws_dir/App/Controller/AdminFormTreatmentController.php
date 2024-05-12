@@ -59,11 +59,11 @@ class AdminFormTreatmentController {
         switch ($formname) {
             case self::FORM_ADD_BOOK:
                 $this->previousForm = Constants::PAGE_ADMIN_ADDBOOK;
-                $this->previousFormArgGenerator = function () { return Book::generateAllFormArgs(); };
+                $this->previousFormArgGenerator = function () { return Book::generateAllAddFormArgs(); };
                 return $this->treatFormAddBook($data);
             case self::FORM_ADD_USER:
                 $this->previousForm = Constants::PAGE_ADMIN_ADDUSER;
-                $this->previousFormArgGenerator = function () { return Consumer::generateAllFormArgs(); };
+                $this->previousFormArgGenerator = function () { return Consumer::generateAllAddFormArgs(); };
                 return $this->treatFormAddUser($data);
         }
     }
@@ -72,7 +72,7 @@ class AdminFormTreatmentController {
         $perror = "";
         $r = $modelClassname::treatAddForm($data, $perror);
         if (strcmp($perror, "") !== 0) {
-            $this->fieldErrorName = $modelClassname::FormAddPrefix . $perror;
+            $this->fieldErrorName = $modelClassname::FormPrefix . $perror;
             return self::TREAT_INCORRECT_DATA;
         }
         return $r === 0 ? self::TREAT_COMPLETE : self::TREAT_DB_ERROR;

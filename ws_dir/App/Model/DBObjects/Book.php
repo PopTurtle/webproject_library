@@ -23,14 +23,19 @@ class Book extends DBObject {
         "Stock" => "stock"
     ];
 
-    public const FormAddPrefix = "book_";
-    protected const FormAddElts = [
+    public const FormPrefix = "book_";
+    protected const FormElts = [
+        "Id" => ["type" => "number", "fn" => "ID"],
         "Title" => ["type" => "text", "fn" => "Titre"],
         "Author" => ["type" => "text", "fn" => "Auteur"],
         "Editor" => ["type" => "text", "fn" => "Editeur"],
         "PublicationYear" => ["type" => "number", "fn" => "Année de publication"],
         "Category" => ["type" => "text", "fn" => "Catégorie"],
         "Stock" => ["type" => "number", "fn" => "Stock"]
+    ];
+
+    protected const FormAddElts = [
+        "Title", "Author", "Editor", "PublicationYear", "Category", "Stock"
     ];
 
     /**

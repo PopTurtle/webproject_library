@@ -78,7 +78,13 @@ $adbc = new AdminDeleteBookController;
                         <p>Identifiant: <?= $b->Id ?></p>
                         <div class="del-btn-container">
                             <form method="get" action="<?= Constants::PAGE_ADMIN_UPDATE_BOOK?>">
-                                <input type="hidden" name="book_title" value="FEUR">
+                                <?php
+                                foreach ($b->generatePrefilledInputs() as $k => $v) {
+                                    ?>
+                                    <input type="hidden" name="<?= $k ?>" value="<?= $v ?>">
+                                    <?php
+                                }
+                                ?>
                                 <input type="submit" value="Modifier le livre">
                             </form>
                             <button id="del-btn" data-book-id=<?= $b->Id ?>>Supprimer le livre</button>

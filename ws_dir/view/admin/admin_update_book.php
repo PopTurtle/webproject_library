@@ -9,8 +9,6 @@ use App\Partials\NavBar;
 require_once "../../autoloader.php";
 
 SessionManager::Instance()->adminPage();
-$fm = FormMaker::Instance();
-$adbc = new AdminDeleteBookController;
 ?>
 
 <!DOCTYPE html>
@@ -20,41 +18,44 @@ $adbc = new AdminDeleteBookController;
     <title>bilbiloték</title>
     <link rel="stylesheet" href=<?= Constants::STYLE_GLOBAL ?>>
     <link rel="stylesheet" href=<?= Constants::STYLE_FORM ?>>
-    <link rel="stylesheet" href=<?= Constants::STYLE_ADMIN_DELETE ?>>
-    <script src="<?= Constants::SCRIPT_ADMIN_DELETE ?>" type="module"></script>
     <?php NavBar::putHeader(); ?>
 </head>
 <body>
     <?php NavBar::put(); ?>
     <main>
         <section class="form-container">
-                <h1>Supprimer un livre</h1>
-                <p>Les champs sont optionnels, n'en saisir qu'un seul suffit.</p>
-                <form method="get" action="<?= Constants::PAGE_ADMIN_DELETE_BOOK ?>" class="simple-form">
+                <h1>Modifier un livre</h1>
+                <form method="get" action="<?= "" ?>" class="simple-form">
+                    <?php
+                    foreach (Book::generateAddForm("") as $f) {
+                        ?>
+                        <div>
+                            <label for="<?= $f["label_for"] ?>"><?= $f["label_content"] ?></label>
+                            <input
+                                type="<?= $f["input_type"] ?? "text" ?>"
+                                value="<?= $f["prev"] ?? "" ?>"
+                                name="<?= $f["input_name"] ?>"
+                                id="<?= $f["input_id"] ?>"
+                                class="<?= $f["input_classes"] ?>"
+                                >
+                            <?php
+                            if ($f["is_error"]) {
+                                ?>
+                                <p class="error-msg">Le champ ci-dessus n'est pas valide.</p>
+                                <?php
+                            }
+                            ?>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                    <input
+                        type="hidden"
+                        name="<?= AdminFormTreatmentController::FORM_NAME_GET ?>"
+                        value="<?= AdminFormTreatmentController::FORM_ADD_BOOK ?>"
+                        >
                     <div>
-                        <?php $i = $fm->generateInputInfo("book_id"); ?>
-                        <label for="<?= $i["label_for"] ?>">Identifiant du livre</label>
-                        <input
-                            type="number"
-                            value="<?= $i["prev"] ?? "" ?>"
-                            name="<?= $i["input_name"] ?>"
-                            id="<?= $i["input_id"] ?>"
-                            class="<?= $i["input_classes"] ?>"
-                            >
-                    </div>
-                    <div>
-                        <?php $i = $fm->generateInputInfo("book_title"); ?>
-                        <label for="<?= $i["label_for"] ?>">Titre</label>
-                        <input
-                            type="text"
-                            value="<?= $i["prev"] ?? "" ?>"
-                            name="<?= $i["input_name"] ?>"
-                            id="<?= $i["input_id"] ?>"
-                            class="<?= $i["input_classes"] ?>"
-                            >
-                    </div>
-                    <div>
-                        <input type="submit" value="Chercher">
+                        <input type="submit" value="Ajouter un livre">
                     </div>
                 </form>
             </section>

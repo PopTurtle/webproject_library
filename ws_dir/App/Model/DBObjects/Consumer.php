@@ -21,13 +21,18 @@ class Consumer extends DBObject {
         "Password" => "password"
     ];
 
-    public const FormAddPrefix = "user_";
-    protected const FormAddElts = [
+    public const FormPrefix = "user_";
+    protected const FormElts = [
+        "Id" => ["type" => "number", "fn" => "ID"],
         "Lastname" => ["type" => "text", "fn" => "Nom"],
         "Firstname" => ["type" => "text", "fn" => "Prénom"],
         "Birthdate" => ["type" => "date", "fn" => "Date de naissance"],
         "Mail" => ["type" => "email", "fn" => "Adresse mail"],
         "Password" => ["type" => "password", "fn" => "Mot de passe"]
+    ];
+
+    protected const FormAddElts = [
+        "Lastname", "Firstname", "Birthdate", "Mail", "Password"
     ];
 
     /**  Renvoie l'utilisateur dont le mail est $mail s'il existe */
