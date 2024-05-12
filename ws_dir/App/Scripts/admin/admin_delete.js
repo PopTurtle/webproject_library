@@ -22,7 +22,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const bookId = deleteBtn.dataset.bookId;
   const consumerId = deleteBtn.dataset.consumerId;
   if (hasSearchResult && bookId !== undefined) {
-    manageButton(deleteBtn, deleteBook, bookId, "Supprimer le livre ?", "Le livre a bien été supprimé");
+    const deleteBook__aux = async (bookId) => {
+      const updateBook = document.getElementById("del-btn-secondary-content");
+      if (updateBook !== null) {
+        updateBook.remove();
+      }
+      return await deleteBook(bookId);
+    }
+    manageButton(deleteBtn, deleteBook__aux, bookId, "Supprimer le livre ?", "Le livre a bien été supprimé");
   }
   if (hasSearchResult && consumerId !== undefined) {
     manageButton(deleteBtn, deleteConsumer, consumerId, "Supprimer l'utilisateur ?", "L'utilisateur a bien été supprimé");

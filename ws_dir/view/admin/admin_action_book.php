@@ -1,7 +1,7 @@
 <?php
 
 use App\Constants;
-use App\Controller\AdminDeleteBookController;
+use App\Controller\AdminActionBookController;
 use App\Controller\Misc\FormMaker;
 use App\Controller\SessionManager;
 use App\Partials\NavBar;
@@ -10,7 +10,7 @@ require_once "../../autoloader.php";
 
 SessionManager::Instance()->adminPage();
 $fm = FormMaker::Instance();
-$adbc = new AdminDeleteBookController;
+$aabc = new AdminActionBookController;
 ?>
 
 <!DOCTYPE html>
@@ -30,7 +30,7 @@ $adbc = new AdminDeleteBookController;
         <section class="form-container">
                 <h1>Supprimer un livre</h1>
                 <p>Les champs sont optionnels, n'en saisir qu'un seul suffit.</p>
-                <form method="get" action="<?= Constants::PAGE_ADMIN_DELETE_BOOK ?>" class="simple-form">
+                <form method="get" action="<?= Constants::PAGE_ADMIN_ACTION_BOOK ?>" class="simple-form">
                     <div>
                         <?php $i = $fm->generateInputInfo("book_id"); ?>
                         <label for="<?= $i["label_for"] ?>">Identifiant du livre</label>
@@ -60,8 +60,8 @@ $adbc = new AdminDeleteBookController;
             </section>
 
             <?php
-            if ($adbc->hasFormResult()) {
-                $b = $adbc->getSearchResult();
+            if ($aabc->hasFormResult()) {
+                $b = $aabc->getSearchResult();
                 ?>
 
                 <section class="search-result-section">
@@ -77,16 +77,18 @@ $adbc = new AdminDeleteBookController;
                         <p><?= $b->Author ?> - <?= $b->PublicationYear ?></p>
                         <p>Identifiant: <?= $b->Id ?></p>
                         <div class="del-btn-container">
-                            <form method="get" action="<?= Constants::PAGE_ADMIN_UPDATE_BOOK?>">
-                                <?php
-                                foreach ($b->generatePrefilledInputs() as $k => $v) {
-                                    ?>
-                                    <input type="hidden" name="<?= $k ?>" value="<?= $v ?>">
+                            <div id="del-btn-secondary-content">
+                                <form method="get" action="<?= Constants::PAGE_ADMIN_UPDATE_BOOK?>">
                                     <?php
-                                }
-                                ?>
-                                <input type="submit" value="Modifier le livre">
-                            </form>
+                                    foreach ($b->generatePrefilledInputs() as $k => $v) {
+                                        ?>
+                                        <input type="hidden" name="<?= $k ?>" value="<?= $v ?>">
+                                        <?php
+                                    }
+                                    ?>
+                                    <input type="submit" value="Modifier le livre">
+                                </form>
+                            </div>
                             <button id="del-btn" data-book-id=<?= $b->Id ?>>Supprimer le livre</button>
                         </div>
                     </div>

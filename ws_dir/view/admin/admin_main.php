@@ -25,7 +25,7 @@ $amc = new AdminMainController;
         <p>Ajouter livre</p>
         <a href="<?= Constants::PAGE_ADMIN_ADDBOOK ?>">Ajouter un livre</a>
         <p>Supprimer livre</p>
-        <a href="<?= Constants::PAGE_ADMIN_DELETE_BOOK ?>">Supprimer un livre</a>
+        <a href="<?= Constants::PAGE_ADMIN_ACTION_BOOK ?>">Supprimer un livre</a>
         <p>Mettre à jour livre</p>
         <a href="<?= Constants::PAGE_ADMIN_UPDATE_BOOK ?>">Modifier un livre</a>
         <p>Ajouter utilisateur</p>

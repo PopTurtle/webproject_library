@@ -6,7 +6,7 @@ use App\Model\Database;
 use App\Model\DBObjects\Book;
 use App\Utils\Utils;
 
-class AdminDeleteBookController {
+class AdminActionBookController {
 
     private bool $hasFormResult;
     private ?Book $searchResult;
