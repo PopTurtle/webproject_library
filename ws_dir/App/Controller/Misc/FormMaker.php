@@ -27,6 +27,7 @@ class FormMaker extends Singleton {
             "label_for" => $name,
             "input_name" => $name,
             "input_id" => $name,
+            "prev" => "",
             "input_classes" => $input_classes,
             "is_error" => false,
         ];

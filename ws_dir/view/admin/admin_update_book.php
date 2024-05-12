@@ -2,8 +2,10 @@
 
 use App\Constants;
 use App\Controller\AdminDeleteBookController;
+use App\Controller\AdminFormTreatmentController;
 use App\Controller\Misc\FormMaker;
 use App\Controller\SessionManager;
+use App\Model\DBObjects\Book;
 use App\Partials\NavBar;
 
 require_once "../../autoloader.php";
@@ -25,9 +27,15 @@ SessionManager::Instance()->adminPage();
     <main>
         <section class="form-container">
                 <h1>Modifier un livre</h1>
-                <form method="get" action="<?= "" ?>" class="simple-form">
+                <form method="get" action="<?= Constants::PAGE_ADMIN_FORM_TREATMENT ?>" class="simple-form">
                     <?php
-                    foreach (Book::generateAddForm("") as $f) {
+                    $c = 0;
+                    foreach (Book::generateUpdateForm("") as $f) {
+                        if ($c === 0) {
+                            ?>
+                            <input type="hidden" name="<?= $f["input_name"] ?>" value="<?= $f["prev"] ?>">
+                            <?php
+                        }
                         ?>
                         <div>
                             <label for="<?= $f["label_for"] ?>"><?= $f["label_content"] ?></label>
@@ -37,7 +45,7 @@ SessionManager::Instance()->adminPage();
                                 name="<?= $f["input_name"] ?>"
                                 id="<?= $f["input_id"] ?>"
                                 class="<?= $f["input_classes"] ?>"
-                                >
+                                <?= $c++ === 0 ? "disabled" : "" ?>>
                             <?php
                             if ($f["is_error"]) {
                                 ?>
@@ -52,43 +60,13 @@ SessionManager::Instance()->adminPage();
                     <input
                         type="hidden"
                         name="<?= AdminFormTreatmentController::FORM_NAME_GET ?>"
-                        value="<?= AdminFormTreatmentController::FORM_ADD_BOOK ?>"
+                        value="<?= AdminFormTreatmentController::FORM_UPDATE_BOOK ?>"
                         >
                     <div>
-                        <input type="submit" value="Ajouter un livre">
+                        <input type="submit" value="Modifier le livre">
                     </div>
                 </form>
             </section>
-
-            <?php
-            if ($adbc->hasFormResult()) {
-                $b = $adbc->getSearchResult();
-                ?>
-
-                <section class="search-result-section">
-                <?php
-                if ($b === null) {
-                    ?>
-                    <p>Aucun résultat pour cette recherche</p>
-                    <?php
-                } else {
-                    ?>
-                    <div class="result-container">
-                        <h1><?= $b->Title ?></h1>
-                        <p><?= $b->Author ?> - <?= $b->PublicationYear ?></p>
-                        <p>Identifiant: <?= $b->Id ?></p>
-                        <div class="del-btn-container">
-                            <button id="del-btn" data-book-id=<?= $b->Id ?>>Supprimer le livre</button>
-                        </div>
-                    </div>
-                    <?php
-                }
-                ?>
-                </section>
-
-                <?php
-            }
-            ?>
     </main>
 </body>
 </html>

@@ -31,6 +31,8 @@ abstract class DBObject {
     protected static $all_properties;
     
     public const FormPrefix = "";
+
+    //  Le premier élément de FormElts doit être la clé primaire si elle existe
     protected const FormElts = [];
     protected const FormAddElts = [];
 
@@ -80,14 +82,28 @@ abstract class DBObject {
 
     /**  Tente d'ajouter l'objet courant à la BDD en utilisant ses valeurs. */
     public function tryAddToDB(&$propertyError = null) : bool {
-        if (!$this->ensureCorrectData($propertyError)) {
+        if (!$this->ensureCorrectAddData($propertyError)) {
             return false;
         }
         $kv = static::getPropertyValues($this);
         $request = "INSERT INTO " . static::TableName
                  . " (" . implode(", ", array_keys($kv)) . ") "
                  . "VALUES (" . implode(", ", array_values($kv)) . ")";
-        return Database::getConnection()->exec($request);
+        return Database::getConnection()->exec($request) !== false;
+    }
+
+    public function tryUpdateDB(&$propertyError = null) : bool {
+        if (!$this->ensureCorrectUpdateData($propertyError)) {
+            return false;
+        }
+        $es = [];
+        foreach (static::getPropertyValues($this) as $k => $v) {
+            $es[] = $k . " = " . $v;
+        }
+        $request = "UPDATE " . static::TableName . " "
+                 . "SET " . implode(", ", $es) . " "
+                 . "WHERE " . $this->updateDBCond();
+        return Database::getConnection()->exec($request) !== false;
     }
 
     /**
@@ -128,6 +144,12 @@ abstract class DBObject {
         return static::generateFormExclusive($inputClasses, $fae);
     }
 
+    public static function generateAllFormArgs() {
+        foreach (array_keys(static::FormElts) as $k) {
+            yield static::FormPrefix . static::getPropertyDBName($k);
+        }
+    }
+
     public static function generateAllAddFormArgs() {
         foreach (array_keys(static::getFormAddElts()) as $k) {
             yield static::FormPrefix . static::getPropertyDBName($k);
@@ -135,18 +157,36 @@ abstract class DBObject {
     }
 
     public static function treatAddForm($data, &$propertyError = null) : int {
-        return static::treatAddFormExclusive($data, $propertyError);
+        $object = static::ObjFromFormData($data);
+        return $object->tryAddToDB($propertyError) ? 0 : -1;
     }
 
-    // public static function generateUpdateForm(string $inputClasses = "") {
-    //     return static::generateFormExclusive($inputClasses, static::)
-    // }
+    public static function generateUpdateForm(string $inputClasses = "") {
+        return static::generateFormExclusive($inputClasses, static::FormElts);
+    }
+
+    public static function treatUpdateForm($data, &$propertyError = null) : int {
+        $object = static::ObjFromFormData($data);
+        return $object->tryUpdateDB($propertyError) ? 0 : -1;
+    }
 
     /**
      *  S'assure que les valeurs associées aux attributs serait conformes au
      *    modèle si on ajoutait l'objet.
      */
     protected abstract function ensureCorrectData(&$propertyError = null) : bool;
+    
+    protected function ensureCorrectAddData(&$propertyError = null) : bool {
+        return $this->ensureCorrectData($propertyError);
+    }
+
+    protected function ensureCorrectUpdateData(&$propertyError = null) : bool {
+        return $this->ensureCorrectData($propertyError);
+    }
+
+    protected function updateDBCond() : string {
+        return "0";
+    }
 
     /**
      *  Renvoie le résultat de la requête associée à :
@@ -281,7 +321,7 @@ abstract class DBObject {
         }
     }
 
-    protected static function treatAddFormExclusive($data, &$propertyError = null) : int {
+    protected static function ObjFromFormData($data) {
         $object = new static();
         foreach (static::$all_properties as $k => $v) {
             $arg = static::FormPrefix . $v;
@@ -289,8 +329,7 @@ abstract class DBObject {
                 $object->{$k} = $data[$arg];
             }
         }
-        var_dump($object);
-        return $object->tryAddToDB($propertyError) ? 0 : -1;
+        return $object;
     }
 
     /**

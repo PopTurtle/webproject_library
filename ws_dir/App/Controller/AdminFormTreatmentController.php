@@ -10,11 +10,13 @@ class AdminFormTreatmentController {
     public const FORM_NAME_GET = "formname";
 
     public const FORM_ADD_BOOK = "addbook";
+    public const FORM_UPDATE_BOOK = "updbook";
     public const FORM_ADD_USER = "adduser";
 
     public const TREAT_COMPLETE = 0;
     public const TREAT_INCORRECT_DATA = -1;
     public const TREAT_DB_ERROR = -2;
+    public const TREAT_NO_FORM = -3;
 
     private bool $formTreated;
     private int $formResult;
@@ -65,10 +67,16 @@ class AdminFormTreatmentController {
                 $this->previousForm = Constants::PAGE_ADMIN_ADDUSER;
                 $this->previousFormArgGenerator = function () { return Consumer::generateAllAddFormArgs(); };
                 return $this->treatFormAddUser($data);
+            case self::FORM_UPDATE_BOOK:
+                $this->previousForm = Constants::PAGE_ADMIN_UPDATE_BOOK;
+                $this->previousFormArgGenerator = function () { return Book::generateAllFormArgs(); };
+                return $this->treatFormUpdateBook($data);
+            default:
+                return self::TREAT_NO_FORM;
         }
     }
 
-    private function treatForm($data, $modelClassname) : int {
+    private function treatAddForm($data, $modelClassname) : int {
         $perror = "";
         $r = $modelClassname::treatAddForm($data, $perror);
         if (strcmp($perror, "") !== 0) {
@@ -79,10 +87,20 @@ class AdminFormTreatmentController {
     }
 
     private function treatFormAddBook($data) : int {
-        return $this->treatForm($data, Book::class);
+        return $this->treatAddForm($data, Book::class);
     }
 
     private function treatFormAddUser($data) : int {
-        return $this->treatForm($data, Consumer::class);
+        return $this->treatAddForm($data, Consumer::class);
+    }
+
+    private function treatFormUpdateBook($data) : int {
+        $perror = "";
+        $r = Book::treatUpdateForm($data, $perror);
+        if (strcmp($perror, "") !== 0) {
+            $this->fieldErrorName = Book::FormPrefix . $perror;
+            return self::TREAT_INCORRECT_DATA;
+        }
+        return $r === 0 ? self::TREAT_COMPLETE : self::TREAT_DB_ERROR;
     }
 }

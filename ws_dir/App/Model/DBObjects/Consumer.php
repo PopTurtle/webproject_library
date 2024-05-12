@@ -106,10 +106,21 @@ class Consumer extends DBObject {
             return false;
         }
 
-        return $test("Id", is_null($this->Id))
-            && $test("Firstname", Utils::isNonEmptyString($this->Firstname, $m))
+        return $test("Firstname", Utils::isNonEmptyString($this->Firstname, $m))
             && $test("Lastname", Utils::isNonEmptyString($this->Lastname, $m))
             && $test("Birthdate", Utils::isCorrectDate($this->Birthdate))
             && $test("Password", Utils::isNonEmptyString($this->Password, $m));
+    }
+    
+    protected function ensureCorrectAddData(&$propertyError = null): bool
+    {
+        if (!parent::ensureCorrectAddData($propertyError)) {
+            return false;
+        }
+        $r = is_null($this->Id);
+        if (!$r && !is_null($propertyError)) {
+            $propertyError = static::getPropertyDBName("Id");
+        }
+        return $r;
     }
 }

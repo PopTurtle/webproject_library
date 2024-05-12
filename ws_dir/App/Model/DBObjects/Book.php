@@ -78,12 +78,40 @@ class Book extends DBObject {
             return $result;
         };
 
-        return $test("Id", is_null($this->Id))
-            && $test("Title", Utils::isNonEmptyString($this->Title, $m))
+        return $test("Title", Utils::isNonEmptyString($this->Title, $m))
             && $test("Author", Utils::isNonEmptyString($this->Author, $m))
             && $test("Editor", Utils::isNonEmptyString($this->Editor, $m))
             && $test("PublicationYear", Utils::isInt($this->PublicationYear))
             && $test("Category", Utils::isNonEmptyString($this->Category, $m))
             && $test("Stock", Utils::isNonEmptyString($this->Stock, $m));
+    }
+
+    protected function ensureCorrectAddData(&$propertyError = null): bool
+    {
+        if (!parent::ensureCorrectAddData($propertyError)) {
+            return false;
+        }
+        $r = is_null($this->Id);
+        if (!$r && !is_null($propertyError)) {
+            $propertyError = static::getPropertyDBName("Id");
+        }
+        return $r;
+    }
+
+    protected function ensureCorrectUpdateData(&$propertyError = null): bool
+    {
+        if (!parent::ensureCorrectUpdateData($propertyError)) {
+            return false;
+        }
+        $r = Utils::isInt($this->Id);
+        if (!$r && !is_null($propertyError)) {
+            $propertyError = static::getPropertyDBName("Id");
+        }
+        return $r;
+    }
+
+    protected function updateDBCond(): string
+    {
+        return static::getPropertyDBName("Id") . " = " . $this->Id;
     }
 }

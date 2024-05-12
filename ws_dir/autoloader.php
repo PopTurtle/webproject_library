@@ -38,4 +38,5 @@ if (!isset($removeNecessaryCode)) {
  *    navigation plus simple entre les pages
  *    pagination de la recherche de livres ?
  *    couverture des livres ?
+ *    Page delete-book => action-book
  */
