@@ -35,4 +35,7 @@ if (!isset($removeNecessaryCode)) {
  *    Déplacer le SessionManager ?
  *    trySelectObj :: return null en cas d'erreur ?
  *    fix bookloan return/renew
+ *    navigation plus simple entre les pages
+ *    pagination de la recherche de livres ?
+ *    couverture des livres ?
  */

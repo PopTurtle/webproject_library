@@ -26,6 +26,7 @@ abstract class Constants {
     public const PAGE_ADMIN_FORM_TREATMENT = "/view/admin/admin_form_treatment.php";
     public const PAGE_ADMIN_DELETE_BOOK = "/view/admin/admin_delete_book.php";
     public const PAGE_ADMIN_DELETE_USER = "/view/admin/admin_delete_user.php";
+    public const PAGE_ADMIN_UPDATE_BOOK = "/view/admin/admin_update_book.php";
 
     /**
      *  Chemins des feuilles de style
