@@ -4,9 +4,10 @@ namespace App\Model\DBObjects;
 
 use App\Model\Database;
 use App\Model\DBObject;
+use App\Utils\Utils;
 
-
-class CartItem extends DBObject {
+class CartItem extends DBObject
+{
     public const TableName = "cartitem";
 
     protected static $all_properties = [
@@ -14,7 +15,8 @@ class CartItem extends DBObject {
         "ConsumerId" => "consumer_id"
     ];
 
-    public static function isInConsumerShoppingCart(int $bookId, int $consumerId) : bool {
+    public static function isInConsumerShoppingCart(int $bookId, int $consumerId): bool
+    {
         $bid_field = self::$all_properties['BookId'];
         $cid_field = self::$all_properties['ConsumerId'];
         $sc = static::getFirstOBJ([
@@ -24,18 +26,21 @@ class CartItem extends DBObject {
         return !is_null($sc);
     }
 
-    public static function canAddToShoppingCart(int $bookId, int $consumerId) : bool {
+    public static function canAddToShoppingCart(int $bookId, int $consumerId): bool
+    {
         return !static::isInConsumerShoppingCart($bookId, $consumerId);
     }
 
-    public static function getShoppingCartOfCustomer(int $customer_id) {
+    public static function getShoppingCartOfCustomer(int $customer_id)
+    {
         $request = "SELECT * FROM " . self::TableName . " " .
-                   "WHERE " . self::$all_properties['ConsumerId'] . " " .
-                   "= $customer_id";
+            "WHERE " . self::$all_properties['ConsumerId'] . " " .
+            "= $customer_id";
         return self::trySelectOBJFromDB($request);
     }
 
-    public static function tryAddToShoppingCart(int $bookId, int $consumerId) {
+    public static function tryAddToShoppingCart(int $bookId, int $consumerId)
+    {
         if (!static::canAddToShoppingCart($bookId, $consumerId)) {
             return false;
         }
@@ -45,18 +50,20 @@ class CartItem extends DBObject {
         return $sc->tryAddToDB();
     }
 
-    public static function removeFromShoppingCart(int $bookId, int $consumerId) {
+    public static function removeFromShoppingCart(int $bookId, int $consumerId)
+    {
         $sc = new static();
         $sc->BookId = $bookId;
         $sc->ConsumerId = $consumerId;
         return $sc->removeFromDB();
     }
-    
+
     /**
      *  Renvoie si le panier de consumerId est vide
      *  @return bool|null
      */
-    public static function isEmptyShoppingCart(int $consumerId) : bool {
+    public static function isEmptyShoppingCart(int $consumerId): bool
+    {
         $request = "SELECT * FROM " . self::TableName . " WHERE consumer_id = $consumerId";
         return Database::Instance()->isEmptyQuery($request);
     }
@@ -65,16 +72,31 @@ class CartItem extends DBObject {
      *  Renvoie si tous les livres d'un panier sont en stock
      *  @return bool|null
      */
-    public static function everyBookFromShoppingCartInStock(int $consumerId) {
+    public static function everyBookFromShoppingCartInStock(int $consumerId)
+    {
         $bid_field = Book::getPropertyDBName("Id");
-        $request = "SELECT b.$bid_field FROM " . BOOK::TableName . " as b, " . self::TableName ." as ci
+        $request = "SELECT b.$bid_field FROM " . BOOK::TableName . " as b, " . self::TableName . " as ci
                     WHERE ci." . self::getPropertyDBName("ConsumerId") . " = $consumerId
                         AND b.$bid_field = ci." . CartItem::getPropertyDBName("BookId") . "
                         AND b." . Book::getPropertyDBName("Stock") . " <= 0";
         return Database::Instance()->isEmptyQuery($request);
     }
 
-    protected function ensureCorrectData(&$propertyError = null): bool {
-        return true;
+    protected function ensureCorrectData(&$propertyError = null): bool
+    {
+        $test = function ($property, $result) use (&$propertyError) {
+            if (!$result && !is_null($propertyError)) {
+                $propertyError = static::getPropertyDBName($property);
+            }
+            return $result;
+        };
+
+        return $test("BookId", Utils::isInt($this->BookId, 0))
+            && $test("ConsumerId", Utils::isInt($this->ConsumerId, 0));
+    }
+
+    protected function ensureCorrectUpdateData(&$propertyError = null): bool
+    {
+        return false;
     }
 }

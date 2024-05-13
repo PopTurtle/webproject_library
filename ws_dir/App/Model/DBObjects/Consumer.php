@@ -9,7 +9,8 @@ use App\Utils\Utils;
 /**
  *  Représente un utilisateur, de la table 'consumer'
  */
-class Consumer extends DBObject {
+class Consumer extends DBObject
+{
     public const TableName = "consumer";
 
     protected static $all_properties = [
@@ -36,22 +37,26 @@ class Consumer extends DBObject {
     ];
 
     /**  Renvoie l'utilisateur dont le mail est $mail s'il existe */
-    public static function getConsumerByMail(string $mail) {
+    public static function getConsumerByMail(string $mail)
+    {
         return static::getFirstOBJ([static::$all_properties["Mail"] . " LIKE \"$mail\""]);
     }
 
     /**  Renvoie l'utilisateur dont l'ID est $id s'il existe */
-    public static function getConsumerByID(int $id) {
+    public static function getConsumerByID(int $id)
+    {
         return static::getFirstOBJ([static::$all_properties["Id"] . " = $id"]);
     }
 
-    public static function deleteConsumerByID(int $id) : bool {
+    public static function deleteConsumerByID(int $id): bool
+    {
         $c = new static();
         $c->Id = $id;
         return $c->removeFromDB() !== false;
     }
 
-    public function tryAddToDB(&$propertyError = null) : bool {
+    public function tryAddToDB(&$propertyError = null): bool
+    {
         //  Vérifie que le mot de passe n'est pas vide
         if (strcmp($this->Password, "") === 0) {
             if (!is_null($propertyError)) {
@@ -72,7 +77,8 @@ class Consumer extends DBObject {
      *    renvoie -1. Renvoie -2 en cas d'erreur de connexion à la BDD
      *  Il est supposé que $mail est valide.
      */
-    public static function isMailAlreadyTaken(string $mail) : int {
+    public static function isMailAlreadyTaken(string $mail): int
+    {
         $cm = self::getPropertyDBName("Mail");
         $request = "
             SELECT $cm FROM consumer
@@ -85,7 +91,8 @@ class Consumer extends DBObject {
         return $r ? 0 : -1;
     }
 
-    protected function ensureCorrectData(&$propertyError = null): bool {
+    protected function ensureCorrectData(&$propertyError = null): bool
+    {
         $m = Database::MAX_STRLEN;
         $test = function ($property, $result) use (&$propertyError) {
             if (!$result && !is_null($propertyError)) {
@@ -111,7 +118,7 @@ class Consumer extends DBObject {
             && $test("Birthdate", Utils::isCorrectDate($this->Birthdate))
             && $test("Password", Utils::isNonEmptyString($this->Password, $m));
     }
-    
+
     protected function ensureCorrectAddData(&$propertyError = null): bool
     {
         if (!parent::ensureCorrectAddData($propertyError)) {
@@ -122,5 +129,10 @@ class Consumer extends DBObject {
             $propertyError = static::getPropertyDBName("Id");
         }
         return $r;
+    }
+
+    protected function ensureCorrectUpdateData(&$propertyError = null): bool
+    {
+        return false;
     }
 }
