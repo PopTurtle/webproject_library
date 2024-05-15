@@ -85,12 +85,9 @@ class Book extends DBObject {
 
     public static function setBookCover(int $bookId, string $filepath): bool {
         $rpath = Utils::getFullStorageFolder() . "/Cover/cov_" . strval($bookId) . ".jpg";
-        var_dump($rpath);
         if (!move_uploaded_file($filepath, $rpath)) {
-            echo "move_uploaded_file FAILED <br>";
             return false;
         }
-        echo "move_uploaded_file SUCCESS <br>";
         return true;
     }
 
@@ -123,9 +120,6 @@ class Book extends DBObject {
     }
 
     private static function treatFormSetCover(?int $bookId = null): int {
-        echo "SETTING COVER <br>";
-        var_dump($bookId);
-        var_dump($_FILES);
         //  Ajoute la couverture si elle existe
         //  ! Ne renvoie pas d'erreur en cas d'échec
         if (!isset($_FILES[static::FormCoverArg])) {
@@ -139,8 +133,6 @@ class Book extends DBObject {
             $bookId = $q->fetch()[0];
         }
         $path = $_FILES[static::FormCoverArg]["tmp_name"];
-        var_dump($bookId);
-        var_dump($path);
         self::setBookCover($bookId, $path);
         return 0;
     }
