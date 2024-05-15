@@ -30,4 +30,5 @@ services:
       - ./database_init.sql:/docker-entrypoint-initdb.d/database_init.sql
 
 volumes:
+  ws_storage:
   db_store:
