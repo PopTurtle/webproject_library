@@ -49,7 +49,7 @@ $bcount = count($res);
                         <a href="<?= Constants::PAGE_BOOK . '?book_id=' . $book->Id ?>">
                             <div class="book-info">
                                 <div class="book-cover">
-                                    <img src="https://placehold.co/400x600" alt="Text">
+                                    <img src="<?= $book->getCoverPath() ?>" alt="Couverture">
                                 </div>
                                 <p class="book-title">
                                     <?= $book->Title ?>

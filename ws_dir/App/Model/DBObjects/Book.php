@@ -40,6 +40,8 @@ class Book extends DBObject {
         "Title", "Author", "Editor", "PublicationYear", "Category", "Stock"
     ];
 
+    public const CoverPlaceholderImage = "/App/Assets/Images/Logo.png";
+
     /**
      *  Renvoie tous les livres dont le champs $type (title, author...) contient
      *    dans sa valeur $content
@@ -76,7 +78,9 @@ class Book extends DBObject {
      */
     public static function getBookCoverPath(int $bookId): string {
         $fn = "cov_" . strval($bookId) . ".jpg";
-        return Utils::getRootStorageFolder() . "/Cover/" . $fn;
+        $full_fn = Utils::getFullStorageFolder() . "/Cover/" . $fn;
+        $cp = static::CoverPlaceholderImage;
+        return !file_exists($full_fn) ? $cp : Utils::getRootStorageFolder() . "/Cover/" . $fn;
     }
 
     public static function setBookCover(int $bookId, string $filepath): bool {
@@ -108,6 +112,10 @@ class Book extends DBObject {
         $path = $_FILES[static::FormCoverArg]["tmp_name"];
         self::setBookCover($id, $path);
         return $r;
+    }
+
+    public function getCoverPath(): string {
+        return static::getBookCoverPath($this->Id);
     }
 
     protected function ensureCorrectData(&$propertyError = null): bool {
