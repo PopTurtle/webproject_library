@@ -102,16 +102,39 @@ class Book extends DBObject {
         if ($r !== 0) {
             return $r;
         }
+        return self::treatFormSetCover();
+    }
+
+    public static function treatUpdateForm($data, &$propertyError = null): int
+    {
+        $dbp = self::FormPrefix . self::getPropertyDBName("Id");
+        if (!isset($data[$dbp])) {
+            return -1;
+        }
+        $bookId = $data[$dbp];
+        $r = parent::treatUpdateForm($data, $propertyError);
+        if ($r !== 0) {
+            return $r;
+        }
+        return self::treatFormSetCover($bookId);
+    }
+
+    private static function treatFormSetCover(?int $bookId = null): int {
         //  Ajoute la couverture si elle existe
         //  ! Ne renvoie pas d'erreur en cas d'échec
-        $q = Database::getConnection()->query("SELECT LAST_INSERT_ID()");
-        if ($q === false) {
+        if (!isset($_FILES[static::FormCoverArg])) {
             return 0;
         }
-        $id = $q->fetch()[0];
+        if ($bookId === null) {
+            $q = Database::getConnection()->query("SELECT LAST_INSERT_ID()");
+            if ($q === false) {
+                return 0;
+            }
+            $bookId = $q->fetch()[0];
+        }
         $path = $_FILES[static::FormCoverArg]["tmp_name"];
-        self::setBookCover($id, $path);
-        return $r;
+        self::setBookCover($bookId, $path);
+        return 0;
     }
 
     public function getCoverPath(): string {
