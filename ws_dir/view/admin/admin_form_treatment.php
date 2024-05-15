@@ -23,8 +23,9 @@ switch ($aftc->getFormTreatmentResult()) {
         break;
     case AdminFormTreatmentController::TREAT_INCORRECT_DATA:
         $args = [FormMaker::FIELD_ERROR_GET => $aftc->getFieldError()];
+        $data = $aftc->getDataSet();
         foreach ($aftc->previousFormArgGenerator()() as $arg) {
-            $args[$arg] = $_GET[$arg];
+            $args[$arg] = $data[$arg];
         }
         Utils::redirectTo($aftc->previousFormURL(), $args);
         break;

@@ -111,4 +111,20 @@ class Utils {
     public static function isValidMail($mail) {
         return filter_var($mail, FILTER_VALIDATE_EMAIL);
     }
+
+    public static function getFullAppFolder(): string {
+        return __ROOT . "/App";
+    }
+    
+    public static function getFullStorageFolder(): string {
+        return self::getFullAppFolder() . "/Storage";
+    }
+
+    public static function getRootAppFolder(): string {
+        return "/App";
+    }
+
+    public static function getRootStorageFolder(): string {
+        return self::getRootAppFolder() . "/Storage";
+    }
 }

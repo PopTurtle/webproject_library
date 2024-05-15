@@ -24,6 +24,8 @@ class Book extends DBObject {
     ];
 
     public const FormPrefix = "book_";
+    public const FormCoverArg = "book_cover";
+
     protected const FormElts = [
         "Id" => ["type" => "number", "fn" => "ID"],
         "Title" => ["type" => "text", "fn" => "Titre"],
@@ -67,6 +69,45 @@ class Book extends DBObject {
         $b = new static();
         $b->Id = $id;
         return $b->removeFromDB() !== false;
+    }
+
+    /**
+     *  Gestion de la couverture d'un livre
+     */
+    public static function getBookCoverPath(int $bookId): string {
+        $fn = "cov_" . strval($bookId) . ".jpg";
+        return Utils::getRootStorageFolder() . "/Cover/" . $fn;
+    }
+
+    public static function setBookCover(int $bookId, string $filepath): bool {
+        $rpath = Utils::getFullStorageFolder() . "/Cover/cov_" . strval($bookId) . ".jpg";
+        if (!move_uploaded_file($filepath, $rpath)) {
+            return false;
+        }
+        return true;
+    }
+
+    public static function deleteBookCover(int $bookId): bool {
+        $fn = Utils::getRootStorageFolder() . "/Cover/cov_" . strval($bookId) . ".png";
+        return unlink($fn);
+    }
+
+    public static function treatAddForm($data, &$propertyError = null): int
+    {
+        $r = parent::treatAddForm($data, $propertyError);
+        if ($r !== 0) {
+            return $r;
+        }
+        //  Ajoute la couverture si elle existe
+        //  ! Ne renvoie pas d'erreur en cas d'échec
+        $q = Database::getConnection()->query("SELECT LAST_INSERT_ID()");
+        if ($q === false) {
+            return 0;
+        }
+        $id = $q->fetch()[0];
+        $path = $_FILES[static::FormCoverArg]["tmp_name"];
+        self::setBookCover($id, $path);
+        return $r;
     }
 
     protected function ensureCorrectData(&$propertyError = null): bool {

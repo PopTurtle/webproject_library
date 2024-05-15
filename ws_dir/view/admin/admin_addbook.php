@@ -25,7 +25,7 @@ SessionManager::Instance()->adminPage();
     <main>
         <section class="form-container">
             <h1>Ajouter un livre</h1>
-            <form action="<?= Constants::PAGE_ADMIN_FORM_TREATMENT ?>" class="simple-form">
+            <form enctype="multipart/form-data" method="post" action="<?= Constants::PAGE_ADMIN_FORM_TREATMENT ?>" class="simple-form">
                 <?php
                 foreach (Book::generateAddForm("") as $f) {
                     ?>
@@ -49,9 +49,17 @@ SessionManager::Instance()->adminPage();
                     <?php
                 }
                 ?>
+                <div>
+                    <label for="cover">Couverture du livre (.jpg)</label>
+                    <input
+                        type="file"
+                        name="<?= Book::FormCoverArg ?>"
+                        id="cover"
+                        >
+                </div>
                 <input
                     type="hidden"
-                    name="<?= AdminFormTreatmentController::FORM_NAME_GET ?>"
+                    name="<?= AdminFormTreatmentController::FORM_NAME_KEY ?>"
                     value="<?= AdminFormTreatmentController::FORM_ADD_BOOK ?>"
                     >
                 <div>

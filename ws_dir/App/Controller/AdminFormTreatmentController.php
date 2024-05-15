@@ -7,7 +7,7 @@ use App\Model\DBObjects\Book;
 use App\Model\DBObjects\Consumer;
 
 class AdminFormTreatmentController {
-    public const FORM_NAME_GET = "formname";
+    public const FORM_NAME_KEY = "formname";
 
     public const FORM_ADD_BOOK = "addbook";
     public const FORM_UPDATE_BOOK = "updbook";
@@ -20,6 +20,7 @@ class AdminFormTreatmentController {
 
     private bool $formTreated;
     private int $formResult;
+    private $dataSet;
 
     private string $previousForm;
     private $previousFormArgGenerator;
@@ -29,11 +30,17 @@ class AdminFormTreatmentController {
     {
         $this->previousForm = "";
         $this->fieldErrorName = "";
-        if (!isset($_GET[self::FORM_NAME_GET])) {
+
+        if (isset($_GET[self::FORM_NAME_KEY])) {
+            $this->dataSet = $_GET;
+        } else if (isset($_POST[self::FORM_NAME_KEY])) {
+            $this->dataSet = $_POST;
+        } else {
             $this->formTreated = false;
             return;
         }
-        $this->formResult = $this->tryTreatForm($_GET[self::FORM_NAME_GET], $_GET);
+
+        $this->formResult = $this->tryTreatForm($this->dataSet[self::FORM_NAME_KEY], $this->dataSet);
         $this->formTreated = true;
     }
 
@@ -43,6 +50,10 @@ class AdminFormTreatmentController {
 
     public function getFormTreatmentResult() : int {
         return $this->formResult;
+    }
+
+    public function getDataSet() {
+        return $this->dataSet;
     }
 
     public function getFieldError() : string {

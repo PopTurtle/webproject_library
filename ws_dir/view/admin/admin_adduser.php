@@ -52,7 +52,7 @@ SessionManager::Instance()->adminPage();
                 ?>
                 <input
                     type="hidden"
-                    name="<?= AdminFormTreatmentController::FORM_NAME_GET ?>"
+                    name="<?= AdminFormTreatmentController::FORM_NAME_KEY ?>"
                     value="<?= AdminFormTreatmentController::FORM_ADD_USER ?>"
                     >
                 <div>

@@ -14,6 +14,8 @@ function autoload($class) {
     require_once $fn;
 }
 
+define("__ROOT", __DIR__);
+
 spl_autoload_register("autoload");
 
 //  Code nécessaire
@@ -27,16 +29,13 @@ if (!isset($removeNecessaryCode)) {
 
 /**
  *  TODO:
- *    ensureCorrectData() pour tous les DBObjects
  *    Administrateur -x
  *    -- Valider l'emprunt du panier
  *    <title> de toutes les pages
  *    Supprimer login.css (Constants et fichier) ainsi que LoginController.php
  *    Déplacer le SessionManager ?
  *    trySelectObj :: return null en cas d'erreur ?
- *    fix bookloan return/renew
  *    navigation plus simple entre les pages
  *    pagination de la recherche de livres ?
  *    couverture des livres ?
- *    Page delete-book => action-book
  */
