@@ -17,7 +17,7 @@ $aduc = new AdminDeleteUserController;
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>bilbiloték</title>
+    <title>Supprimer un utilisateur</title>
     <link rel="stylesheet" href=<?= Constants::STYLE_GLOBAL ?>>
     <link rel="stylesheet" href=<?= Constants::STYLE_FORM ?>>
     <link rel="stylesheet" href=<?= Constants::STYLE_ADMIN_DELETE ?>>

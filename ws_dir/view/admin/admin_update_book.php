@@ -17,7 +17,7 @@ SessionManager::Instance()->adminPage();
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>bilbiloték</title>
+    <title>Mettre à jour un livre</title>
     <link rel="stylesheet" href=<?= Constants::STYLE_GLOBAL ?>>
     <link rel="stylesheet" href=<?= Constants::STYLE_FORM ?>>
     <?php NavBar::putHeader(); ?>

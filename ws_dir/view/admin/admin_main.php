@@ -13,7 +13,7 @@ $amc = new AdminMainController;
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>bilbiloték</title>
+    <title>Administrateur</title>
     <link rel="stylesheet" href=<?= Constants::STYLE_GLOBAL ?>>
     <?php NavBar::putHeader(); ?>
 </head>

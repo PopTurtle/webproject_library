@@ -17,7 +17,7 @@ $aabc = new AdminActionBookController;
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>bilbiloték</title>
+    <title>Actions sur les livres</title>
     <link rel="stylesheet" href=<?= Constants::STYLE_GLOBAL ?>>
     <link rel="stylesheet" href=<?= Constants::STYLE_FORM ?>>
     <link rel="stylesheet" href=<?= Constants::STYLE_ADMIN_DELETE ?>>
@@ -28,7 +28,7 @@ $aabc = new AdminActionBookController;
     <?php NavBar::put(); ?>
     <main>
         <section class="form-container">
-                <h1>Supprimer un livre</h1>
+                <h1>Actions sur les livres</h1>
                 <p>Les champs sont optionnels, n'en saisir qu'un seul suffit.</p>
                 <form method="get" action="<?= Constants::PAGE_ADMIN_ACTION_BOOK ?>" class="simple-form">
                     <div>

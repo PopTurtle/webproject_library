@@ -15,7 +15,7 @@ $cl = $pc->currentLoans();
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>bilbiloték</title>
+    <title>Profil</title>
     <link rel="stylesheet" href=<?= Constants::STYLE_GLOBAL ?>>
     <link rel="stylesheet" href=<?= Constants::STYLE_PROFILE ?>>
     <?php NavBar::putHeader(); ?>

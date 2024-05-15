@@ -16,7 +16,7 @@ $cb = $bc->getCurrentBook();
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>bilbiloték</title>
+    <title><?= $cb->Title ?></title>
     <link rel="stylesheet" href=<?= Constants::STYLE_GLOBAL ?>>
     <link rel="stylesheet" href=<?= Constants::STYLE_BOOKSEARCH ?>>
     <script src="<?= Constants::SCRIPT_BOOK_CARTITEM ?>" type="module"></script>

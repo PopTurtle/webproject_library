@@ -23,7 +23,7 @@ if ($allLoans === false) {
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>rendre liver</title>
+    <title>Rendre un livre</title>
     <script src="<?= Constants::SCRIPT_BOOKLOAN_RETURN ?>" type="module"></script>
     <link rel="stylesheet" href=<?= Constants::STYLE_GLOBAL ?>>
     <link rel="stylesheet" href=<?= Constants::STYLE_DISPLAY_BOOK ?>>

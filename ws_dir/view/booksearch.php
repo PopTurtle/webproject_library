@@ -20,7 +20,7 @@ $bcount = count($res);
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>bilbiloték</title>
+    <title>Recherche de livre</title>
     <link rel="stylesheet" href=<?= Constants::STYLE_GLOBAL ?>>
     <link rel="stylesheet" href=<?= Constants::STYLE_BOOKSEARCH ?>>
     <script src="<?= Constants::SCRIPT_BOOKSEARCH ?>" type="module"></script>

@@ -31,7 +31,6 @@ if (!isset($removeNecessaryCode)) {
  *  TODO:
  *    Administrateur -x
  *    -- Valider l'emprunt du panier
- *    <title> de toutes les pages
  *    Déplacer le SessionManager ? ; Non, probablement pas ?
  *    trySelectObj :: return null en cas d'erreur ?
  *    navigation plus simple entre les pages
