@@ -32,10 +32,8 @@ if (!isset($removeNecessaryCode)) {
  *    Administrateur -x
  *    -- Valider l'emprunt du panier
  *    <title> de toutes les pages
- *    Supprimer login.css (Constants et fichier) ainsi que LoginController.php
- *    Déplacer le SessionManager ?
+ *    Déplacer le SessionManager ? ; Non, probablement pas ?
  *    trySelectObj :: return null en cas d'erreur ?
  *    navigation plus simple entre les pages
  *    pagination de la recherche de livres ?
- *    couverture des livres ?
  */
