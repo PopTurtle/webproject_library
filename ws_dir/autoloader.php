@@ -29,11 +29,10 @@ if (!isset($removeNecessaryCode)) {
 
 /**
  *  TODO:
- *    CSS : book / booksearch
  *    Accueil: "nouveautés"
- *    Réorganiser les constantes
  *    -- Valider l'emprunt du panier
- *    Déplacer le SessionManager ? ; Non, probablement pas ?
- *    trySelectObj :: return null en cas d'erreur ?
- *    pagination de la recherche de livres ?
+ *    Fin - CSS - (book / booksearch)
+ *    Fin - Réorganiser les constantes
+ *    Fin - Déplacer le SessionManager ? ; Non, probablement pas ?
+ *    Fin - pagination de la recherche de livres ? ; peu de chance
  */

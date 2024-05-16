@@ -92,7 +92,7 @@ class Bookloan extends DBObject
         $request = "SELECT * FROM " . CartItem::TableName . "
                     WHERE consumer_id = $consumerId";
         $items = CartItem::trySelectOBJFromDB($request);
-        if (count($items) === 0) {
+        if ($items === false || count($items) === 0) {
             return false;
         }
         $loans = [];
