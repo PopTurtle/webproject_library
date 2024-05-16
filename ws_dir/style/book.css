@@ -1,95 +1,117 @@
-.book-presentation {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+@layer presentation, infos, buttons, buttons-disabled;
+
+@layer presentation {
+    .book-presentation {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .book-presentation a {
+        position: absolute;
+        width: 100px;
+        left: 50px;
+        padding: 1rem 2rem;
+        text-align: center;
+        text-decoration: none;
+        color: white;
+        background-color: var(--color-palette-3);
+        border-radius: 2rem;
+    }
+    
+    .book-presentation a:hover {
+        filter: brightness(95%);
+    }
+    
+    .book-presentation h1 {
+        color: var(--color-palette-1);
+        font-size: 3rem;
+    }
 }
 
-.book-presentation a {
-    position: absolute;
-    width: 100px;
-    left: 50px;
-    padding: 1rem 2rem;
-    text-align: center;
-    text-decoration: none;
-    color: white;
-    background-color: var(--color-palette-3);
-    border-radius: 2rem;
+@layer infos {
+    .book-infos {
+        display: flex;
+        margin: 0 10%;
+        justify-content: center;
+        align-items: stretch;
+        gap: 50px;
+    }
+    
+    .book-infos > div {
+        position: relative;
+        width: 40vw;
+        height: 50vh;
+    }
+    
+    .book-infos .cover-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .book-infos div img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+    
+    .book-infos .infos {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        box-sizing: border-box;
+        padding: 40px;
+        background-color: white;
+        border-radius: 40px;
+        box-shadow: 0px 3px 12px #00000029;
+    }
+    
+    .book-infos .infos p {
+        color: var(--color-palette-1);
+        margin: 0;
+    }
 }
 
-.book-presentation a:hover {
-    filter: brightness(95%);
+@layer buttons {
+    .book-infos #loan-container, .book-infos .btn-container a, .btn-already-loan {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: stretch;
+    }
+    
+    .book-infos .btn-container a {
+        text-decoration: none;
+    }
+    
+    .book-infos .btn-container button {
+        color: white;
+        font-size: 1.5rem;
+        background-color: var(--color-palette-4);
+        padding: 1rem;
+        border: none;
+        border-radius: 2rem;
+        cursor: pointer;
+    }
+    
+    .book-infos .btn-container button:hover {
+        filter: brightness(95%);
+    }
 }
 
-.book-presentation h1 {
-    color: var(--color-palette-1);
-    font-size: 3rem;
+@layer buttons-disabled {
+    .btn-already-loan button {
+        background-color: var(--color-palette-1);
+        cursor: default;
+    }
+
+    .btn-already-loan button:hover {
+        filter: none;
+    }
 }
 
-.book-infos {
-    display: flex;
-    margin: 0 10%;
-    justify-content: center;
-    align-items: stretch;
-    gap: 50px;
-}
 
-.book-infos > div {
-    position: relative;
-    width: 40vw;
-    height: 50vh;
-}
 
-.book-infos .cover-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-
-.book-infos div img {
-    max-width: 100%;
-    max-height: 100%;
-}
-
-.book-infos .infos {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    box-sizing: border-box;
-    padding: 40px;
-    background-color: white;
-    border-radius: 40px;
-    box-shadow: 0px 3px 12px #00000029;
-}
-
-.book-infos .infos p {
-    color: var(--color-palette-1);
-    margin: 0;
-}
-
-.book-infos #loan-container, .book-infos .btn-container a{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: stretch;
-}
-
-.book-infos .btn-container a {
-    text-decoration: none;
-}
-
-.book-infos .btn-container button {
-    color: white;
-    font-size: 1.5rem;
-    background-color: var(--color-palette-4);
-    padding: 1rem;
-    border: none;
-    border-radius: 2rem;
-    cursor: pointer;
-}
-
-.book-infos .btn-container button:hover {
-    filter: brightness(95%);
-}

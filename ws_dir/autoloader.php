@@ -29,8 +29,6 @@ if (!isset($removeNecessaryCode)) {
 
 /**
  *  TODO:
- *    book.php : on peut ajouter un livre déjà emprunter au panier
- *      -- Il faut l'empecher
  *    Fin - tenter de réduire les :has()
  *    Fin - Réorganiser les constantes
  */

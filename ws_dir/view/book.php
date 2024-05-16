@@ -3,6 +3,7 @@
 use App\Constants;
 use App\Controller\BookController;
 use App\Controller\SessionManager;
+use App\Model\DBObjects\Bookloan;
 use App\Model\DBObjects\CartItem;
 use App\Partials\NavBar;
 
@@ -10,6 +11,13 @@ require_once "../autoloader.php";
 
 $bc = new BookController;
 $cb = $bc->getCurrentBook();
+
+if (SessionManager::Instance()->isUserConnected()) {
+    $cid = SessionManager::Instance()->getUserConsumer()->Id;
+    $isInSC = CartItem::isInConsumerShoppingCart($cb->Id, $cid) ? "0" : "1";
+    $isInLoan = Bookloan::isBookInLoan($cid, $cb->Id);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -51,11 +59,15 @@ $cb = $bc->getCurrentBook();
                             </button>
                         </a>
                         <?php
-                    } else {
-                        $cid = SessionManager::Instance()->getUserConsumer()->Id;
-                        $isLoan = CartItem::isInConsumerShoppingCart($cb->Id, $cid) ? "0" : "1";
+                    } else if ($isInLoan) {
                         ?>
-                        <div id="loan-container" data-is-loan="<?= $isLoan ?>" data-book-id="<?= $cb->Id ?>">
+                        <div class="btn-already-loan">
+                            <button disabled>Déjà emprunter !</button>
+                        </div>
+                        <?php
+                    } else {
+                        ?>
+                        <div id="loan-container" data-is-loan="<?= $isInSC ?>" data-book-id="<?= $cb->Id ?>">
                             <p id="btn-state"></p>
                             <button id="btn-loan">
                                 Ajouter au panier

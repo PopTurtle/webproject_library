@@ -52,11 +52,18 @@ class Bookloan extends DBObject
         return self::transferShoppingCartIntoLoan($consumerId, $date_start, $date_end);
     }
 
-    public static function getAllCurrentLoans($consumerId)
+    public static function getAllCurrentLoans(int $consumerId)
     {
         $request = "SELECT * FROM " . self::TableName . "
                     WHERE " . self::getPropertyDBName("ConsumerId") . " = $consumerId";
         return self::trySelectOBJFromDB($request);
+    }
+
+    public static function isBookInLoan(int $consumerId, int $bookId) {
+        $request = "SELECT * FROM " . self::TableName . "
+                    WHERE " . self::getPropertyDBName("ConsumerId") . " = $consumerId" . "
+                        AND " . self::getPropertyDBName("BookId") . " = $bookId";
+        return !Database::Instance()->isEmptyQuery($request);
     }
 
     public static function returnLoan(int $consumerId, int $bookId): bool
