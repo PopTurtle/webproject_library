@@ -78,7 +78,6 @@ CREATE TABLE cartitem (
 INSERT INTO book
 (book_id, title, author, editor, publication_year, category, stock)
 VALUES
-(NULL, "Super titre", "Moi", "Padéditeur", "1975", "Roman", 2),
 (NULL, "Les Misérables", "Victor Hugo", "Gallimard", "1862", "Roman classique", 3),
 (NULL, "1984", "George Orwell", "Secker & Warburg", "1949", "Science-fiction", 5),
 (NULL, "Le Seigneur des Anneaux", "J.R.R. Tolkien", "Allen & Unwin", "1954", "Fantasy", 3),

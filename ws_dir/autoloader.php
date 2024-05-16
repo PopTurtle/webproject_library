@@ -30,7 +30,7 @@ if (!isset($removeNecessaryCode)) {
 /**
  *  TODO:
  *    -- Valider l'emprunt du panier
- *    Fin - CSS - (book / booksearch)
+ *    Fin - CSS - (book / profil / panier)
  *    Fin - Réorganiser les constantes
  *    Fin - Déplacer le SessionManager ? ; Non, probablement pas ?
  *    Fin - pagination de la recherche de livres ? ; peu de chance
