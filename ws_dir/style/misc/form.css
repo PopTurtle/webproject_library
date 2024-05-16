@@ -59,6 +59,14 @@
         justify-content: flex-end;
     }
 
+    form.simple-form div > input[type="file"] {
+        background-color: white;
+        padding: 1rem;
+        height: auto;
+        font-size: 1.5rem;
+        text-wrap: wrap;
+    }
+
     form.simple-form div > input[type="submit"] {
         color: white;
         background-color: var(--color-palette-4);
