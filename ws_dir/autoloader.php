@@ -29,7 +29,6 @@ if (!isset($removeNecessaryCode)) {
 
 /**
  *  TODO:
- *    Rendre un livre ne le rajoute pas en stock
  *    book.php : on peut ajouter un livre déjà emprunter au panier
  *      -- Il faut l'empecher
  *      -- Ne pas permettre la validation d'un panier si un livre est déjà emprunter

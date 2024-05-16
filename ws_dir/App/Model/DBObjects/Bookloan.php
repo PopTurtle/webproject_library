@@ -60,7 +60,25 @@ class Bookloan extends DBObject
         $bl = new static();
         $bl->ConsumerId = $consumerId;
         $bl->BookId = $bookId;
-        return $bl->removeFromDB(1) !== false;
+        $c = Database::getConnection();
+        if (!$c->beginTransaction()) {
+            return false;
+        }
+        $b_tn = Book::TableName;
+        $bid_field = Book::getPropertyDBName("Id");
+        $bs_field = Book::getPropertyDBName("Stock");
+        $request = "UPDATE $b_tn 
+                    SET $bs_field = $bs_field + 1 
+                    WHERE $bid_field = $bookId";
+        if ($c->exec($request) === false) {
+            $c->rollback();
+            return false;
+        }
+        if ($bl->removeFromDB(1) === false) {
+            $c->rollback();
+            return false;
+        }
+        return $c->commit();
     }
 
     public static function renewLoan(int $consumerId, int $bookId): bool
