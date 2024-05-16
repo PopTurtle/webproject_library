@@ -21,7 +21,7 @@ $scc = new ShoppingCartController();
     <?php NavBar::putHeader(); ?>
 </head>
 <body>
-    <?php NavBar::put(); ?>
+    <?php NavBar::put(["btn_mode" => Navbar::BTN_SHOPPINGCART]); ?>
     <main>
         <section class="sc-section">
             <h1>Mon panier</h1>

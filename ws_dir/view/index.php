@@ -21,7 +21,7 @@ $hc = new HomeController;
     <?php SearchBar::putHeader(); ?>
 </head>
 <body>
-    <?php NavBar::put(["btn_mode" => Navbar::BTN_USER]); ?>
+    <?php NavBar::put(["btn_mode" => Navbar::BTN_HOME]); ?>
     <main>
         <section class="main-search">
             <h1>Bienvenue sur votre espace d'emprunt !</h2>

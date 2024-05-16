@@ -19,7 +19,7 @@ $amc = new AdminMainController;
     <?php NavBar::putHeader(); ?>
 </head>
 <body>
-    <?php NavBar::put(); ?>
+    <?php NavBar::put(["btn_mode" => Navbar::BTN_HOME_ADMIN]); ?>
     <main>
         <section class="admin">
             <span class="title">

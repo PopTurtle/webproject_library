@@ -20,7 +20,7 @@ $had_error = false;
     <?php NavBar::putHeader(); ?>
 </head>
 <body>
-    <?php NavBar::put(); ?>
+    <?php NavBar::put(["btn_mode" => Navbar::BTN_CONNECT_USER]); ?>
     <main>
         <section class="form-container">
             <h1>Se connecter</h1>

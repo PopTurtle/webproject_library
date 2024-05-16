@@ -19,7 +19,7 @@ $fm = FormMaker::Instance();
     <?php NavBar::putHeader(); ?>
 </head>
 <body>
-    <?php NavBar::put(); ?>
+    <?php NavBar::put(["btn_mode" => Navbar::BTN_CONNECT_ADMIN]); ?>
 
     <main>
         <section class="form-container">

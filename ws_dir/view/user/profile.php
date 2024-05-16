@@ -21,7 +21,7 @@ $cl = $pc->currentLoans();
     <?php NavBar::putHeader(); ?>
 </head>
 <body>
-    <?php NavBar::put(); ?>
+    <?php NavBar::put(["btn_mode" => Navbar::BTN_PROFILE]); ?>
     <main>
         <section class="profile-section">
             <h1>Bienvenue sur votre profil, <?= $cc->Firstname ?> !</h1>
