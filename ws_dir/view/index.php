@@ -2,6 +2,7 @@
 
 use App\Constants;
 use App\Controller\HomeController;
+use App\Model\DBObjects\Book;
 use App\Partials\NavBar;
 use App\Partials\SearchBar;
 
@@ -33,12 +34,23 @@ $hc = new HomeController;
         
         <section class="main-news">
             <h1 class="category-title">Les nouveautés</h2>
+            <div class="new-books">
+                <?php
+                $books = Book::getNewestBooks(5);
+                if ($books === false) {
+                    ?>
+                    <p>Impossible de récupérer les nouveautés</p>
+                    <?php
+                } else {
+                    foreach ($books as $b) {
+                        ?>
+                        <div><?php var_dump($b); ?></div>
+                        <?php
+                    }
+                }
+                ?>
+            </div>
         </section>
     </main>
-
-    <div style="height: 200vh">
-        SCROLL WOUW
-    </div>
-
 </body>
 </html>

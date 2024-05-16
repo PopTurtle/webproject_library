@@ -119,6 +119,19 @@ class Book extends DBObject {
         return self::treatFormSetCover($bookId);
     }
 
+    /**
+     *  Renvoie les livres les plus récents, dans la limite de $count.
+     *  Renvoie false en cas d'erreur
+     */
+    public static function getNewestBooks(int $count) {
+        $tn = self::TableName;
+        $bid_field = self::getPropertyDBName("Id");
+        $request = "SELECT * FROM $tn 
+                    ORDER BY $bid_field DESC 
+                    LIMIT $count";
+        return self::trySelectOBJFromDB($request);
+    }
+
     private static function treatFormSetCover(?int $bookId = null): int {
         //  Ajoute la couverture si elle existe
         //  ! Ne renvoie pas d'erreur en cas d'échec
