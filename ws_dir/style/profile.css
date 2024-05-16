@@ -1,12 +1,18 @@
 .profile-section {
     display: flex;
     flex-direction: column;
-    margin: 2vh 5% 0;
+    margin: 2vh 5% 80px;
 }
 
 .profile-section h1 {
     color: var(--color-palette-1);
     font-size: 2rem;
+}
+
+.profile-section h2 {
+    color: var(--color-palette-2);
+    font-size: 2rem;
+    margin: 0 0 20px 10px;
 }
 
 .profile-actions a.button {
@@ -34,12 +40,62 @@
     color: var(--color-palette-1);
     text-align: center;
     font-size: 2rem;
-    margin: 0;
+    margin: 0 0 20px;
 }
 
 .profile-loans-container {
     flex-grow: 1;
 }
 
+.profile-loans {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 30%);
+    gap: 3.3%;
+    margin-bottom: 60px;
+}
 
+.loan-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
+.loan-container .cover {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border: 1px solid var(--color-palette-1);
+    border-radius: 30px;
+    overflow: hidden;
+}
+
+.loan-container img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.loan-container p {
+    margin: 0;
+    color: var(--color-palette-3);
+    text-align: center;
+}
+
+.loan-container p:first-of-type {
+    margin-top: 20px;
+}
+
+.loan-container p:last-of-type {
+    margin-bottom: 20px;
+}
+
+.loan-container p.book-title {
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+.loan-container p.loan-end-date {
+    font-size: 1rem;
+    font-weight: 300;
+}

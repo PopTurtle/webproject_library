@@ -34,14 +34,27 @@ $cl = $pc->currentLoans();
                 </div>
                 <div class="profile-loans-container">
                     <h2>Mes emprunts</h2>
-                    <?php var_dump($cl); ?>
                     <div class="profile-loans">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
+                        <?php
+                        if (count($cl) === 0) {
+                            ?>
+                            <p>Vous n'avez aucun emprunt en cours</p>
+                            <?php
+                        }
+                        foreach ($cl as $fl) {
+                            $b = $fl->book();
+                            $l = $fl->loan();
+                            ?>
+                            <div class="loan-container">
+                                <div class="cover">
+                                    <img src="<?= $b->getCoverPath() ?>" alt="">
+                                </div>
+                                <p class="book-title"><?= $b->Title ?></p>
+                                <p class="loan-end-date">Se termine le <?= $l->DateEnd ?></p>
+                            </div>
+                            <?php
+                        }
+                        ?>
                     </div>
                 </div>
             </div>
