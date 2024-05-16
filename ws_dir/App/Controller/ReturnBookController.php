@@ -13,6 +13,7 @@ class ReturnBookController {
         $this->consumer = SessionManager::Instance()->getUserConsumer();
     }
 
+    /**  Renvoie tous les emprunts de l'utilisateur courant */
     public function getAllLoans() {
         $id = $this->consumer->Id;
         return FullBookloan::getFullBookLoansFromConsumer($id);

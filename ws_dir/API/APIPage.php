@@ -2,6 +2,10 @@
 
 namespace API;
 
+/**
+ *  Représente une page sur laquelle on peut effectuer des requête, et qui
+ *    n'affiche en retour qu'un résultat json par exemple.
+ */
 abstract class APIPage {
     public const actionKey = "action";
     public const resultKey = "status";

@@ -27,16 +27,17 @@ class ShoppingCartController {
         }
     }
 
+    /**  Renvoie tous les livres actuellement dans le panier */
     public function getAllShoppingCartBooks() {
         return $this->books;
     }
 
-    // From today
+    /**  Renvoie la date à laquelle un emprunt devrait prendre fin */
     public function getLoanEndDate() {
         return Utils::getDateIn(Bookloan::LOAN_DURATION);
     }
 
-    //
+    /**  Tente de valider le panier de l'utilisateur courant */
     public function validateShoppingCart() : bool {
         return Bookloan::makeLoanFromShoppingCart($this->consumer->Id);
     }

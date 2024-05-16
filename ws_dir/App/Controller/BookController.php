@@ -24,6 +24,7 @@ class BookController {
         }
     }
 
+    /**  Renvoie le livre associé à la page courante */
     public function getCurrentBook() : Book {
         return $this->curBook;
     }

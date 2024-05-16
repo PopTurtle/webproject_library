@@ -42,19 +42,26 @@ class SessionManager extends Singleton {
         }
     }
 
+    /**  S'assure qu'une tentative de connexion est effectuée */
     public static function ensureUserConnectionAttempt() {
         self::Instance();
     }
 
+    /**  Renvoie si l'utilisateur est connecté */
     public function isUserConnected() : bool {
         return $this->isUserConnected;
     }
 
+    /**  Renvoie si l'utilisateur est admin */
     public function isUserAdmin() : bool {
         return isset($_SESSION[self::SESS_ADMIN_ID])
             && $_SESSION[self::SESS_ADMIN_ID] === self::ADMIN_ID;
     }
 
+    /**
+     *  Renvoie l'objet associé à l'utilisateur courant s'il existe
+     *    (c'est-à-dire s'il est connecté)
+     */
     public function getUserConsumer(): ?Consumer {
         return $this->currentUser;
     }
@@ -77,6 +84,7 @@ class SessionManager extends Singleton {
         return 0;
     }
 
+    /**  Tente de connecter l'utilisateur en tant qu'administrateur */
     public function tryConnectAdmin(string $password) : int {
         if (!Utils::testPassword($password, self::ADMIN_PASS)) {
             return self::ADMINCONNECT_FAILED_PASS;
@@ -103,16 +111,19 @@ class SessionManager extends Singleton {
         return 0;
     }
 
+    /**  Redirige vers l'accueil du site si l'utilisateur n'est pas admin */
     public function adminPage() {
         if (!$this->isUserAdmin()) {
             Utils::redirectTo(Constants::PAGE_HOME);
         }
     }
 
+    /**  Déconnecte l'utilisateur courant */
     public function logOutUser() {
         $_SESSION[self::SESS_USER_ID] = self::NOT_CONNECTED_USER_ID;
     }
 
+    /**  Déconnecte l'utilisateur courant, s'il est admin */
     public function logOutAdmin() {
         unset($_SESSION[self::SESS_ADMIN_ID]);
     }

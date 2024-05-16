@@ -36,22 +36,27 @@ class ProfileController {
         return $this->currentLoans;
     }
 
+    /**  Renvoie l'utilisateur actuellement connecté */
     public function currentConsumer() {
         return $this->consumer;
     }
 
+    /**  URL vers les livres (pour emprunt) */
     public function loanBookURL() : string {
         return Constants::PAGE_BOOKSEARCH;
     }
     
+    /**  URL vers le renouvellement d'emprunts */
     public function renewLoanURL() : string {
         return Constants::PAGE_RENEWBOOK;
     }
 
+    /**  URL vers l'annulation d'emprunt (rendu des livres) */
     public function returnBookURL() : string {
         return Constants::PAGE_RETURNBOOK;
     }
 
+    /**  Tente de connecter l'utilisateur avec les données fournies */
     private function tryConnectUser(string $mail, string $password) {
         $res = $this->sm->tryConnectUser($mail, $password);
         if ($res != 0) {

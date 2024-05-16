@@ -35,6 +35,7 @@ class BookSearchController {
         }
     }
 
+    /**  S'assure que les données de recherches sont valides */
     private function makeValidSearchValues() {
         $validType = false;
         $types = [
@@ -53,6 +54,7 @@ class BookSearchController {
         }
     }
 
+    /**  Tente de récupérer les livres associés à la recherche en cours */
     public function fetchSearchResult() {
         $r = Book::getBooks($this->searchStr, $this->searchType);
         if ($r === false) {
@@ -61,6 +63,7 @@ class BookSearchController {
         return $r;
     }
 
+    /**  Renvoie les identifiants des livres déjà empruntés */
     public function getBookIdsInLoan() {
         $rs = [];
         if (is_null($this->consumer)) {
@@ -72,6 +75,7 @@ class BookSearchController {
         return $rs;
     }
 
+    /**  Renvoie les identifiants des livres dans le panier */
     public function getBookIdsInCart() {
         $rs = [];
         if (is_null($this->consumer)) {
@@ -83,10 +87,12 @@ class BookSearchController {
         return $rs;
     }
 
+    /**  Renvoie les données de la recherche actuelle */
     public function getSearchStr() : string {
         return $this->searchStr;
     }
 
+    /**  Lien vers la recherche de "Tous les livres" (= pas de recherche) */
     public function everyBookLink() {
         return Constants::PAGE_BOOKSEARCH;
     }

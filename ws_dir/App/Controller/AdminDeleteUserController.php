@@ -26,14 +26,20 @@ class AdminDeleteUserController {
         }
     }
     
+    /**  Renvoie si des données de recherche sont disponibles */
     public function hasFormResult() : bool {
         return $this->hasFormResult;
     }
 
+    /**
+     *  Renvoie l'utilisateur trouvé si des données de recherches sont
+     *    disponibles
+     */
     public function getSearchResult() : ?Consumer {
         return $this->searchResult;
     }
 
+    /**  Tente de trouver un utilisateur via son identifiant */
     private function fetchConsumerId(int $consumer_id) {
         $r = Consumer::getConsumerByID($consumer_id);
         if ($r === false) {
@@ -42,6 +48,7 @@ class AdminDeleteUserController {
         $this->searchResult = $r;
     }
 
+    /**  Tente de trouver un utilisateur via son email */
     private function fetchConsumerMail(string $mail) {
         $r = Consumer::getConsumerByMail($mail);
         if ($r === false) {
@@ -50,6 +57,9 @@ class AdminDeleteUserController {
         $this->searchResult = $r;
     }
 
+    /**
+     *  Renvoie la page d'erreur avec un message d'erreur lié à la recherche
+     */
     private function fetchError() {
         Utils::showErrorCode(
             Database::ConnectionErrorCode,

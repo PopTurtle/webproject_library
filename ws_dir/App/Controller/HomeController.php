@@ -15,10 +15,12 @@ class HomeController {
         }
     }
 
+    /**  Lien vers lequel redirige la bar de recherche */
     public function searchBarAction() {
         return Constants::PAGE_BOOKSEARCH;
     }
 
+    /**  Lien vers tous les livres */
     public function everyBookLink() {
         return Constants::PAGE_BOOKSEARCH;
     }

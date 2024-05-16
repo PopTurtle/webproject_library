@@ -52,7 +52,7 @@ $scc = new ShoppingCartController();
             <?php
             if (count($books) !== 0) {
                 ?>
-                <p class="end-date">Date de rendu prévue: <?= Utils::formatDate(Utils::getDateIn(Bookloan::LOAN_DURATION)) ?></p>
+                <p class="end-date">Date de rendu prévue: <?= Utils::formatDate($scc->getLoanEndDate()) ?></p>
                 <div class="validate-btn-container">
                     <button id="validate-shopping-cart">
                         Débuter l'emprunt

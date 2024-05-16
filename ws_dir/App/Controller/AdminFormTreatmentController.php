@@ -44,30 +44,39 @@ class AdminFormTreatmentController {
         $this->formTreated = true;
     }
 
+    /**  Renvoie si le formulaire demandé a été traité */
     public function wasFormTreated() : bool {
         return $this->formTreated;
     }
 
+    /**  Renvoie les résultats du traitement du formulaire */
     public function getFormTreatmentResult() : int {
         return $this->formResult;
     }
 
+    /**  Renvoie les données utilisée pour le traitement du formulaire */
     public function getDataSet() {
         return $this->dataSet;
     }
 
+    /**  Renvoie le champ du formulaire qui a causé l'erreur s'il y en a une */
     public function getFieldError() : string {
         return $this->fieldErrorName;
     }
 
+    /**  Renvoie l'url du formulaire qui a envoyé sur cette page */
     public function previousFormURL() : string {
         return $this->previousForm;
     }
 
+    /**
+     *  Génère les valeurs à renvoyer au formulaire pour pré-remplir les champs
+     */
     public function previousFormArgGenerator() {
         return $this->previousFormArgGenerator;
     }
 
+    /**  Tente de traiter le formulaire demandé */
     private function tryTreatForm($formname, $data) : int {
         switch ($formname) {
             case self::FORM_ADD_BOOK:
@@ -87,6 +96,7 @@ class AdminFormTreatmentController {
         }
     }
 
+    /**  Traite un formulaire d'ajout */
     private function treatAddForm($data, $modelClassname) : int {
         $perror = "";
         $r = $modelClassname::treatAddForm($data, $perror);
@@ -97,14 +107,17 @@ class AdminFormTreatmentController {
         return $r === 0 ? self::TREAT_COMPLETE : self::TREAT_DB_ERROR;
     }
 
+    /**  Traite le formulaire d'ajout de livre */
     private function treatFormAddBook($data) : int {
         return $this->treatAddForm($data, Book::class);
     }
 
+    /**  Traite le formulaire d'ajout d'utilisateur */
     private function treatFormAddUser($data) : int {
         return $this->treatAddForm($data, Consumer::class);
     }
 
+    /**  Traite le formulaire de mise à jour d'un livre */
     private function treatFormUpdateBook($data) : int {
         $perror = "";
         $r = Book::treatUpdateForm($data, $perror);

@@ -15,6 +15,7 @@ class AdminMainController {
         SessionManager::Instance()->adminPage();
     }
 
+    /**  Tente de se connecter en tant qu'admin */
     private function tryConnect(string $password) {
         $r = SessionManager::Instance()->tryConnectAdmin($password);
         if ($r != 0) {
