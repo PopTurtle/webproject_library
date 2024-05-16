@@ -26,14 +26,16 @@ $scc = new ShoppingCartController();
     <main>
         <section class="sc-section">
             <h1>Mon panier</h1>
+            <?php
+            $books = $scc->getAllShoppingCartBooks();
+            if (count($books) === 0) {
+                ?>
+                <p>Vous n'avez aucun livre dans votre panier</p>
+                <?php
+            }
+            ?>
             <div class="sc-container">
                 <?php
-                $books = $scc->getAllShoppingCartBooks();
-                if (count($books) === 0) {
-                    ?>
-                    <p>Vous n'avez aucun livre dans votre panier</p>
-                    <?php
-                }
                 foreach ($books as $book) {
                     ?>
                     <div class="book-container">

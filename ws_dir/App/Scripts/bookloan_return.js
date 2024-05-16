@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let lastMsgElt = null
     button.addEventListener("click", async () => {
       if (confirm("Rendre le livre ?")) {
-        if (false && await returnLoan(bookId)) {
+        if (await returnLoan(bookId)) {
           replaceElt(button, "Le livre a bien été rendu.");
         } else {
           if (lastMsgElt !== null) {
