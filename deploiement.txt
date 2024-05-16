@@ -1,0 +1,47 @@
+Afin de déployer le site de méthode sont possibles :
+
+
+------- 1 - Déployer manuellement ----------------------------------------------
+
+Ci-dessous les informations nécessaire si vous souhaitez déployer le site
+manuellement.
+
+Racine du site : ws_dir/
+Version PHP : 7.4.33 ; Avec PDO pour mysql
+Version MySQL : 8.0.31
+
+
+------- 2 - Déployer le site via deploy.sh -------------------------------------
+
+Un fichier 'deploy.sh' permet de déployer le site sur votre machine, à
+condition que Docker soit installer, et que la session possède la permission
+d'utiliser la commande sudo (Voir le fichier deploy.sh pour comprendre).
+
+Pour déployer le site, utilisez (au minimum) la commande :
+
+DB_PASS="password" bash deploy.sh
+
+D'autre variables d'environnement peuvent être passée en paramètres :
+
+DB_HOST :
+    Host de la base de donnée, par défaut 'database', il s'agit du nom donné à
+    l'image mysql dans le fichier docker-compose.
+
+DB_USER :
+    Utilisateur utilisé par le site pour la connexion à la BDD.
+    Par défaut: root
+
+DB_PASS :
+    Mot de passe utilisé pour la connexion à la BDD, il doit être défini. Le
+    même mot de passe doit être réutilisé au redémarrage du site si les volumes
+    docker sont conservés.
+
+DB_NAME :
+    Nom de la base utilisée, par défaut: webproject_library
+
+KEEP_VOLUMES :
+    La variable n'est pas défini par défaut. Lui donner une valeur différente
+    de "" (par exemple "yes") pour conserver les volumes (c'est-à-dire la BDD et
+    le dossier de stockage du site) s'ils existent déjà
+
+Normalement si tout se passe bien, le site est déployé
