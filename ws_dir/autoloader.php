@@ -29,7 +29,6 @@ if (!isset($removeNecessaryCode)) {
 
 /**
  *  TODO:
- *    Accueil: "nouveautés"
  *    -- Valider l'emprunt du panier
  *    Fin - CSS - (book / booksearch)
  *    Fin - Réorganiser les constantes

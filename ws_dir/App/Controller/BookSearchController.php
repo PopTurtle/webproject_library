@@ -23,14 +23,16 @@ class BookSearchController {
         $this->searchType = $_GET["search-type"] ?? "";
         $this->makeValidSearchValues();
         $this->consumer = SessionManager::Instance()->getUserConsumer();
-        $this->books = CartItem::getShoppingCartOfCustomer($this->consumer->Id);
-        if ($this->books === false) {
-            Utils::showErrorCode(Database::RequestErrorCode, "Erreur lors d'une requête");
-        }        
-        $this->loans = Bookloan::getAllCurrentLoans($this->consumer->Id);
-        if ($this->loans === false) {
-            Utils::showErrorCode(Database::RequestErrorCode, "Erreur lors d'une requête");
-        }        
+        if (!is_null($this->consumer)) {
+            $this->books = CartItem::getShoppingCartOfCustomer($this->consumer->Id);
+            if ($this->books === false) {
+                Utils::showErrorCode(Database::RequestErrorCode, "Erreur lors d'une requête");
+            }        
+            $this->loans = Bookloan::getAllCurrentLoans($this->consumer->Id);
+            if ($this->loans === false) {
+                Utils::showErrorCode(Database::RequestErrorCode, "Erreur lors d'une requête");
+            }
+        }
     }
 
     private function makeValidSearchValues() {

@@ -44,7 +44,14 @@ $hc = new HomeController;
                 } else {
                     foreach ($books as $b) {
                         ?>
-                        <div><?php var_dump($b); ?></div>
+                        <a class="book-link" href="<?= Constants::PAGE_BOOK . "?book_id=" . $b->Id ?>">
+                            <div class="book-container">
+                                <div class="cover-container">
+                                    <img src="<?= $b->getCoverPath() ?>" alt="">
+                                </div>
+                                <p><?= $b->Title ?></p>
+                            </div>
+                        </a>
                         <?php
                     }
                 }
