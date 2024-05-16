@@ -31,7 +31,6 @@ if (!isset($removeNecessaryCode)) {
  *  TODO:
  *    book.php : on peut ajouter un livre déjà emprunter au panier
  *      -- Il faut l'empecher
- *      -- Ne pas permettre la validation d'un panier si un livre est déjà emprunter
  *    Fin - tenter de réduire les :has()
  *    Fin - Réorganiser les constantes
  */

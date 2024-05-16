@@ -42,6 +42,10 @@ class Bookloan extends DBObject
         if (CartItem::everyBookFromShoppingCartInStock($consumerId) !== true) {
             return false;
         }
+        //  Test qu'aucun des livres du panier n'est déjà emprunter
+        if (CartItem::noBookFromShoppingCartIsLoan($consumerId) !== true) {
+            return false;
+        }
         //  Transfère les livres du panier en un emprunt
         $date_start = Utils::getTodayDate();
         $date_end = Utils::getDateIn(self::LOAN_DURATION);

@@ -94,6 +94,26 @@ class CartItem extends DBObject
         return Database::Instance()->isEmptyQuery($request);
     }
 
+    /**
+     *  Renvoie true si tout les livres du panier ne sont pas déjà empruntés
+     *    par le même utilisateur. Renvoie false sinon. Renvoie null en cas
+     *    d'erreur.
+     */
+    public static function noBookFromShoppingCartIsLoan(int $consumerId) {
+        $bl_tn = Bookloan::TableName;
+        $ci_tn = CartItem::TableName;
+        $blbid_field = Bookloan::getPropertyDBName("BookId");
+        $cibid_field = CartItem::getPropertyDBName("BookId");
+        $blcid_field = Bookloan::getPropertyDBName("ConsumerId");
+        $cicid_field = CartItem::getPropertyDBName("ConsumerId");
+        $request = "SELECT bl.$blbid_field 
+                    FROM $bl_tn as bl, $ci_tn as ci 
+                    WHERE ci.$cicid_field = $consumerId AND 
+                          bl.$blcid_field = $consumerId AND 
+                          bl.$blbid_field = ci.$cibid_field";
+        return Database::Instance()->isEmptyQuery($request);
+    }
+
     protected function ensureCorrectData(&$propertyError = null): bool
     {
         $test = function ($property, $result) use (&$propertyError) {
