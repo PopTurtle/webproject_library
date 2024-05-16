@@ -48,7 +48,7 @@ body::after {
 
 section.basic {
     display: flex;
-    padding: 25vw;
+    padding: 0 25vw;
     flex-direction: column;
     justify-content: center;
     align-items: center;

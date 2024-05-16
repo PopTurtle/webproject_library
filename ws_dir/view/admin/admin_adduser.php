@@ -26,7 +26,7 @@ SessionManager::Instance()->adminPage();
     <main>
         <section class="form-container">
             <h1>Ajouter un utilisateur</h1>
-            <form action="<?= Constants::PAGE_ADMIN_FORM_TREATMENT ?>" class="simple-form">
+            <form method="post" action="<?= Constants::PAGE_ADMIN_FORM_TREATMENT ?>" class="simple-form">
                 <?php
                 foreach (Consumer::generateAddForm("") as $f) {
                     ?>
