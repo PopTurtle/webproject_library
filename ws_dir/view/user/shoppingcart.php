@@ -2,6 +2,7 @@
 
 use App\Constants;
 use App\Controller\ShoppingCartController;
+use App\Model\DBObjects\Bookloan;
 use App\Partials\NavBar;
 use App\Utils\Utils;
 
@@ -27,19 +28,37 @@ $scc = new ShoppingCartController();
             <h1>Mon panier</h1>
             <div class="sc-container">
                 <?php
-                foreach ($scc->getAllShoppingCartBooks() as $book) {
+                $books = $scc->getAllShoppingCartBooks();
+                if (count($books) === 0) {
                     ?>
-                    <div>
-                        <?php var_dump($book); ?>
+                    <p>Vous n'avez aucun livre dans votre panier</p>
+                    <?php
+                }
+                foreach ($books as $book) {
+                    ?>
+                    <div class="book-container">
+                        <div class="cover">
+                            <img src="<?= $book->getCoverPath() ?>" alt="Couverture">
+                        </div>
+                        <p class="book-title"><?= $book->Title ?></p>
                     </div>
                     <?php
                 }
                 ?>
             </div>
-            <p>Date de rendu prévue: dd/mm/yyyy</p>
-            <a href="" class="button">Valider l'emprunt</a>
-
-            <button id="validate-shopping-cart">Débuter un emprunt</button>
+            
+            <?php
+            if (count($books) !== 0) {
+                ?>
+                <p class="end-date">Date de rendu prévue: <?= Utils::formatDate(Utils::getDateIn(Bookloan::LOAN_DURATION)) ?></p>
+                <div class="validate-btn-container">
+                    <button id="validate-shopping-cart">
+                        Débuter l'emprunt
+                    </button>
+                </div>
+                <?php
+            }
+            ?>
         </section>
     </main>
 </body>

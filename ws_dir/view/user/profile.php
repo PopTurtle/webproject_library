@@ -5,6 +5,7 @@ require_once "../../autoloader.php";
 use App\Constants;
 use App\Controller\ProfileController;
 use App\Partials\NavBar;
+use App\Utils\Utils;
 
 $pc = new ProfileController();
 $cc = $pc->currentConsumer();
@@ -50,7 +51,7 @@ $cl = $pc->currentLoans();
                                     <img src="<?= $b->getCoverPath() ?>" alt="">
                                 </div>
                                 <p class="book-title"><?= $b->Title ?></p>
-                                <p class="loan-end-date">Se termine le <?= $l->DateEnd ?></p>
+                                <p class="loan-end-date">Se termine le <?= Utils::formatDate($l->DateEnd) ?></p>
                             </div>
                             <?php
                         }

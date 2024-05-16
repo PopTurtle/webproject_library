@@ -39,6 +39,18 @@ class CartItem extends DBObject
         return self::trySelectOBJFromDB($request);
     }
 
+    public static function getBooksFromShoppingCartOfCustomer(int $consumerId) {
+        $ctn = self::TableName;
+        $btn = Book::TableName;
+        $ccid_field = self::getPropertyDBName("ConsumerId");
+        $cbid_field = self::getPropertyDBName("BookId");
+        $bbid_field = Book::getPropertyDBName("Id");
+        $request = "SELECT * FROM $btn as b, $ctn as c
+                    WHERE c.$ccid_field = $consumerId AND
+                          b.$bbid_field = c.$cbid_field";
+        return Book::trySelectOBJFromDB($request);
+    }
+
     public static function tryAddToShoppingCart(int $bookId, int $consumerId)
     {
         if (!static::canAddToShoppingCart($bookId, $consumerId)) {

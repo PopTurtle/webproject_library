@@ -29,26 +29,30 @@ class Utils {
      *  Renvoie la date telle qu'elle sera dans $days jours. Par défaut la
      *    chaine de fin est "s".
      */
-    public static function getDateIn($days) {
+    public static function getDateIn($days): string {
         return self::getDateAt(time() + self::daysInSeconds($days));
     }
 
     /**
      *  Convertis les jours en secondes.
      */
-    public static function daysInSeconds($days) {
+    public static function daysInSeconds($days): string {
         return $days * 86400;
     }
 
     /**
      *  Renvoie la date au format (Année)-(Mois)-(Jour) au temps timestamp.
      */
-    private static function getDateAt($timestamp) {
+    private static function getDateAt($timestamp): string {
         return date('Y-m-d', $timestamp);
     }
 
-    public static function formatDate($date) {
-        return $date;
+    public static function formatDate($date): string {
+        $ds = explode('-', $date);
+        if (count($ds) !== 3) {
+            return $date;
+        }
+        return implode('/', [$ds[2], $ds[1], $ds[0]]);
     }
 
     /**

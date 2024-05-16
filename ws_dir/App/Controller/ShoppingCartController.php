@@ -21,7 +21,7 @@ class ShoppingCartController {
             Utils::redirectTo(Constants::PAGE_LOGIN);
         }
         $this->consumer = $sm->getUserConsumer();
-        $this->books = CartItem::getShoppingCartOfCustomer($this->consumer->Id);
+        $this->books = CartItem::getBooksFromShoppingCartOfCustomer($this->consumer->Id);
         if ($this->books === false) {
             Utils::showErrorCode(Database::RequestErrorCode, "Impossible de récupérer les données");
         }

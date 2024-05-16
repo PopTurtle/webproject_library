@@ -30,7 +30,7 @@ if (!isset($removeNecessaryCode)) {
 /**
  *  TODO:
  *    -- Valider l'emprunt du panier
- *    Fin - CSS - (profil / panier)
+ *    Fin - CSS - (panier)
  *    Fin - tenter de réduire les :has()
  *    Fin - Réorganiser les constantes
  */
