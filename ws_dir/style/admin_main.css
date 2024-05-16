@@ -1,0 +1,90 @@
+section.admin {
+    display: flex;
+    margin: 0 25vw;
+    flex-direction: column;
+    align-items: center;
+}
+
+.admin .title {
+    display: flex;
+    margin-bottom: 10vh;
+    gap: 20px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.admin h1 {
+    color: var(--color-palette-1);
+    font-size: 2rem;
+}
+
+.admin .title img {
+    width: 2rem;
+    height: 2rem;
+    padding: .5rem;
+    clip-path: circle();
+    background-color: var(--color-palette-4);
+}
+
+.admin .content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10vw;
+}
+
+.admin .content > div {
+    position: relative;
+    display: flex;
+    width: 20vw;
+    flex-direction: column;
+    gap: 40px;
+    padding: 60px 40px;
+    border-radius: 40px;
+    box-shadow: 0px 3px 12px #00000029;
+    background-color: white;
+}
+
+.admin .content div h2 {
+    color: var(--color-palette-2);
+    text-align: center;
+    margin: 0;
+}
+
+.admin .content div .link {
+    display: flex;
+    height: 64px;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.admin .content div img {
+    box-sizing: border-box;
+    height: 100%;
+    padding: 10px;
+    clip-path: circle();
+}
+
+.admin .content .link::after {
+    content: "";
+    position: absolute;
+    height: 64px;
+    width: 64px;
+    border-radius: 100%;
+    outline: 2px solid black;
+}
+
+.admin .content div .link a {
+    flex-grow: 1;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5rem;
+    padding: 1rem 2rem;
+    background-color: var(--color-palette-3);
+}
+
+.admin .content div a:hover {
+    filter: brightness(95%);
+}

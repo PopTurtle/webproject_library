@@ -51,8 +51,12 @@ switch ($aftc->getFormTreatmentResult()) {
 <body>
     <?php NavBar::put(); ?>
     <main>
-        <p>Résultat: <?= $aftc->getFormTreatmentResult() ?></p>
-        <p>Field error: <?= $aftc->getFormTreatmentResult() === AdminFormTreatmentController::TREAT_INCORRECT_DATA ? $aftc->getFieldError() : "None" ?></p>
+        <section class="basic">
+            <h1>Le formulaire a été traité correctement</h1>
+            <a class="button" href="<?= Constants::PAGE_ADMIN_MAIN ?>">
+                Retourner au menu
+            </a>
+        </section>
     </main>
 </body>
 </html>

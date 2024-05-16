@@ -43,6 +43,7 @@ abstract class Constants {
     public const STYLE_RENEW_BOOK = "/style/renew_book.css";
     public const STYLE_DISPLAY_BOOK = "/style/misc/display_book.css";
     public const STYLE_ADMIN_DELETE = "/style/admin_delete.css";
+    public const STYLE_ADMIN_MAIN = "/style/admin_main.css";
 
     /**
      *  Chemins des scripts

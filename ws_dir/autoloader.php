@@ -29,6 +29,9 @@ if (!isset($removeNecessaryCode)) {
 
 /**
  *  TODO:
+ *    CSS : book / booksearch / admin
+ *    Accueil: "nouveautés"
+ *    Réorganiser les constantes
  *    Administrateur -x
  *    -- Valider l'emprunt du panier
  *    Déplacer le SessionManager ? ; Non, probablement pas ?

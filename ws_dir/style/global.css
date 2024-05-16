@@ -46,6 +46,20 @@ body::after {
     z-index: -1000;
 }
 
+section.basic {
+    display: flex;
+    padding: 25vw;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+section.basic h1 {
+    color: var(--color-palette-1);
+    text-align: center;
+    font-size: 2rem;
+}
+
 .button {
     --btn-color: var(--color-palette-4);
     --btn-padding-h: 1rem;
