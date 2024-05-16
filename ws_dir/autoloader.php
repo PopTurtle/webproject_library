@@ -26,9 +26,3 @@ if (!isset($removeNecessaryCode)) {
     Database::ensureConnection();
     SessionManager::ensureUserConnectionAttempt();
 }
-
-/**
- *  TODO:
- *    Fin - tenter de réduire les :has()
- *    Fin - Réorganiser les constantes
- */
