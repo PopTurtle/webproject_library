@@ -10,6 +10,12 @@ Racine du site : ws_dir/
 Version PHP : 7.4.33 ; Avec PDO pour mysql
 Version MySQL : 8.0.31
 
+Les variables de connexion à la base de données se trouve au chemin :*
+ws_dir/App/Model/Database.php
+
+Les constantes que vous devez changer sont:
+DB_DEFAULT_HOST ; DB_DEFAULT_NAME ; DB_DEFAULT_USER ; DB_DEFAULT_PASS
+
 
 ------- 2 - Déployer le site via deploy.sh -------------------------------------
 
