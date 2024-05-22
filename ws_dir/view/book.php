@@ -62,7 +62,7 @@ if (SessionManager::Instance()->isUserConnected()) {
                     } else if ($isInLoan) {
                         ?>
                         <div class="btn-already-loan">
-                            <button disabled>Déjà emprunter !</button>
+                            <button disabled>Déjà emprunté !</button>
                         </div>
                         <?php
                     } else {

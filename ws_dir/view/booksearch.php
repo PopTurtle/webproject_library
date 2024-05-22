@@ -71,7 +71,7 @@ $bcount = count($res);
                             if ($disabled) {
                                 ?>
                                 <button class="book-result-button" disabled>
-                                    <?= $inLoan ? "Déjà emprunter" : "Indisponible" ?>
+                                    <?= $inLoan ? "Déjà emprunté" : "Indisponible" ?>
                                 </button>
                                 <?php
                             } else if (!SessionManager::Instance()->isUserConnected()) {
